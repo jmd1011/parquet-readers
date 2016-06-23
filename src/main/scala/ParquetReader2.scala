@@ -25,10 +25,7 @@ object ParquetReader2 {
     val schema = parquetMetadata.getFileMetaData.getSchema
 
     val out = new PrintWriter(new File("/home/jdecker/Downloads/customer_test.txt"))
-
-    out.println("Starting dump")
     dump(parquetMetadata, schema, p, out)
-    out.println("Oh man, we finished!")
   }
 
   def dump(meta: ParquetMetadata, schema: MessageType, path: Path, out: PrintWriter = new PrintWriter(System.out)) = {
@@ -253,80 +250,4 @@ object ParquetReader2 {
     //dumpMetaData()
     dumpData()
   }
-
-
-
-//  class SimpleReadSupport[T] extends ReadSupport[T] {
-//    def prepareForRead(configuration: Configuration, keyValueMetaData: util.Map[String, String], fileSchema: MessageType, readContext: ReadContext): RecordMaterializer[Nothing] = new SimpleRecordMaterializer(fileSchema)
-//
-//  }
-//
-//  class SimpleRecordMaterializer[T](schema: MessageType) extends RecordMaterializer[T] {
-//    val root = null //SimpleRecordConverter(schema)
-//
-//    override def getRootConverter: GroupConverter = ???
-//
-//    override def getCurrentRecord: T = ???
-//  }
-//
-//  class SimpleRecordConverter(schema: GroupType) extends GroupConverter {
-//    new SimpleRecordConverter(schema, Array[Converter](), "", null)
-//
-//    override def getConverter(i: Int): Converter = ???
-//    override def end(): Unit = ???
-//    override def start(): Unit = ???
-//  }
-//
-//  class SimpleRecordConverter(schema: GroupType, converters: Array[Converter], name: String, parent: SimpleRecordConverter) extends GroupConverter {
-//    val record: Record = new Record(Vector[String](), Vector[String]())
-//
-//    override def getConverter(i: Int): Converter = converters(i)
-//    override def start(): Unit = {  }
-//    override def end(): Unit = ??? //{ if (parent != null) parent.record.add(name, record) }
-//
-//    private def createConverter(field: Type) = {
-//      if (field.isPrimitive) {
-//        val otype = field.getOriginalType
-//        if (otype != null && otype == UTF8) {
-//          new StringConverter(field.getName)
-//        }
-//
-//        new SimplePrimitiveConverter(field.getName)
-//      }
-//
-//      new SimpleRecordConverter(field.asGroupType, converters, field.getName, this);
-//    }
-//
-//    class SimplePrimitiveConverter(name: String) extends PrimitiveConverter {
-//      override def addFloat(value: Float): Unit = super.addFloat(value)
-//
-//      override def addBinary(value: Binary): Unit = super.addBinary(value)
-//
-//      override def addDouble(value: Double): Unit = super.addDouble(value)
-//
-//      override def addInt(value: Int): Unit = super.addInt(value)
-//
-//      override def addBoolean(value: Boolean): Unit = super.addBoolean(value)
-//
-//      override def addLong(value: Long): Unit = super.addLong(value)
-//    }
-//  }
-//
-//  case class Record(fields: Vector[String], schema: Vector[String]) {
-//    def add(f: String, s: String): Unit = {
-//      if (schema.contains(s)) {
-//        fields.addString(new StringBuilder(f))
-//      }
-//    }
-//  }
-
-
-
-//  type Schema = Vector[String]
-//  type Fields = Vector[String]
-//
-//  case class Record(fields: Fields, schema: Schema) {
-//    def apply(key: String): String = fields(schema indexOf key)
-//    def apply(keys: Schema): Fields = keys.map(this apply _)
-//  }
 }
