@@ -3,16 +3,12 @@ package main.scala
 import java.io.{File, PrintWriter}
 import java.util
 
-import scala.collection.JavaConversions._
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
-import org.apache.parquet.column.impl.ColumnReadStoreImpl
 import org.apache.parquet.hadoop.api.{InitContext, ReadSupport}
 import org.apache.parquet.hadoop.api.ReadSupport.ReadContext
-import org.apache.parquet.hadoop.{ParquetFileReader, ParquetReader}
-import org.apache.parquet.io
-import org.apache.parquet.io.{MessageColumnIO, RecordReaderImplementation}
-import org.apache.parquet.io.api.{Converter, GroupConverter, PrimitiveConverter, RecordMaterializer}
+import org.apache.parquet.hadoop.ParquetReader
+import org.apache.parquet.io.api._
 import org.apache.parquet.schema.{GroupType, MessageType, OriginalType, Type}
 
 /**
@@ -27,8 +23,7 @@ object Loader {
     var value = reader.read()
 
     while (value != null) {
-      value.print(out)
-
+      out.println(value toString)
       value = reader.read()
     }
 
@@ -49,19 +44,15 @@ object Loader {
 
     class SimpleRecordConverter(schema: GroupType, name: String, parent: SimpleRecordConverter) extends GroupConverter {
       val converters = new Array[Converter](schema.getFieldCount)
-      val record = new Record(Schema(schema.getFields.map(_.getName): _*), Fields(schema.getFields.map(_.getName): _*))
+      //val record = new Record(Schema(schema.getFields.map(_.getName): _*), Fields(schema.getFields.map(_.getName): _*))
+      val record = new Record()
 
-      def Fields(s: String*): Fields = {
-        s.map(x => new RString(x, x.length)).toVector
-      }
-
+      def Fields(s: String*): Fields = s.map(x => new RString(x, x.length)).toVector
       def Schema(s: String*): Schema = s.toVector
 
       def createConverters() = {
         def createConverter(field: Type): Converter = {
-          class StringConverter(name: String) extends SimplePrimitiveConverter(name) {
-
-          }
+          class StringConverter(name: String) extends SimplePrimitiveConverter(name)
 
           if (field.isPrimitive) {
             val originalType = field.getOriginalType
@@ -83,11 +74,22 @@ object Loader {
 
       override def getConverter(i: Int): Converter = converters(i)
 
-      override def end(): Unit = {}
+      override def end(): Unit = { if (parent != null) parent.record.add(name, record) }
 
       override def start(): Unit = {}
 
-      class SimplePrimitiveConverter(name: String) extends PrimitiveConverter
+      class SimplePrimitiveConverter(name: String) extends PrimitiveConverter {
+        override def addBinary(value: Binary): Unit = {
+          record.add(name, new String(value.getBytes))
+        }
+
+        override def addFloat(value: Float): Unit = record.add(name, float2Float(value))
+        override def addDouble(value: Double): Unit = record.add(name, double2Double(value))
+        override def addInt(value: Int): Unit = record.add(name, int2Integer(value))
+        override def addBoolean(value: Boolean): Unit = record.add(name, boolean2Boolean(value))
+        override def addLong(value: Long): Unit = record.add(name, long2Long(value))
+      }
+
       createConverters()
     }
   }
@@ -131,15 +133,30 @@ object Loader {
     def hash = value.asInstanceOf[Long]
   }
 
-  class Record(schema: Schema, fields: Fields) {
-    def print(out: PrintWriter) = {
-      for (i <- schema.indices) {
-        out.println(s"${schema.get(i)}: ${fields.get(i)}")
-      }
+  class Record() {
+    def add(name: String, value: Object): Unit = {
+      val nv = new NameValue(name, value)
+      values = values :+ nv
     }
 
-    def add(s: String, f: RField): Unit = {
-      fields.add(schema.indexOf(s), f)
+    class NameValue(name: String, value: Object) {
+      override def toString: String = s"$name: $value"
     }
+
+    var values = List[NameValue]()
   }
+
+//  class Record(schema: Schema, fields: Fields) {
+//    def print(out: PrintWriter): Unit = {
+//      for (i <- schema.indices) {
+//        out.println(s"${schema.get(i)}: ${fields.get(i)}")
+//      }
+//
+//      out.println()
+//    }
+//
+//    def add(s: String, f: RField): Unit = {
+//      fields.add(schema.indexOf(s), f)
+//    }
+//  }
 }
