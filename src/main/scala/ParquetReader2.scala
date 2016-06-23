@@ -3,6 +3,7 @@ package main.scala
 import java.io.{File, PrintWriter}
 import java.util
 
+import main.scala.Loader.{RInt, RString}
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.parquet.column.ColumnDescriptor
@@ -19,6 +20,52 @@ import scala.collection.JavaConversions._
   * Created by jdecker on 6/21/16.
   */
 object ParquetReader2 {
+  type Fields = Vector[RField]
+  type Schema = Vector[String]
+
+  abstract class RField {
+    def print()
+
+    def compare(o: RField): Boolean
+
+    def hash: Long
+  }
+
+  case class RString(data: String, len: Int) extends RField {
+    def print() = println(data)
+
+    def compare(o: RField) = o match {
+      case RString(data2, len2) => if (len != len2) false
+      else {
+        // TODO: we may or may not want to inline this (code bloat and icache considerations).
+        var i = 0
+        while (i < len && data.charAt(i) == data2.charAt(i)) {
+          i += 1
+        }
+        i == len
+      }
+    }
+
+    def hash = data.hashCode()
+  }
+
+  case class RInt(value: Int) extends RField {
+    def print() = printf("%d", value)
+
+    def compare(o: RField) = o match {
+      case RInt(v2) => value == v2
+    }
+
+    def hash = value.asInstanceOf[Long]
+  }
+
+  case class Record(fields: Fields, schema: Schema) {
+    def apply(key: String): RField = fields(schema indexOf key)
+    def apply(keys: Schema): Fields = keys.map(this apply _)
+  }
+
+  def Schema(schema: String*): Schema = schema.toVector
+
   def main(args: Array[String]) {
     val p = new Path("./resources/customer.parquet")
     val parquetMetadata = ParquetFileReader.readFooter(new Configuration(), p)
