@@ -1,6 +1,6 @@
 package main.scala
 
-import java.io.{File, PrintWriter}
+import java.io.{PrintWriter}
 import java.util
 
 import org.apache.hadoop.conf.Configuration
@@ -16,16 +16,22 @@ import org.apache.parquet.schema.{GroupType, MessageType, OriginalType, Type}
   */
 object Loader {
   def main(args: Array[String]): Unit = {
-    val out = new PrintWriter(new File("./resources/customer_test.txt"))
+    //val out = new PrintWriter(new File("./resources/customer_test.txt"))
+    val out = new PrintWriter(System.out)
 
     val p = new Path("./resources/customer.parquet")
     val reader = new ParquetReader[Record](p, new SimpleReadSupport())
     var value = reader.read()
+    var lValue = value
 
     while (value != null) {
+      lValue = value
+
       out.println(value toString)
       value = reader.read()
     }
+
+    println(lValue toString)
 
     reader.close()
   }
@@ -44,11 +50,7 @@ object Loader {
 
     class SimpleRecordConverter(schema: GroupType, name: String, parent: SimpleRecordConverter) extends GroupConverter {
       val converters = new Array[Converter](schema.getFieldCount)
-      //val record = new Record(Schema(schema.getFields.map(_.getName): _*), Fields(schema.getFields.map(_.getName): _*))
       val record = new Record()
-
-      def Fields(s: String*): Fields = s.map(x => new RString(x, x.length)).toVector
-      def Schema(s: String*): Schema = s.toVector
 
       def createConverters() = {
         def createConverter(field: Type): Converter = {
@@ -74,7 +76,7 @@ object Loader {
 
       override def getConverter(i: Int): Converter = converters(i)
 
-      override def end(): Unit = { if (parent != null) parent.record.add(name, record) }
+      override def end(): Unit = {}// if (parent != null) parent.record.add(name, record) }
 
       override def start(): Unit = {}
 
@@ -94,49 +96,14 @@ object Loader {
     }
   }
 
-  type Fields = Vector[RField]
-  type Schema = Vector[String]
-
-  abstract class RField {
-    def print()
-
-    def compare(o: RField): Boolean
-
-    def hash: Long
-  }
-
-  case class RString(data: String, len: Int) extends RField {
-    def print() = println(data)
-
-    def compare(o: RField) = o match {
-      case RString(data2, len2) => if (len != len2) false
-      else {
-        // TODO: we may or may not want to inline this (code bloat and icache considerations).
-        var i = 0
-        while (i < len && data.charAt(i) == data2.charAt(i)) {
-          i += 1
-        }
-        i == len
-      }
-    }
-
-    def hash = data.hashCode()
-  }
-
-  case class RInt(value: Int) extends RField {
-    def print() = printf("%d", value)
-
-    def compare(o: RField) = o match {
-      case RInt(v2) => value == v2
-    }
-
-    def hash = value.asInstanceOf[Long]
-  }
-
   class Record() {
     def add(name: String, value: Object): Unit = {
       val nv = new NameValue(name, value)
       values = values :+ nv
+    }
+
+    override def toString:String = {
+      ""
     }
 
     class NameValue(name: String, value: Object) {
@@ -145,18 +112,4 @@ object Loader {
 
     var values = List[NameValue]()
   }
-
-//  class Record(schema: Schema, fields: Fields) {
-//    def print(out: PrintWriter): Unit = {
-//      for (i <- schema.indices) {
-//        out.println(s"${schema.get(i)}: ${fields.get(i)}")
-//      }
-//
-//      out.println()
-//    }
-//
-//    def add(s: String, f: RField): Unit = {
-//      fields.add(schema.indexOf(s), f)
-//    }
-//  }
 }
