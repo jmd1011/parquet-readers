@@ -16,9 +16,9 @@ import org.apache.parquet.schema.{GroupType, MessageType, OriginalType, Type}
   */
 object Loader {
   def main(args: Array[String]): Unit = {
-    val out = new PrintWriter(new File("/home/jdecker/Downloads/customer_test2.txt"))
+    val out = new PrintWriter(new File("./resources/customer_test.txt"))
 
-    val p = new Path("/home/jdecker/Downloads/customer.parquet")
+    val p = new Path("./resources/customer.parquet")
     val reader = new ParquetReader[Record](p, new SimpleReadSupport())
     var value = reader.read()
 

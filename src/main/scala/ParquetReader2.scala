@@ -20,11 +20,11 @@ import scala.collection.JavaConversions._
   */
 object ParquetReader2 {
   def main(args: Array[String]) {
-    val p = new Path("/home/jdecker/Downloads/customer.parquet")
+    val p = new Path("./resources/customer.parquet")
     val parquetMetadata = ParquetFileReader.readFooter(new Configuration(), p)
     val schema = parquetMetadata.getFileMetaData.getSchema
 
-    val out = new PrintWriter(new File("/home/jdecker/Downloads/customer_test.txt"))
+    val out = new PrintWriter(new File("./resources/customer_test2.txt"))
     dump(parquetMetadata, schema, p, out)
   }
 
