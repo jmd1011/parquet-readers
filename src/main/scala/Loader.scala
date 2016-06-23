@@ -6,9 +6,12 @@ import java.util
 import scala.collection.JavaConversions._
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
+import org.apache.parquet.column.impl.ColumnReadStoreImpl
 import org.apache.parquet.hadoop.api.{InitContext, ReadSupport}
 import org.apache.parquet.hadoop.api.ReadSupport.ReadContext
 import org.apache.parquet.hadoop.{ParquetFileReader, ParquetReader}
+import org.apache.parquet.io
+import org.apache.parquet.io.{MessageColumnIO, RecordReaderImplementation}
 import org.apache.parquet.io.api.{Converter, GroupConverter, PrimitiveConverter, RecordMaterializer}
 import org.apache.parquet.schema.{GroupType, MessageType, OriginalType, Type}
 
@@ -20,11 +23,7 @@ object Loader {
     val out = new PrintWriter(new File("/home/jdecker/Downloads/customer_test2.txt"))
 
     val p = new Path("/home/jdecker/Downloads/customer.parquet")
-    val parquetMetadata = ParquetFileReader.readFooter(new Configuration(), p)
-    val schema = parquetMetadata.getFileMetaData.getSchema
-    //val RRI = new RecordReaderImplementation[Record](schema, new SimpleRecordMaterializer(schema), true, )
     val reader = new ParquetReader[Record](p, new SimpleReadSupport())
-
     var value = reader.read()
 
     while (value != null) {
@@ -32,6 +31,8 @@ object Loader {
 
       value = reader.read()
     }
+
+    reader.close()
   }
 
   class SimpleReadSupport extends ReadSupport[Record] {
@@ -86,10 +87,8 @@ object Loader {
 
       override def start(): Unit = {}
 
-      class SimplePrimitiveConverter(name: String) extends PrimitiveConverter {
-
-      }
-
+      class SimplePrimitiveConverter(name: String) extends PrimitiveConverter
+      createConverters()
     }
   }
 

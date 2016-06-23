@@ -73,6 +73,40 @@ object ParquetReader2 {
     }
 
     def dumpData(): Unit = {
+      def dump(crstore: ColumnReadStoreImpl, column: ColumnDescriptor, page: Long, total: Long, offset: Long) = {
+        val dmax = column.getMaxDefinitionLevel
+        val creader = crstore.getColumnReader(column)
+        out.print(s"*** row group $page of $total, values $offset to ${offset + creader.getTotalValueCount - 1}")
+        out.println()
+
+        for (i <- 0L until creader.getTotalValueCount) {
+          val rlvl = creader.getCurrentDefinitionLevel
+          val dlvl = creader.getCurrentDefinitionLevel
+
+          out.print(s"value ${offset + i}: R:$rlvl D:$dlvl V:")
+
+          if (dlvl == dmax) {
+            def BtoS() = out.print(new String(creader.getBinary.getBytes))
+
+            column.getType match {
+              case PrimitiveType.PrimitiveTypeName.BINARY => BtoS()
+              case PrimitiveType.PrimitiveTypeName.BOOLEAN => out.print(creader.getBoolean)
+              case PrimitiveType.PrimitiveTypeName.DOUBLE => out.print(creader.getDouble)
+              case PrimitiveType.PrimitiveTypeName.FLOAT => out.print(creader.getFloat)
+              case PrimitiveType.PrimitiveTypeName.INT32 => out.print(creader.getInteger)
+              case PrimitiveType.PrimitiveTypeName.INT64 => out.print(creader.getLong)
+              case PrimitiveType.PrimitiveTypeName.INT96 => BtoS()
+              case PrimitiveType.PrimitiveTypeName.FIXED_LEN_BYTE_ARRAY => BtoS()
+            }
+          } else {
+            out.print("<null>")
+          }
+
+          out.println()
+          creader.consume()
+        }
+      }
+
       for (i <- 0 until columns.size()) {
         val column = columns.get(i)
         out.println()
@@ -89,7 +123,7 @@ object ParquetReader2 {
 
         while (store != null) {
           val crstore = new ColumnReadStoreImpl(store, new DumpGroupConverter(), schema, "James Decker")
-          dump1(crstore, column, page, total, offset)
+          dump(crstore, column, page, total, offset)
 
           page += 1
           offset += store.getRowCount
@@ -110,40 +144,6 @@ object ParquetReader2 {
       class DumpConverter extends PrimitiveConverter {
         override def isPrimitive = true
         override def asGroupConverter() = new DumpGroupConverter()
-      }
-    }
-
-    def dump1(crstore: ColumnReadStoreImpl, column: ColumnDescriptor, page: Long, total: Long, offset: Long) = {
-      val dmax = column.getMaxDefinitionLevel
-      val creader = crstore.getColumnReader(column)
-      out.print(s"*** row group $page of $total, values $offset to ${offset + creader.getTotalValueCount - 1}")
-      out.println()
-
-      for (i <- 0L until creader.getTotalValueCount) {
-        val rlvl = creader.getCurrentDefinitionLevel
-        val dlvl = creader.getCurrentDefinitionLevel
-
-        out.print(s"value ${offset + i}: R:$rlvl D:$dlvl V:")
-
-        if (dlvl == dmax) {
-          def BtoS() = out.print(new String(creader.getBinary.getBytes))
-
-          column.getType match {
-            case PrimitiveType.PrimitiveTypeName.BINARY => BtoS()
-            case PrimitiveType.PrimitiveTypeName.BOOLEAN => out.print(creader.getBoolean)
-            case PrimitiveType.PrimitiveTypeName.DOUBLE => out.print(creader.getDouble)
-            case PrimitiveType.PrimitiveTypeName.FLOAT => out.print(creader.getFloat)
-            case PrimitiveType.PrimitiveTypeName.INT32 => out.print(creader.getInteger)
-            case PrimitiveType.PrimitiveTypeName.INT64 => out.print(creader.getLong)
-            case PrimitiveType.PrimitiveTypeName.INT96 => BtoS()
-            case PrimitiveType.PrimitiveTypeName.FIXED_LEN_BYTE_ARRAY => BtoS()
-          }
-        } else {
-          out.print("<null>")
-        }
-
-        out.println()
-        creader.consume()
       }
     }
 
