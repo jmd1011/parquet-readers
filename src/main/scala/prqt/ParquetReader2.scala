@@ -1,18 +1,14 @@
-package main.scala
+package main.scala.prqt
 
-import java.io.{File, PrintWriter}
 import java.util
 
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.fs.{FSDataInputStream, FileStatus, Path}
-import org.apache.parquet.bytes.BytesUtils
+import org.apache.hadoop.fs.Path
 import org.apache.parquet.column.ColumnDescriptor
 import org.apache.parquet.column.impl.ColumnReadStoreImpl
 import org.apache.parquet.column.page.{Page, PageReadStore}
-import org.apache.parquet.format.converter.ParquetMetadataConverter
-import org.apache.parquet.format.converter.ParquetMetadataConverter.MetadataFilter
-import org.apache.parquet.hadoop.{ParquetFileReader, ParquetFileWriter}
-import org.apache.parquet.hadoop.metadata.{BlockMetaData, ColumnChunkMetaData, ParquetMetadata}
+import org.apache.parquet.hadoop.ParquetFileReader
+import org.apache.parquet.hadoop.metadata.{ColumnChunkMetaData, ParquetMetadata}
 import org.apache.parquet.io.api._
 import org.apache.parquet.schema._
 
@@ -54,7 +50,7 @@ object ParquetReader2 {
         println("finished printStuff(ccmds)")
 
         println(s"creating ParquetFileReader for i = $i")
-        val freader = new ParquetFileReader(configuration, path, blocks, columns)
+        val freader = new ParquetFileReader(configuration, path, blocks toList, columns toList)
 
         println("store = freader.readNextRowGroup()")
         var store = freader.readNextRowGroup()
@@ -108,6 +104,21 @@ object ParquetReader2 {
         }
       }
 
+      class DumpGroupConverter extends GroupConverter {
+        override def getConverter(i: Int): Converter = {
+          class DumpConverter extends PrimitiveConverter {
+            override def isPrimitive = true
+            override def asGroupConverter() = new DumpGroupConverter()
+          }
+
+          new DumpConverter()
+        }
+
+        override def end(): Unit = {}
+
+        override def start(): Unit = {}
+      }
+
       for (i <- 0 until columns.size()) {
         val column = columns.get(i)
         println()
@@ -116,6 +127,7 @@ object ParquetReader2 {
 
         var page = 1L
         val total = blocks.size()
+        println(s"total = $total")
         var offset = 1L
 
         val freader = new ParquetFileReader(configuration, path, blocks, columns)
@@ -131,19 +143,6 @@ object ParquetReader2 {
         }
 
         freader.close()
-      }
-
-      class DumpGroupConverter extends GroupConverter {
-        override def getConverter(i: Int): Converter = { new DumpConverter() }
-
-        override def end(): Unit = {}
-
-        override def start(): Unit = {}
-      }
-
-      class DumpConverter extends PrimitiveConverter {
-        override def isPrimitive = true
-        override def asGroupConverter() = new DumpGroupConverter()
       }
     }
 
@@ -248,63 +247,6 @@ object ParquetReader2 {
     //dumpMetaData()
     dumpData()
   }
-
-  class ParquetFileReader1 extends java.io.Closeable {
-    val parquetMetadataConverter = new ParquetMetadataConverter()
-
-    override def close(): Unit = {}
-
-    def readFooter(configuration: Configuration, path: Path): ParquetMetadata = readFooter(configuration, path, ParquetMetadataConverter.NO_FILTER)
-
-    def readFooter(configuration: Configuration, path: Path, metadataFilter: MetadataFilter): ParquetMetadata = {
-      val fileSystem = path.getFileSystem(configuration)
-      readFooter(configuration, fileSystem.getFileStatus(path), metadataFilter)
-    }
-
-    def readFooter(configuration: Configuration, fileStatus: FileStatus, metadataFilter: MetadataFilter): ParquetMetadata = {
-      val path = fileStatus.getPath
-      val fileSystem = path.getFileSystem(configuration)
-      val f = fileSystem.open(path)
-
-      val length = fileStatus.getLen
-      val FOOTER_LENGTH_SIZE = 4
-
-      if (length < ParquetFileWriter.MAGIC * 2 + FOOTER_LENGTH_SIZE) {
-        throw new Exception("This file is too small homie")
-      }
-
-      val footerLengthIndex = length - FOOTER_LENGTH_SIZE - ParquetFileWriter.MAGIC.length
-      f.seek(footerLengthIndex)
-
-      val footerLength = BytesUtils.readIntLittleEndian(f)
-      val magic = new Array[Byte](ParquetFileWriter.MAGIC.length)
-      f.readFully(magic)
-
-      if (!ParquetFileWriter.MAGIC.eq(magic)) {
-        throw new Exception("Still not a Parquet file friendo. Missing the magic number.")
-      }
-
-      val footerIndex = footerLengthIndex - footerLength
-
-      if (footerIndex < ParquetFileWriter.MAGIC.length || footerIndex >= footerLengthIndex) {
-        throw new Exception("This file is straight up corrupt.")
-      }
-
-      f.seek(footerIndex)
-
-      parquetMetadataConverter.readParquetMetadata(f, metadataFilter)
-    }
-  }
-
-
-
-
-
-
-
-
-
-
 
   type Fields = Vector[RField]
   type Schema = Vector[String]
