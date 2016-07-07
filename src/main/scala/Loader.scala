@@ -23,11 +23,12 @@ object Loader {
     //val out = new PrintWriter(System.out)
 
     val p = new Path("./resources/customer.parquet")
-    val reader = new ParquetReader[Record](p, new SimpleReadSupport())
+    val reader = new ParquetReader[Record](p, new SimpleReadSupport)
     var value = reader.read()
     var lValue = value
 
     while (value != null) {
+      value.print(out)
       lValue = value
       value = reader.read()
     }
@@ -78,7 +79,7 @@ object Loader {
 
       override def getConverter(i: Int): Converter = converters(i)
 
-      override def end(): Unit = {}// if (parent != null) parent.record.add(name, record) }
+      override def end(): Unit = {}
 
       override def start(): Unit = {}
 
@@ -110,15 +111,29 @@ object Loader {
     }
 
     def print(out: PrintWriter): Unit = {
-      for (key <- map) {
-        out.println(s"${key._1}:")
+      var max = -1
 
-        for (value <- key._2) {
-          out.println(value)
+      for (key <- map) max = math.max(key._2.size, max)
+
+      for (i <- 0 until max) {
+        out.println(s"#${i + 1}:")
+
+        for (key <- map) {
+          out.println(s"${key._1}: ${key._2(i)}")
         }
 
         out.println()
       }
+
+//      for (key <- map) {
+//        out.println(s"${key._1}:")
+//
+//        for (value <- key._2) {
+//          out.println(value)
+//        }
+//
+//        out.println()
+//      }
     }
 
     override def toString: String = {
