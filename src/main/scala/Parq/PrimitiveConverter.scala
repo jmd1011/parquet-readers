@@ -7,7 +7,6 @@ import org.apache.parquet.io.api.Binary
   * Created by James on 7/7/2016.
   */
 abstract class PrimitiveConverter extends Converter {
-  def this() = this
   def isPrimitive = true
   override def asPrimitiveConverter(): PrimitiveConverter = this
   def hasDictionarySupport = false

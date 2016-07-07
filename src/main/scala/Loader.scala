@@ -19,8 +19,8 @@ import scala.collection.mutable.ListBuffer
   */
 object Loader {
   def main(args: Array[String]): Unit = {
-    val out = new PrintWriter(new java.io.File("./resources/customer_test.txt"))
-    //val out = new PrintWriter(System.out)
+    //val out = new PrintWriter(new java.io.File("./resources/customer_test.txt"))
+    val out = new PrintWriter(System.out)
 
     val p = new Path("./resources/customer.parquet")
     val reader = new ParquetReader[Record](p, new SimpleReadSupport)
