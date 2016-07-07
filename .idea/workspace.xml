@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07c06c13-905b-4fe6-8180-eb9e3ab5709d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Loader.scala" afterPath="$PROJECT_DIR$/src/main/scala/Loader.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/prqt/PFR.scala" afterPath="$PROJECT_DIR$/src/main/scala/prqt/PFR.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/prqt/ParquetFileReader1.scala" afterPath="$PROJECT_DIR$/src/main/scala/prqt/ParquetFileReader1.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/prqt/ParquetMetadataConverter1.scala" afterPath="$PROJECT_DIR$/src/main/scala/prqt/ParquetMetadataConverter1.scala" />
-    </list>
+    <list default="true" id="07c06c13-905b-4fe6-8180-eb9e3ab5709d" name="Default" comment="" />
     <ignored path="ParquetStuff.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -695,7 +689,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
