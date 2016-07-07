@@ -23,6 +23,7 @@ object ParquetReader2 {
   def main(args: Array[String]) {
     val p = new Path("./resources/customer.parquet")
     val parquetMetadata = ParquetFileReader.readFooter(new Configuration(), p)
+    val test = new ParquetFileReader1().readFooter(new Configuration(), p)
     val schema = parquetMetadata.getFileMetaData.getSchema
 
     dump(parquetMetadata, schema, p)
