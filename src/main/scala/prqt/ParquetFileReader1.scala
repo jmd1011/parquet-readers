@@ -6,6 +6,8 @@ import java.nio.charset.Charset
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileStatus, Path}
 import org.apache.parquet.column.ColumnDescriptor
+import org.apache.parquet.format.converter.ParquetMetadataConverter
+import org.apache.parquet.hadoop.ParquetFileReader
 import org.apache.parquet.hadoop.metadata.{BlockMetaData, ParquetMetadata}
 
 /**
@@ -15,11 +17,11 @@ class ParquetFileReader1 extends java.io.Closeable {
   def this(configuration: Configuration, path: Path, blocks: List[BlockMetaData], columns: List[ColumnDescriptor]) = this()
 
   val MAGIC = "PAR1".getBytes(Charset.forName("ASCII"))
-  val parquetMetadataConverter = new ParquetMetadataConverter1()
+  val parquetMetadataConverter = new ParquetMetadataConverter()
 
   override def close(): Unit = {}
 
-  def readFooter(configuration: Configuration, path: Path): ParquetMetadata = readFooter(configuration, path, parquetMetadataConverter.NO_FILTER)
+  def readFooter(configuration: Configuration, path: Path): ParquetMetadata = ParquetFileReader.readFooter(configuration, path, ParquetMetadataConverter.NO_FILTER)
 
   def readFooter(configuration: Configuration, path: Path, metadataFilter: MetadataFilter): ParquetMetadata = {
     val fileSystem = path.getFileSystem(configuration)
@@ -62,7 +64,8 @@ class ParquetFileReader1 extends java.io.Closeable {
 
     f.seek(footerIndex)
 
-    parquetMetadataConverter.readParquetMetadata(f, metadataFilter)
+    //parquetMetadataConverter.readParquetMetadata(f, metadataFilter)
+    parquetMetadataConverter.readParquetMetadata(f, ParquetMetadataConverter.NO_FILTER)
   }
 
   def readIntLittleEndian(in: InputStream): Int = {
