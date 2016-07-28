@@ -1,8 +1,10 @@
 package main.scala
 
-import java.io.PrintWriter
+import java.io.{FileInputStream, InputStream, PrintWriter}
 import java.util
+import java.util.Scanner
 
+import main.scala.prqt.ParquetInputStream
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.Path
 import org.apache.parquet.hadoop.api.{InitContext, ReadSupport}
@@ -22,6 +24,7 @@ object Loader {
     //val out = new PrintWriter(new java.io.File("./resources/customer_test.txt"))
     val out = new PrintWriter(System.out)
 
+
     val p = new Path("./resources/customer.parquet")
     val reader = new ParquetReader[Record](p, new SimpleReadSupport)
     var value = reader.read()
@@ -33,6 +36,7 @@ object Loader {
       value = reader.read()
     }
 
+    val test = new FileInputStream("")
 
     lValue.print(out)
 
