@@ -124,16 +124,6 @@ object Loader {
 
         out.println()
       }
-
-//      for (key <- map) {
-//        out.println(s"${key._1}:")
-//
-//        for (value <- key._2) {
-//          out.println(value)
-//        }
-//
-//        out.println()
-//      }
     }
 
     override def toString: String = {
