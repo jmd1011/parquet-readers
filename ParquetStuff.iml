@@ -20,5 +20,6 @@
     </orderEntry>
     <orderEntry type="library" name="org.apache.parquet:parquet-hadoop:1.8.1" level="project" />
     <orderEntry type="library" name="org.scalatest:scalatest_2.11:3.0.0-SNAP13" level="project" />
+    <orderEntry type="library" name="scala-sdk-2.11.7" level="application" />
   </component>
 </module>

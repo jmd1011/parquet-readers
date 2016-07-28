@@ -5,7 +5,7 @@ package main.scala.Parq
   */
 abstract class GroupConverter extends Converter {
   def isPrimitive = false
-  override def asGroupConverter = this
+  override def asGroupConverter() = this
   def getConverter(i: Int): Converter
   def start(): Unit
   def end(): Unit
