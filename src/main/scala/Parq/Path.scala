@@ -2,7 +2,6 @@ package main.scala.Parq
 
 import java.net.URI
 
-import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.FileSystem
 
 /**
@@ -69,5 +68,5 @@ class Path extends Comparable[Path] {
 
   override def compareTo(o: Path): Int = 1
 
-  def getFileSystem(conf: Configuration) = FileSystem.get(uri, conf)
+  def getFileSystem(conf: org.apache.hadoop.conf.Configuration) = FileSystem.get(uri, conf)
 }
