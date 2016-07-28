@@ -14,7 +14,7 @@ abstract class ReadSupport[T] {
   val PARQUET_READ_SCHEMA = "parquet.read.schema"
   //val reader = Inter
 
-  def prepareForRead(configuration: Configuration, keyValueMetaData: util.Map[String, String], fileSchema: MessageType, readContext: ReadContext): RecordMaterializer[T]
+  def prepareForRead(configuration: Configuration, keyValueMetaData: Map[String, String], fileSchema: MessageType, readContext: ReadContext): RecordMaterializer[T]
   def init(context: InitContext): ReadContext = new ReadContext(context getFileSchema)
 
 //  def read: T = {

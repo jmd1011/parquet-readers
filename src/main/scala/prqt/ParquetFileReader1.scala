@@ -3,18 +3,20 @@ package main.scala.prqt
 import java.io.InputStream
 import java.nio.charset.Charset
 
-import org.apache.hadoop.conf.Configuration
+import main.scala.Parq.Configuration
 import org.apache.hadoop.fs.{FileStatus, Path}
 import org.apache.parquet.column.ColumnDescriptor
 import org.apache.parquet.format.converter.ParquetMetadataConverter
 import org.apache.parquet.hadoop.ParquetFileReader
-import org.apache.parquet.hadoop.metadata.{BlockMetaData, ParquetMetadata}
+import org.apache.parquet.hadoop.metadata.{BlockMetaData, FileMetaData, ParquetMetadata}
 
 /**
   * Created by jdecker on 6/24/16.
   */
 class ParquetFileReader1 extends java.io.Closeable {
   def this(configuration: Configuration, path: Path, blocks: List[BlockMetaData], columns: List[ColumnDescriptor]) = this()
+  def this(configuration: Configuration, fileMetaData: FileMetaData, path: main.scala.Parq.Path, blocks: List[BlockMetaData], columns: List[ColumnDescriptor]) = this()
+
 
   val MAGIC = "PAR1".getBytes(Charset.forName("ASCII"))
   val parquetMetadataConverter = new ParquetMetadataConverter()
