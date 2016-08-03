@@ -1,7 +1,8 @@
 package main.scala.prqt
+
 import java.nio.ByteBuffer
 
-import org.apache.hadoop.fs.FSDataInputStream
+import main.scala.Parq.FSDataInputStream
 
 /**
   * Created by jdecker on 7/1/16.

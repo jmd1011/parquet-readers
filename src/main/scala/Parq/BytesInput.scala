@@ -5,11 +5,11 @@ import java.io.OutputStream
 /**
   * Created by james on 7/19/16.
   */
-abstract class BytesInput(size: Long) {
+abstract class BytesInput(val len: Long) {
   def concat(inputs: BytesInput*) = new SequenceBytesIn(inputs toList)
   def writeAllTo(out: OutputStream): Unit = ???
 
-  class SequenceBytesIn(inputs: List[BytesInput]) extends BytesInput(inputs.map(_.size).sum) {
+  class SequenceBytesIn(inputs: List[BytesInput]) extends BytesInput(inputs.map(_.len).sum) {
     override def writeAllTo(out: OutputStream) = {
       def write(is: List[BytesInput]) = is match {
         case List() => Nil
@@ -24,9 +24,7 @@ abstract class BytesInput(size: Long) {
       if (s == 0) 1L else s.asInstanceOf[Long]
     })
   {
-    def size(): Long = {
-
-    }
+    def size(): Long = this.len
 
     override def writeAllTo(out: OutputStream): Unit = {
       var x = value & -128

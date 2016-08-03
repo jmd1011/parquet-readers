@@ -2,8 +2,6 @@ package main.scala.Parq
 
 import main.scala.prqt.ParquetFileReader1
 import org.apache.parquet.hadoop.metadata.{BlockMetaData, FileMetaData}
-import org.apache.parquet.io.ColumnIOFactory
-import org.apache.parquet.schema.MessageType
 
 import scala.collection.JavaConversions._
 
@@ -13,6 +11,17 @@ import scala.collection.JavaConversions._
 class InternalParquetReader[T](readSupport: ReadSupport[T]) {
   var columnIOFactory: ColumnIOFactory = _
   var reader: ParquetFileReader1 = _
+  var recordConverter: RecordMaterializer[T] = _
+
+  var requestedSchema: MessageType = _
+  var fileSchema: MessageType = _
+
+  var total: Long = 0L
+  var current: Long = 0L
+  var totalCountLoadedSoFar: Long = 0L
+
+  var currentValue: T = _
+  var recordReader: RecordReader[T] = _
 
   def initialize(fileSchema: MessageType, parquetFileMetadata: FileMetaData, file: Path, blocks: List[BlockMetaData], configuration: Configuration): Unit = {
     def toSetMultiMap[K, V](map: Map[K, V]): Map[K, Set[V]] = {
@@ -26,8 +35,42 @@ class InternalParquetReader[T](readSupport: ReadSupport[T]) {
 
     val fileMetadata = parquetFileMetadata.getKeyValueMetaData
     val readContext = readSupport.init(new InitContext(configuration, toSetMultiMap(fileMetadata.toMap), fileSchema))
+    requestedSchema = readContext requestedSchema
+    //this.fileSchema = fileSchema
+
     columnIOFactory = new ColumnIOFactory(parquetFileMetadata getCreatedBy)
-    val columns = readContext.getRequestedSchema.getColumns.toList
-    reader = new ParquetFileReader1(configuration, parquetFileMetadata, file, blocks, columns)
+
+    val columns = requestedSchema columns
+    //reader = new ParquetFileReader1(configuration, parquetFileMetadata, file, blocks, columns)
+
+    for (block <- blocks) {
+      total += block.getRowCount
+    }
   }
+
+  def hasNextKeyValue: Boolean = {
+    while (current < total) {
+      checkRead()
+
+      current += 1
+      currentValue = recordReader.read()
+
+      if (currentValue != null) true
+    }
+
+    false
+  }
+
+  def checkRead(): Boolean = true //{
+//    if (current == totalCountLoadedSoFar) {
+//      val pages = reader.readNextRowGroup()
+//
+//      if (pages == null) false
+//
+//      val columnIO = columnIOFactory.getColumnIO(requestedSchema, fileSchema)
+//      recordReader = columnIO.getRecordReader(pages, recordConverter, null)
+//    }
+//
+//    true
+//  }
 }

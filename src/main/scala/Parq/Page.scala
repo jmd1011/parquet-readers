@@ -27,7 +27,7 @@ class DictionaryPage extends Page {
   def this(bytes: BytesInput, uncompressedSize: Int, dictionarySize: Int, encoding: Encoding) {
     this()
     this.bytes = bytes
-    this.compressedSize = bytes.size().asInstanceOf[Int]
+    this.compressedSize = bytes.len.asInstanceOf[Int]
     this.uncompressedSize = uncompressedSize
     this.dictionarySize = dictionarySize
 
@@ -37,8 +37,8 @@ class DictionaryPage extends Page {
   }
 
   def this(bytes: BytesInput, dictionarySize: Int, encoding: Encoding) {
-    this(bytes, bytes.size().asInstanceOf[Int], dictionarySize, encoding)
+    this(bytes, bytes.len.asInstanceOf[Int], dictionarySize, encoding)
   }
 
-  def copy: DictionaryPage = new DictionaryPage(BytesInput.copy(this.bytes), this.uncompressedSize, this.dictionarySize, this.encoding)
+  def copy: DictionaryPage = ??? //new DictionaryPage(BytesInput.copy(this.bytes), this.uncompressedSize, this.dictionarySize, this.encoding)
 }
