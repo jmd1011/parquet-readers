@@ -1,6 +1,7 @@
 package main.scala
 
-import java.io.{FileInputStream, InputStream, PrintWriter}
+import java.io._
+import java.nio.charset.Charset
 import java.util
 import java.util.Scanner
 
@@ -8,6 +9,8 @@ import main.scala.Parq.FSDataInputStream
 import main.scala.prqt.ParquetInputStream
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FSInputStream, Path}
+import org.apache.parquet.bytes.BytesUtils
+import org.apache.parquet.filter2.predicate.FilterPredicate
 import org.apache.parquet.hadoop.api.{InitContext, ReadSupport}
 import org.apache.parquet.hadoop.api.ReadSupport.ReadContext
 import org.apache.parquet.hadoop.ParquetReader
@@ -22,8 +25,8 @@ import scala.collection.mutable.ListBuffer
   */
 object Loader {
   def main(args: Array[String]): Unit = {
-    //val out = new PrintWriter(new java.io.File("./resources/customer_test.txt"))
-    val out = new PrintWriter(System.out)
+    val out = new PrintWriter(new java.io.File("./resources/customer_test2.txt"))
+    //val out = new PrintWriter(System.out)
 
 
     val p = new Path("./resources/customer.parquet")
@@ -37,8 +40,6 @@ object Loader {
       lValue = value
       value = reader.read()
     }
-
-    val test = new FileInputStream("")
 
     lValue.print(out)
 
