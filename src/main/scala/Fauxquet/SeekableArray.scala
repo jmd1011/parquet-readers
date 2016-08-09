@@ -14,4 +14,12 @@ class SeekableArray[T](val array: Array[T], var pos: Int = 0) {
   def next = apply(pos)
 
   def getItemWithoutMovingPos(i: Int) = array(i)
+
+  def readAll(array: Array[T], length: Int) = {
+    for (i <- 0 until length) {
+      array(i) = this.next
+    }
+  }
+
+  def getBytesRemaining: Int = array.length - pos
 }

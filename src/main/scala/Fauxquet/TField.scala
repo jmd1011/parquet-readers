@@ -4,7 +4,7 @@ package main.scala.Fauxquet
   * Created by james on 8/5/16.
   */
 
-class TField(val name: String, val Type: Byte, val id: Short) {
+case class TField(name: String, Type: Byte, id: Short) {
   def this() = this("", 0, 0)
 
   def apply(name: String, Type: Byte, id: Short) = new TField(name, Type, id)
