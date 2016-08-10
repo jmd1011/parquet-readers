@@ -13,7 +13,7 @@ object FauxquetDecoder {
   def readStructBegin(): Unit = id = 0
   def readStructEnd(id: Int) = this.id = id
 
-
+  //TODO
   def readSchemaItem(arr: SeekableArray[Byte]): String = {
     ""
   }

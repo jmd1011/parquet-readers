@@ -16,12 +16,14 @@ class FauxquetFile(val file: String) {
 
   lazy val array = new SeekableArray[Byte](Files.readAllBytes(Paths.get(file)))
   lazy val table: Map[Schema, Fields] = ???
-  lazy val fileMetaData: FileMetadata = new FileMetadata()
+  val fileMetaData: FileMetadata = new FileMetadata()
   var schema: Schema = _
   var fields: Fields = _
 
   def init() = {
     if (!isParquetFile) throw new Error(s"$file is not a valid Parquet file.")
+
+    fileMetaData read array
 
     schema = fileMetaData.schema
   }
@@ -49,6 +51,8 @@ class FauxquetFile(val file: String) {
     for (i <- 0 until MAGIC.length) {
       magic(i) = array(footerLengthIndex + 4 + i)
     }
+
+    array.pos = footerLengthIndex - footerLength
 
     magic.sameElements(MAGIC)
   }
