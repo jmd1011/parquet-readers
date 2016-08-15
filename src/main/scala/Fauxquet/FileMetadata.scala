@@ -9,7 +9,7 @@ class FileMetadata() extends Fauxquetable {
   var createdBy: String = _
   var rowGroups: List[RowGroup] = _
 
-  var schema: Vector[String] = Vector[String]()
+  var schema: Vector[SchemaElement] = Vector[SchemaElement]()
 
   override def doMatch(field: TField, arr: SeekableArray[Byte]): Unit = field match {
     case TField(_, 8, 1) => version = FauxquetDecoder readI32 arr
@@ -21,7 +21,7 @@ class FileMetadata() extends Fauxquetable {
         for (i <- 0 until schema.size) this.schema :+= {
           val se = new SchemaElement
           se read arr
-          se name
+          se
         }
       case 4 =>
         val list = FauxquetDecoder readListBegin arr
