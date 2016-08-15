@@ -25,7 +25,7 @@ class FauxquetFile(val file: String) {
 
     fileMetaData read array
 
-    schema = fileMetaData.schema
+    //schema = fileMetaData.schema
   }
 
   def isParquetFile: Boolean = {

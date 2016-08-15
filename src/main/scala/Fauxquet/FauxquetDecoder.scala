@@ -9,6 +9,7 @@ import java.nio.ByteBuffer
 object FauxquetDecoder {
   var id: Int = 0
   var boolValue: java.lang.Boolean = _ //wtf is this?
+  //var ids: List[Int] = Nil
 
   def readStructBegin(): Unit = id = 0
   def readStructEnd(id: Int) = this.id = id
@@ -96,7 +97,7 @@ object FauxquetDecoder {
   def readFieldBegin(arr: SeekableArray[Byte]): TField = {
     val t = arr next
 
-    if (t == 0) TSTOP
+    if (t == 0) return TSTOP
 
     val modifier = ((t & 240) >> 4).asInstanceOf[Short]
     var fid: Short = 0
@@ -189,7 +190,7 @@ object FauxquetDecoder {
   }
 
   def zigzagToInt(n: Int): Int = n >>> 1 ^ -(n & 1)
-  def zigzagToLong(n: Long): Long = n >>> 1 & -(n & 1L)
+  def zigzagToLong(n: Long): Long = n >>> 1 ^ -(n & 1L)
 
   def readBinary(arr: SeekableArray[Byte]): ByteBuffer = {
     val length = readVarint32(arr)
@@ -230,14 +231,14 @@ object FauxquetDecoder {
 
     if (length == 0) ""
     else {
-      if (arr.getBytesRemaining >= length) {
-        val e: String = new String(arr.array, arr.pos, length, "UTF-8")
-        arr.pos += length
-
-        e
-      } else {
+//      if (arr.getBytesRemaining >= length) {
+//        val e: String = new String(arr.array, arr.pos, length, "UTF-8")
+//        arr.pos += length
+//
+//        e
+//      } else {
         new String(readBinary(arr, length), "UTF-8")
-      }
+      //}
     }
   }
 
