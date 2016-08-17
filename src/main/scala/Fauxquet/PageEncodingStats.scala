@@ -26,4 +26,6 @@ class PageEncodingStats extends Fauxquetable {
     if (encoding == null) throw new Error("PageEncodingStats encoding was not found in file.")
     if (pageType == null) throw new Error("PageEncodingStats pageType was not found in file.")
   }
+
+  override def className: String = "PageEncodingStats"
 }

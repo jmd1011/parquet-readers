@@ -26,4 +26,6 @@ class ColumnChunk extends Fauxquetable {
   override def validate(): Unit = {
     if (fileOffset == -1L) throw new Error("ColumnChunk fileOffset was not found in file.")
   }
+
+  override def className: String = "ColumnChunk"
 }

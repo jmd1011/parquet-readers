@@ -30,4 +30,6 @@ class Statistics extends Fauxquetable {
   override def write(): Unit = ???
 
   override def validate(): Unit = {}
+
+  override def className: String = "Statistics"
 }

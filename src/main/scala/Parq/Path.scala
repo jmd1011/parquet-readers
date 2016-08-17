@@ -10,7 +10,7 @@ import org.apache.hadoop.fs.FileSystem
 class Path extends Comparable[Path] {
   val SEPARATOR = "/"
   val CUR_DIR = "."
-  val WINDOWS = System.getProperty("os.name").startsWith("Windows")
+  val WINDOWS = System.getProperty("os.className").startsWith("Windows")
   var uri: URI = null
 
   def this(pathString: String) = {

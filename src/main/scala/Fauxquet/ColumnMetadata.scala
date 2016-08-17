@@ -77,4 +77,6 @@ class ColumnMetadata extends Fauxquetable {
     if (totalCompressedSize == -1L) throw new Error("ColumnMetadata totalCompressedSize was not found in file.")
     if (dataPageOffset == -1L) throw new Error("ColumnMetadata dataPageOffset was not found in file.")
   }
+
+  override def className: String = "ColumnMetadata"
 }

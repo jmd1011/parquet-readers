@@ -6,8 +6,11 @@ package main.scala.Fauxquet
 
 trait Fauxquetable {
   var keyValueMetadata: List[KeyValue] = Nil
+  def className: String
 
   def read(arr: SeekableArray[Byte]): Unit = {
+    println(s"Starting read of $className, arr.pos = ${arr.pos}.")
+
     FauxquetDecoder readStructBegin()
 
     var keepGoing = true

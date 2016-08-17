@@ -213,20 +213,20 @@ object ParquetReader2 {
 //
 //    def showColumnChunkDetails(current: util.Map[String, Object], depth: Int): Unit = {
 //      for (entry: util.Map.Entry[String, Object] <- current.entrySet()) {
-//        val name = entry.getKey
+//        val className = entry.getKey
 //        val value: Object = entry.getValue
 //
 //        if (value.isInstanceOf[util.Map[String, Object]]) {
-//          println(name + ": ")
+//          println(className + ": ")
 //          showColumnChunkDetails(value.asInstanceOf[util.Map[String, Object]], depth + 1)
 //        } else {
-//          print(name + ": ")
-//          showDetails(value.asInstanceOf[ColumnChunkMetaData], name = false)
+//          print(className + ": ")
+//          showDetails(value.asInstanceOf[ColumnChunkMetaData], className = false)
 //        }
 //      }
 //    }
 //
-//    def showDetails(meta: ColumnChunkMetaData, name: Boolean) = {
+//    def showDetails(meta: ColumnChunkMetaData, className: Boolean) = {
 //      val doff = meta.getDictionaryPageOffset
 //      val foff = meta.getFirstDataPageOffset
 //      val tsize = meta.getTotalSize
@@ -235,7 +235,7 @@ object ParquetReader2 {
 //      val ratio = usize / tsize.asInstanceOf[Double]
 //      val encodings = meta.getEncodings.toArray.mkString(",")
 //
-//      if (name) {
+//      if (className) {
 //        print(meta.getPath.toArray.mkString(",") + ": ")
 //      }
 //
