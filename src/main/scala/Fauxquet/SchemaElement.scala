@@ -35,6 +35,8 @@ class SchemaElement extends Fauxquetable {
   override def write(): Unit = ???
 
   override def validate(): Unit = {
-    if (name == null) throw new Error("SchemaElement name was not found in file.")
+    if (className == null) throw new Error("SchemaElement className was not found in file.")
   }
+
+  override def className: String = "SchemaElement"
 }

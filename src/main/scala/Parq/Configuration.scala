@@ -38,7 +38,7 @@ class Configuration extends Iterable[Entry[String, String]] with Writable {
   def getHexDigits(string: String): String = ???
 
   def getInt(name: String, defaultValue: Int): Int = ??? //{
-//    val str = this.get(name)
+//    val str = this.get(className)
 //
 //    if (null == str) defaultValue
 //    else {

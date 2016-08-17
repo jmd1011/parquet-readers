@@ -26,4 +26,6 @@ class SortingColumn extends Fauxquetable {
     if (descending isEmpty) throw new Error("SortingColumn descending not found in file.")
     if (nullsFirst isEmpty) throw new Error("SortingColumn nullsFirst not found in file.")
   }
+
+  override def className: String = "SortingColumn"
 }

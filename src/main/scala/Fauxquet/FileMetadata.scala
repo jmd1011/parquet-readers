@@ -3,7 +3,7 @@ package main.scala.Fauxquet
 /**
   * Created by james on 8/5/16.
   */
-class FileMetadata() extends Fauxquetable {
+class FileMetadata extends Fauxquetable {
   var numRows: Long = _
   var version: Int = _
   var createdBy: String = _
@@ -21,7 +21,7 @@ class FileMetadata() extends Fauxquetable {
         for (i <- 0 until schema.size) this.schema :+= {
           val se = new SchemaElement
           se read arr
-          se
+          if (se.name != null && se.name != "m") se else null
         }
       case 4 =>
         val list = FauxquetDecoder readListBegin arr
@@ -50,4 +50,6 @@ class FileMetadata() extends Fauxquetable {
     if (version == -1) throw new Error("File Metadata version was not found in file.")
     if (numRows == -1) throw new Error("File Metadata numRows was not found in file.")
   }
+
+  override def className: String = "FileMetadata"
 }

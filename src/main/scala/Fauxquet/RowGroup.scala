@@ -44,4 +44,6 @@ class RowGroup extends Fauxquetable {
     if (numRows == -1L) throw new Error("RowGroup numRows not found in file.")
     if (columns == null) throw new Error("RowGroup columns not found in file.")
   }
+
+  override def className: String = "RowGroup"
 }

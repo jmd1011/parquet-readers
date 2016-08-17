@@ -19,4 +19,6 @@ class KeyValue extends Fauxquetable {
   override def write(): Unit = ???
 
   override def validate(): Unit = if (key == null) throw new Error("Key must not be null in KeyValue")
+
+  override def className: String = "KeyValue"
 }
