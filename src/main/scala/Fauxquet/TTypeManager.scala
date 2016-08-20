@@ -18,3 +18,5 @@ object TTypeManager {
     }
   }
 }
+
+case class TType(id: Int, value: String)

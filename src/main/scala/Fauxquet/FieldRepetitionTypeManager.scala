@@ -11,3 +11,5 @@ object FieldRepetitionTypeManager {
     case _ => null
   }
 }
+
+case class FieldRepetitionType(id: Int, value: String)

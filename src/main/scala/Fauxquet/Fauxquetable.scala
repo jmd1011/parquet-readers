@@ -25,6 +25,7 @@ trait Fauxquetable {
           FauxquetDecoder readStructEnd field.id
           validate()
           keepGoing = false
+          println(s"Finished read of $className, arr.pos = ${arr.pos}.")
         case _ => doMatch(field, arr)
       }
     }

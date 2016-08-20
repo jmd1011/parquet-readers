@@ -12,3 +12,5 @@ object PageTypeManager {
     case _ => null
   }
 }
+
+case class PageType(id: Int, value: String)

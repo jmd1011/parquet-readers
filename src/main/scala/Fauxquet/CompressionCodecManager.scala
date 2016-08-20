@@ -12,3 +12,5 @@ object CompressionCodecManager {
     case _ => null
   }
 }
+
+case class CompressionCodec(id: Int, value: String)

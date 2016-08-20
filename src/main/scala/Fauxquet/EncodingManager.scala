@@ -16,3 +16,5 @@ object EncodingManager {
     case 8 => Encoding(0, "RLE_DICTIONARY")
   }
 }
+
+case class Encoding(id: Int, value: String)
