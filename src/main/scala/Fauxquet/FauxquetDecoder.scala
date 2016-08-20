@@ -94,13 +94,14 @@ object FauxquetDecoder {
     TList(Type, size)
   }
 
-  def readFieldBegin(arr: SeekableArray[Byte]): TField = {
+  def readFieldBegin(arr: SeekableArray[Byte], id: Int = 0): TField = {
     val t = arr next
 
     if (t == 0) return TSTOP
 
     val modifier = ((t & 240) >> 4).asInstanceOf[Short]
     var fid: Short = 0
+    this.id = id
 
     if (modifier == 0) {
       fid = readI16(arr)
