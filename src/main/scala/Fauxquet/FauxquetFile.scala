@@ -15,7 +15,7 @@ class FauxquetFile(val file: String) {
   val MAGIC = "PAR1".getBytes(Charset.forName("ASCII"))
 
   lazy val array = new SeekableArray[Byte](Files.readAllBytes(Paths.get(file)))
-  lazy val table: Map[Schema, Fields] = ???
+  lazy val table: Map[String, List[String]] = ???
   val fileMetaData: FileMetadata = new FileMetadata()
   var schema: Schema = _
   var fields: Fields = _
@@ -24,6 +24,8 @@ class FauxquetFile(val file: String) {
     if (!isParquetFile) throw new Error(s"$file is not a valid Parquet file.")
 
     fileMetaData read array
+
+    schema = Schema(fileMetaData.schema.filter(x => x.name != "m").map(x => x.name).toList)
 
     println("Done reading fileMetaData")
   }

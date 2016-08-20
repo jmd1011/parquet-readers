@@ -30,3 +30,5 @@ object ConvertedTypeManager {
     case _ => null
   }
 }
+
+case class ConvertedType(id: Int, value: String)
