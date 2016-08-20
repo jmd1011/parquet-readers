@@ -63,6 +63,7 @@ class ColumnMetadata extends Fauxquetable {
       case 9 => dataPageOffset = FauxquetDecoder readI64 arr
       case 10 => indexPageOffset = FauxquetDecoder readI64 arr
       case 11 => dictionaryPageOffset = FauxquetDecoder readI64 arr
+      case _ => FauxquetDecoder skip(arr, 10)
     }
     case TField(_, 12, 12) => statistics = {val s = new Statistics; s read arr; s}
     case _ => FauxquetDecoder skip(arr, field Type)

@@ -14,9 +14,11 @@ trait Fauxquetable {
     FauxquetDecoder readStructBegin()
 
     var keepGoing = true
+    var id = 0
 
     while (keepGoing) {
-      val field = FauxquetDecoder readFieldBegin arr
+      val field = FauxquetDecoder readFieldBegin (arr, id)
+      id = field id
 
       field match {
         case TField(_, 0, _) =>

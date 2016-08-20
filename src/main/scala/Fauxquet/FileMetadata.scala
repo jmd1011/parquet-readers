@@ -7,7 +7,7 @@ class FileMetadata extends Fauxquetable {
   var numRows: Long = _
   var version: Int = _
   var createdBy: String = _
-  var rowGroups: List[RowGroup] = _
+  var rowGroups: List[RowGroup] = Nil
 
   var schema: Vector[SchemaElement] = Vector[SchemaElement]()
 
@@ -18,10 +18,10 @@ class FileMetadata extends Fauxquetable {
     case TField(_, 15, x) => x match {
       case 2 =>
         val schema = FauxquetDecoder readListBegin arr
-        for (i <- 0 until schema.size) this.schema :+= {
+        for (i <- 0 until schema.size) {
           val se = new SchemaElement
           se read arr
-          if (se.name != null && se.name != "m") se else null
+          if (se.name != null) this.schema :+= se
         }
       case 4 =>
         val list = FauxquetDecoder readListBegin arr
