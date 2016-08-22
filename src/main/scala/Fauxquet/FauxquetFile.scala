@@ -1,7 +1,10 @@
 package main.scala.Fauxquet
 
+import java.io.{File, PrintWriter}
 import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
+
+import scala.tools.nsc.classpath.FileUtils.FileOps
 
 /**
   * Created by james on 8/5/16.
@@ -24,6 +27,8 @@ class FauxquetFile(val file: String) {
     if (!isParquetFile) throw new Error(s"$file is not a valid Parquet file.")
 
     fileMetaData read array
+
+    //val out = new PrintWriter(new File("./resources/loader2test.txt"))
 
     schema = Schema(fileMetaData.schema.filter(x => x.name != "m").map(x => x.name).toList)
 
