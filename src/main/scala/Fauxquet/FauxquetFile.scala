@@ -1,10 +1,8 @@
 package main.scala.Fauxquet
 
-import java.io.{File, PrintWriter}
+import java.io.{ByteArrayInputStream, File, PrintWriter}
 import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
-
-import scala.tools.nsc.classpath.FileUtils.FileOps
 
 /**
   * Created by james on 8/5/16.
@@ -28,9 +26,16 @@ class FauxquetFile(val file: String) {
 
     fileMetaData read array
 
-    //val out = new PrintWriter(new File("./resources/loader2test.txt"))
+    array pos = 4
 
-    schema = Schema(fileMetaData.schema.filter(x => x.name != "m").map(x => x.name).toList)
+    var valuesRead = 0L
+
+    while (valuesRead <= fileMetaData.numRows) {
+      val pageHeader = new PageHeader
+      pageHeader read array
+
+      valuesRead += pageHeader.dataPageHeader.numValues
+    }
 
     println("Done reading fileMetaData")
   }
