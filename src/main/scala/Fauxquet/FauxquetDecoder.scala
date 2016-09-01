@@ -148,6 +148,50 @@ object FauxquetDecoder {
     ret
   }
 
+  def readLong(b: java.io.ByteArrayInputStream, len: Int): Long = {
+    var count = 0
+    var n = 0
+
+    val ab = new Array[Byte](len)
+
+    while (n < len) {
+
+      count = b.read(ab, 0, len)
+
+      if (count < 0) throw new Error("Hit end of file early")
+
+      n += count
+    }
+
+    val ret = {
+      var sum = 0L
+
+      for (i <- 0 until 8) {
+        sum += (ab(i).asInstanceOf[Long] & 255) << (8 * i)
+      }
+
+      sum
+    }
+
+    ret
+  }
+
+  def readLong(arr: SeekableArray[Byte]): Long = {
+    val ret = {
+      var sum = 0L
+
+      for (i <- 0 until 8) {
+        sum += (arr.next.asInstanceOf[Long] & 255) << (8 * i)
+      }
+
+      sum
+    }
+
+    //val ret = ((long)this.readBuffer[arr.pos + 7] << 56) + ((long)(this.readBuffer[6] & 255) << 48) + ((long)(this.readBuffer[5] & 255) << 40) + ((long)(this.readBuffer[4] & 255) << 32) + ((long)(this.readBuffer[3] & 255) << 24) + (long)((this.readBuffer[2] & 255) << 16) + (long)((this.readBuffer[1] & 255) << 8) + (long)((this.readBuffer[0] & 255) << 0)
+
+    ret
+  }
+
   def readI64(arr: SeekableArray[Byte]): Long = {
     val r = readVarint64(arr)
     val ret = zigzagToLong(r)

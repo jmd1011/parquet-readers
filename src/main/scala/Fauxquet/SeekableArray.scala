@@ -21,4 +21,6 @@ class SeekableArray[T](val array: Array[T], var pos: Int = 0) {
   }
 
   def getBytesRemaining: Int = array.length - pos
+
+  def hasNext: Boolean = pos < array.length - 1
 }
