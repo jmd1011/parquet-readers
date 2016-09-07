@@ -30,11 +30,12 @@ class FauxquetFile(val file: String) {
 
     var valuesRead = 0L
 
-    while (valuesRead <= fileMetaData.numRows) {
+    while (valuesRead < fileMetaData.numRows) {
       val pageHeader = new PageHeader
       pageHeader read array
 
       valuesRead += pageHeader.dataPageHeader.numValues
+      array pos = array.pos + pageHeader.compressedPageSize
     }
 
     println("Done reading fileMetaData")
