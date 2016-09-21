@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07c06c13-905b-4fe6-8180-eb9e3ab5709d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/LittleEndianDecoder.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/org_apache_parquet_parquet_hadoop_1_8_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_parquet_parquet_hadoop_1_8_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/Fauxquetable.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/Fauxquetable.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/prqt/ParquetReader2.scala" afterPath="$PROJECT_DIR$/src/main/scala/prqt/ParquetReader2.scala" />
     </list>
     <ignored path="ParquetStuff.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,34 +38,41 @@
       <file leaf-file-name="Loader.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Loader.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+            <state relative-caret-position="18">
+              <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ParquetFileReader.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetFileReader.java">
+      <file leaf-file-name="FauxquetFile.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="624" column="0" selection-start-line="624" selection-start-column="0" selection-end-line="624" selection-end-column="0" />
+            <state relative-caret-position="162">
+              <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
               <folding>
-                <element signature="e#20580#20602#0" expanded="true" />
-                <element signature="e#22658#22668#0" expanded="true" />
+                <element signature="e#29#55#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FauxquetFile.scala" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala">
+      <file leaf-file-name="Loader2.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
-              <folding>
-                <element signature="e#29#85#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="360">
+              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ParquetReader2.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/prqt/ParquetReader2.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="34" column="58" selection-start-line="34" selection-start-column="58" selection-end-line="34" selection-end-column="58" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,38 +80,8 @@
       <file leaf-file-name="Fauxquetable.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Fauxquetable.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PageHeader.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/PageHeader.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PageTypeManager.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/PageTypeManager.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FauxquetDecoder.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="147" column="4" selection-start-line="147" selection-start-column="4" selection-end-line="147" selection-end-column="4" />
+            <state relative-caret-position="468">
+              <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -111,37 +93,6 @@
             <state relative-caret-position="216">
               <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PageHeader.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/PageHeader.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="707" column="0" selection-start-line="707" selection-start-column="0" selection-end-line="707" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3174#3175#0" expanded="true" />
-                <element signature="e#3229#3230#0" expanded="true" />
-                <element signature="e#7209#7210#0" expanded="true" />
-                <element signature="e#7262#7263#0" expanded="true" />
-                <element signature="e#7313#7314#0" expanded="true" />
-                <element signature="e#7357#7358#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Util.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/Util.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding>
-                <element signature="e#4420#4421#0" expanded="true" />
-                <element signature="e#4481#4482#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -167,8 +118,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/scala/Parq/FSDataInputStream.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Parq/TrackingFileInputStream.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Loader2.scala" />
         <option value="$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/FileMetaData.class" />
         <option value="$PROJECT_DIR$/src/main/scala/Farquet/Decoder.scala" />
@@ -202,22 +151,24 @@
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/SchemaElement.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnMetadata.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FileMetadata.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/Fauxquetable.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/PageTypeManager.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/EncodingManager.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ConvertedTypeManager.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/CompressionCodecManager.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FieldRepetitionTypeManager.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/TTypeManager.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/SeekableArray.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/DictionaryPageHeader.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/DataPageHeaderV2.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/PageHeader.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/IndexPageHeader.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/DataPageHeader.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/SeekableArray.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/LittleEndianDecoder.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/Fauxquetable.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/prqt/ParquetReader2.scala" />
       </list>
     </option>
   </component>
@@ -259,8 +210,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -315,123 +264,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="prqt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parquet-readers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parquet-readers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Fauxquet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-format-2.3.0-incubating.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-format-2.3.0-incubating.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-format-2.3.0-incubating.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thrift" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parquet-format-2.3.0-incubating.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thrift" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protocol" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -454,7 +317,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Loader2">
+  <component name="RunManager" selected="Application.ParquetReader2">
     <configuration default="false" name="SpecificParquetRecordReaderTest" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -563,10 +426,7 @@
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
-      <method>
-        <option name="Make" enabled="true" />
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
@@ -589,10 +449,7 @@
       <Profilers>
         <option name="GAPID_DISABLE_PCS" value="false" />
       </Profilers>
-      <method>
-        <option name="Make" enabled="true" />
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
@@ -838,9 +695,9 @@
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Application.Loader2" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Loader" />
-        <item index="2" class="java.lang.String" itemvalue="Application.ParquetReader2" />
+        <item index="0" class="java.lang.String" itemvalue="Application.ParquetReader2" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Loader2" />
+        <item index="2" class="java.lang.String" itemvalue="Application.Loader" />
         <item index="3" class="java.lang.String" itemvalue="Application.SpecificParquetRecordReaderTest" />
       </list>
     </recent_temporary>
@@ -876,7 +733,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="7" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -886,7 +743,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29615384" sideWeight="0.50772333" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3537207" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3537207" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -895,7 +752,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35779816" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35881755" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -935,18 +792,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$PROJECT_DIR$/lib/parquet-encoding-1.8.1.jar!/org/apache/parquet/bytes/LittleEndianDataInputStream.class</url>
-          <line>154</line>
-          <properties />
-          <option name="timeStamp" value="161" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-encoding-1.8.1.jar!/org/apache/parquet/bytes/LittleEndianDataInputStream.class</url>
-          <line>24</line>
-          <properties />
-          <option name="timeStamp" value="162" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-encoding-1.8.1.jar!/org/apache/parquet/bytes/LittleEndianDataInputStream.class</url>
           <line>16</line>
           <properties />
           <option name="timeStamp" value="164" />
@@ -968,24 +813,6 @@
           <line>26</line>
           <properties />
           <option name="timeStamp" value="167" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/impl/ColumnReaderImpl.class</url>
-          <line>421</line>
-          <properties />
-          <option name="timeStamp" value="168" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/impl/ColumnReaderImpl.class</url>
-          <line>460</line>
-          <properties />
-          <option name="timeStamp" value="171" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/RecordReaderImplementation.class</url>
-          <line>67</line>
-          <properties />
-          <option name="timeStamp" value="172" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetFileReader.java</url>
@@ -1012,64 +839,42 @@
           <option name="timeStamp" value="184" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/PageHeader.class</url>
-          <line>745</line>
-          <properties />
-          <option name="timeStamp" value="185" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetFileReader.java</url>
-          <line>511</line>
-          <properties />
-          <option name="timeStamp" value="186" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetFileReader.java</url>
-          <line>561</line>
-          <properties />
-          <option name="timeStamp" value="191" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetFileReader.java</url>
-          <line>633</line>
-          <properties />
-          <option name="timeStamp" value="192" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetFileReader.java</url>
           <line>516</line>
           <properties />
           <option name="timeStamp" value="193" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/RecordReaderImplementation.class</url>
-          <line>171</line>
+          <url>jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/impl/ColumnReaderImpl.class</url>
+          <line>199</line>
           <properties />
-          <option name="timeStamp" value="194" />
+          <option name="timeStamp" value="209" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <condition expression="ch4 == 0" language="JAVA" />
+          <url>jar://$PROJECT_DIR$/lib/parquet-common-1.8.1.jar!/org/apache/parquet/bytes/BytesUtils.class</url>
+          <line>30</line>
+          <properties />
+          <option name="timeStamp" value="214" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetFileReader.java</url>
+          <line>562</line>
+          <properties />
+          <option name="timeStamp" value="220" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <condition expression="in[offset] == 3" language="JAVA" />
+          <url>jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/values/plain/BinaryPlainValuesReader.class</url>
+          <line>24</line>
+          <properties />
+          <option name="timeStamp" value="224" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/prqt/ParquetReader2.scala</url>
-          <line>133</line>
+          <line>145</line>
           <properties />
           <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/prqt/ParquetReader2.scala</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/prqt/ParquetReader2.scala</url>
-          <line>25</line>
-          <properties />
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala</url>
-          <line>9</line>
-          <properties />
-          <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/Loader.scala</url>
@@ -1085,36 +890,42 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala</url>
-          <line>223</line>
+          <line>228</line>
           <properties />
           <option name="timeStamp" value="148" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala</url>
-          <line>183</line>
+          <url>file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala</url>
+          <line>29</line>
           <properties />
-          <option name="timeStamp" value="160" />
+          <option name="timeStamp" value="199" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala</url>
-          <line>30</line>
+          <line>34</line>
           <properties />
-          <option name="timeStamp" value="195" />
+          <option name="timeStamp" value="201" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala</url>
-          <line>33</line>
+          <line>61</line>
           <properties />
-          <option name="timeStamp" value="196" />
+          <option name="timeStamp" value="207" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala</url>
-          <line>37</line>
+          <line>38</line>
           <properties />
-          <option name="timeStamp" value="197" />
+          <option name="timeStamp" value="221" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala</url>
+          <line>43</line>
+          <properties />
+          <option name="timeStamp" value="227" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="199" />
+      <option name="time" value="228" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1123,167 +934,53 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/Footer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FileMetadata.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/schema/Type.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="77" column="28" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/schema/PrimitiveType.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/schema/GroupType.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/schema/MessageType.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+        <state relative-caret-position="306">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/hadoop-core-1.1.0.jar!/org/apache/hadoop/fs/FSInputChecker.class">
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/PrimitiveColumnIO.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="203" column="0" selection-start-line="203" selection-start-column="0" selection-end-line="203" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/hadoop-core-1.1.0.jar!/org/apache/hadoop/fs/ChecksumFileSystem.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="415" column="0" selection-start-line="415" selection-start-column="0" selection-end-line="415" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/hadoop-core-1.1.0.jar!/org/apache/hadoop/fs/FSDataInputStream.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
+        <state relative-caret-position="252">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/parquet/org/apache/thrift/protocol/TProtocol.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/KeyValue.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/SchemaElement.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-197">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/DictionaryPageHeader.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="72" selection-start-line="12" selection-start-column="72" selection-end-line="12" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/DataPageHeaderV2.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="72" selection-start-line="12" selection-start-column="72" selection-end-line="12" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/metadata/BlockMetaData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/parquet/org/apache/thrift/protocol/TStruct.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/parquet/org/apache/thrift/transport/TIOStreamTransport.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/IndexPageHeader.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/DataPageHeader.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="28" column="11" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/metadata/ColumnChunkMetaData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="138" column="30" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-encoding-1.8.1.jar!/org/apache/parquet/column/values/bitpacking/ByteBitPackingBE.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5601">
-          <caret line="336" column="81" selection-start-line="336" selection-start-column="81" selection-end-line="336" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/values/bitpacking/ByteBitPackingValuesReader.class">
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/schema/Type.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-encoding-1.8.1.jar!/org/apache/parquet/bytes/LittleEndianDataInputStream.class">
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/GroupColumnIO.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="325">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/schema/PrimitiveType.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/schema/MessageType.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/ColumnIOFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1294,35 +991,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/InternalParquetRecordReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="217" column="0" selection-start-line="217" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/RecordReaderImplementation.class">
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/MessageColumnIO.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
-          <caret line="198" column="0" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
-          <folding />
+          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/impl/ColumnReaderImpl.class">
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/ColumnIO.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/values/plain/PlainValuesReader.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
+        <state relative-caret-position="200">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/page/DataPage.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/Encoding.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/ColumnDescriptor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/io/ByteArrayInputStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/page/DataPageV1.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1333,60 +1047,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/MessageColumnIO.class">
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/InternalParquetRecordReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+        <state relative-caret-position="3060">
+          <caret line="223" column="0" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/SchemaElement.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+        <state relative-caret-position="216">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ColumnChunkPageReadStore.java">
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Float.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1674">
+          <caret line="132" column="31" selection-start-line="132" selection-start-column="31" selection-end-line="132" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/TTypeManager.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/io/InputStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/values/ValuesReader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/nio/charset/Charset.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
+          <caret line="312" column="28" selection-start-line="312" selection-start-column="28" selection-end-line="312" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-encoding-1.8.1.jar!/org/apache/parquet/bytes/BytesInput.class">
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/api/Binary.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <caret line="392" column="0" selection-start-line="392" selection-start-column="0" selection-end-line="392" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-common-1.8.1.jar!/org/apache/parquet/bytes/BytesUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/ColumnDescriptor.class">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/PageTypeManager.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding>
-            <element signature="e#1175#1176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/format/converter/ParquetMetadataConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+        <state relative-caret-position="270">
+          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/page/DataPageV1.class">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/EncodingManager.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="198">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/parquet/org/apache/thrift/transport/TTransport.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1394,58 +1141,127 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/Encoding.class">
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/parquet/org/apache/thrift/protocol/TCompactProtocol.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state relative-caret-position="181">
+          <caret line="332" column="0" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/DataPageHeader.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="490" column="0" selection-start-line="490" selection-start-column="0" selection-end-line="490" selection-end-column="0" />
-          <folding>
-            <element signature="e#2482#2483#0" expanded="true" />
-            <element signature="e#2537#2538#0" expanded="true" />
-            <element signature="e#4062#4063#0" expanded="true" />
-            <element signature="e#4100#4101#0" expanded="true" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4441#4442#0" expanded="true" />
-            <element signature="e#4584#4585#0" expanded="true" />
-            <element signature="e#4620#4621#0" expanded="true" />
-            <element signature="e#5071#5072#0" expanded="true" />
-            <element signature="e#5124#5125#0" expanded="true" />
-            <element signature="e#5745#5746#0" expanded="true" />
-            <element signature="e#5798#5799#0" expanded="true" />
-            <element signature="e#6406#6407#0" expanded="true" />
-            <element signature="e#6444#6445#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="235">
+          <caret line="485" column="0" selection-start-line="485" selection-start-column="0" selection-end-line="485" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/parquet/org/apache/thrift/protocol/TCompactProtocol.class">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/DataPageHeader.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="253" column="0" selection-start-line="253" selection-start-column="0" selection-end-line="253" selection-end-column="0" />
-          <folding>
-            <element signature="e#1721#1722#0" expanded="true" />
-            <element signature="e#1753#1754#0" expanded="true" />
-            <element signature="e#14771#14772#0" expanded="true" />
-            <element signature="e#14812#14813#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="330">
+          <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/PageHeader.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="99" column="4" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/InterningProtocol.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="37">
-          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+        <state relative-caret-position="217">
+          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ColumnChunkPageReadStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/values/plain/PlainValuesReader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-encoding-1.8.1.jar!/org/apache/parquet/bytes/LittleEndianDataInputStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#459#460#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/impl/ColumnReaderImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3618">
+          <caret line="284" column="0" selection-start-line="284" selection-start-column="0" selection-end-line="284" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/column/values/plain/BinaryPlainValuesReader.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetFileReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8496">
+          <caret line="550" column="0" selection-start-line="550" selection-start-column="0" selection-end-line="550" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31927#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#4758#4759#0" expanded="false" />
+            <element signature="e#4818#4819#0" expanded="false" />
+            <element signature="e#26801#26802#0" expanded="false" />
+            <element signature="e#26830#26831#0" expanded="false" />
+            <element signature="e#30495#30496#0" expanded="false" />
+            <element signature="e#30529#30530#0" expanded="false" />
+            <element signature="e#31881#31882#0" expanded="false" />
+            <element signature="e#31917#31918#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/Util.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1332">
+          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/io/RecordReaderImplementation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="208" column="0" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1458,91 +1274,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/PageTypeManager.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/LittleEndianDecoder.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="147" column="4" selection-start-line="147" selection-start-column="4" selection-end-line="147" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/PageHeader.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Fauxquetable.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Loader.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
+        <state relative-caret-position="235">
+          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/PageHeader.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="707" column="0" selection-start-line="707" selection-start-column="0" selection-end-line="707" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3174#3175#0" expanded="true" />
-            <element signature="e#3229#3230#0" expanded="true" />
-            <element signature="e#7209#7210#0" expanded="true" />
-            <element signature="e#7262#7263#0" expanded="true" />
-            <element signature="e#7313#7314#0" expanded="true" />
-            <element signature="e#7357#7358#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="180">
+          <caret line="692" column="0" selection-start-line="692" selection-start-column="0" selection-end-line="692" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/org/apache/parquet/format/Util.class">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Loader.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="e#4420#4421#0" expanded="true" />
-            <element signature="e#4481#4482#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="18">
+          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/hadoop/ParquetFileReader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Fauxquetable.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="624" column="0" selection-start-line="624" selection-start-column="0" selection-end-line="624" selection-end-column="0" />
-          <folding>
-            <element signature="e#20580#20602#0" expanded="true" />
-            <element signature="e#22658#22668#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="468">
+          <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+        <state relative-caret-position="162">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
           <folding>
-            <element signature="e#29#85#0" expanded="true" />
+            <element signature="e#29#55#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/prqt/ParquetReader2.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="34" column="58" selection-start-line="34" selection-start-column="58" selection-end-line="34" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>

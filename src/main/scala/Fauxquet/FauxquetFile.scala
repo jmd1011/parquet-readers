@@ -1,6 +1,6 @@
 package main.scala.Fauxquet
 
-import java.io.{ByteArrayInputStream, File, PrintWriter}
+import java.io.PrintWriter
 import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
 
@@ -22,23 +22,49 @@ class FauxquetFile(val file: String) {
   var fields: Fields = _
 
   def init() = {
+    //val out = new PrintWriter("./resources/fauxquet_out.txt")
+    val out = System.out
+
     if (!isParquetFile) throw new Error(s"$file is not a valid Parquet file.")
 
     fileMetaData read array
 
     array pos = 4
 
-    var valuesRead = 0L
+    for (i <- 1 until fileMetaData.schema.length) { //skip 'm'
+      var valuesRead = 0L
 
-    while (valuesRead < fileMetaData.numRows) {
-      val pageHeader = new PageHeader
-      pageHeader read array
+      while (valuesRead < fileMetaData.numRows) {
+        val pageHeader = new PageHeader
+        pageHeader read array
 
-      valuesRead += pageHeader.dataPageHeader.numValues
-      array pos = array.pos + pageHeader.compressedPageSize
+        valuesRead += pageHeader.dataPageHeader.numValues
+
+        val numToSkip = LittleEndianDecoder readInt array
+        array.pos = array.pos + numToSkip
+
+        var j = 0
+        while (j < pageHeader.dataPageHeader.numValues) {
+          fileMetaData.schema(i).Type match {
+            case TType(0, "BOOLEAN") => out.println(LittleEndianDecoder readBool array)
+            case TType(1, "INT32") => out.println(LittleEndianDecoder readInt array)
+            case TType(2, "INT64") => out.println(LittleEndianDecoder readLong array)
+            case TType(3, "INT96") => out.println(fileMetaData.schema(i).Type.value + " should be int96")
+            case TType(4, "FLOAT") => out.println(LittleEndianDecoder readFloat array)
+            case TType(5, "DOUBLE") => out.println(LittleEndianDecoder readDouble array)
+            case TType(6, "BYTE_ARRAY") => out.println(LittleEndianDecoder readString array)
+            case TType(7, "FIXED_LEN_BYTE_ARRAY") => out.println(LittleEndianDecoder readFixedLengthString(array, 8)) //figure out length
+          }
+
+          j = j + 1
+        }
+
+        //println(array pos)
+        //array pos = array.pos + pageHeader.compressedPageSize
+      }
     }
 
-    println("Done reading fileMetaData")
+    //println("Done reading fileMetaData")
   }
 
   def isParquetFile: Boolean = {
