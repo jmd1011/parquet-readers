@@ -9,7 +9,7 @@ trait Fauxquetable {
   def className: String
 
   def read(arr: SeekableArray[Byte]): Unit = {
-    println(s"Starting read of $className, arr.pos = ${arr.pos}.")
+    //println(s"Starting read of $className, arr.pos = ${arr.pos}.")
 
     FauxquetDecoder readStructBegin()
 
@@ -25,7 +25,7 @@ trait Fauxquetable {
           FauxquetDecoder readStructEnd field.id
           validate()
           keepGoing = false
-          println(s"Finished read of $className, arr.pos = ${arr.pos}.")
+          //println(s"Finished read of $className, arr.pos = ${arr.pos}.")
         case _ => doMatch(field, arr)
       }
     }
