@@ -2,6 +2,8 @@ package main.scala.Fauxquet
 
 import java.nio.ByteBuffer
 
+import main.scala.Fauxquet.FauxquetObjs._
+
 /**
   * Created by james on 8/5/16.
   */

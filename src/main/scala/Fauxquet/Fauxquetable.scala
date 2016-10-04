@@ -1,5 +1,7 @@
 package main.scala.Fauxquet
 
+import main.scala.Fauxquet.FauxquetObjs.{KeyValue, TField}
+
 /**
   * Created by james on 8/5/16.
   */
