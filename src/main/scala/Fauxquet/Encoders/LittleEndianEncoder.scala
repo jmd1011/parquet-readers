@@ -1,11 +1,11 @@
-package main.scala.Fauxquet
+package main.scala.Fauxquet.Encoders
 
 import java.io.OutputStream
 
 /**
   * Created by james on 10/4/16.
   */
-class LittleEndianEncoder {
+class LittleEndianEncoder extends Encoder {
   val out: OutputStream = null
 
   def write(b: Int): Unit = this.out.write(b)

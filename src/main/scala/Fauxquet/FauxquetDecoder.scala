@@ -11,15 +11,9 @@ import main.scala.Fauxquet.FauxquetObjs._
 object FauxquetDecoder {
   var id: Int = 0
   var boolValue: java.lang.Boolean = _ //wtf is this?
-  //var ids: List[Int] = Nil
 
   def readStructBegin(): Unit = id = 0
   def readStructEnd(id: Int) = this.id = id
-
-  //TODO
-  def readSchemaItem(arr: SeekableArray[Byte]): String = {
-    ""
-  }
 
   def skip(arr: SeekableArray[Byte], Type: Byte): Unit = {
     def skip0(arr: SeekableArray[Byte], Type: Byte, maxDepth: Int): Unit = {
