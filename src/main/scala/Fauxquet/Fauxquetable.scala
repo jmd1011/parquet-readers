@@ -35,6 +35,7 @@ trait Fauxquetable {
 
   def write() = {
     validate()
+    FauxquetEncoder writeStructBegin()
   }
 
   def validate()
