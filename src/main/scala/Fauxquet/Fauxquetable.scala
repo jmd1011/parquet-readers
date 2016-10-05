@@ -33,7 +33,9 @@ trait Fauxquetable {
     }
   }
 
-  def write()
+  def write() = {
+    validate()
+  }
 
   def validate()
 

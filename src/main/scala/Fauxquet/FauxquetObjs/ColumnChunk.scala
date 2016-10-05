@@ -23,7 +23,9 @@ class ColumnChunk extends Fauxquetable {
   }
 
   //TODO
-  override def write(): Unit = ???
+  override def write(): Unit = {
+
+  }
 
   override def validate(): Unit = {
     if (fileOffset == -1L) throw new Error("ColumnChunk fileOffset was not found in file.")
