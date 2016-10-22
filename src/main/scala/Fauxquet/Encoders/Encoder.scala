@@ -9,7 +9,7 @@ trait Encoder {
   var out: OutputStream = _
 
   def write(b: Int): Unit = this.out.write(b)
-  def write(b: Array[Byte]) = this.write(b, 0, b.length)
+  def write(b: Array[Byte]): Unit = this.write(b, 0, b.length)
   def write(b: Array[Byte], offset: Int, length: Int): Unit = this.out.write(b, offset, length)
 
   def flush() = this.out.flush()

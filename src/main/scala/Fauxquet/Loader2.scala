@@ -8,7 +8,7 @@ object Loader2 extends App {
 
   for (i <- 0 until 30) {
     val t = time {
-      val file = new FauxquetFile("./resources/customer.parquet")
+      val file = new FauxquetFile("./resources/lineitem.parquet")
       file init()
     }
 
