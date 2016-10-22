@@ -14,9 +14,13 @@ class DataPageHeader extends Fauxquetable {
 
   var statistics: Statistics = _
 
-  override def className: String = "DataPageHeader"
+  private val NUM_VALUES_FIELD_DESC = TField("num_values", 8, 1)
+  private val ENCODING_FIELD_DESC = TField("encoding", 8, 2)
+  private val DEFINITION_LEVEL_ENCODING_FIELD_DESC = TField("definition_level_encoding", 8, 3)
+  private val REPETITION_LEVEL_ENCODING_FIELD_DESC = TField("repetition_level_encoding", 8, 4)
+  private val STATISTICS_FIELD_DESC = TField("statistics", 12, 5)
 
-  override def write(): Unit = ???
+  override def className: String = "DataPageHeader"
 
   override def validate(): Unit = {
     if (numValues == -1) throw new Error("DataPageHeader numValues was not found in file.")
@@ -37,5 +41,55 @@ class DataPageHeader extends Fauxquetable {
       statistics = new Statistics()
       statistics read arr
     case _ => FauxquetDecoder skip(arr, field Type)
+  }
+
+  override def doWrite(): Unit = {
+    def writeNumValues(): Unit = {
+      FauxquetEncoder writeFieldBegin ENCODING_FIELD_DESC
+      FauxquetEncoder writeI32 numValues
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeEncoding(): Unit = {
+      FauxquetEncoder writeFieldBegin ENCODING_FIELD_DESC
+      FauxquetEncoder writeI32 encoding.id
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeDefinitionLevelEncoding(): Unit = {
+      FauxquetEncoder writeFieldBegin DEFINITION_LEVEL_ENCODING_FIELD_DESC
+      FauxquetEncoder writeI32 definitionLevelEncoding.id
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeRepetitionLevelEncoding(): Unit = {
+      FauxquetEncoder writeFieldBegin REPETITION_LEVEL_ENCODING_FIELD_DESC
+      FauxquetEncoder writeI32 repetitionLevelEncoding.id
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeStatistics(): Unit = {
+      FauxquetEncoder writeFieldBegin STATISTICS_FIELD_DESC
+      this.statistics.write()
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    writeNumValues()
+
+    if (this.encoding != null) {
+      writeEncoding()
+    }
+
+    if (this.definitionLevelEncoding != null) {
+      writeDefinitionLevelEncoding()
+    }
+
+    if (this.repetitionLevelEncoding != null) {
+      writeRepetitionLevelEncoding()
+    }
+
+    if (this.statistics != null) {
+      writeStatistics()
+    }
   }
 }

@@ -1,6 +1,6 @@
 package main.scala.Fauxquet.FauxquetObjs
 
-import main.scala.Fauxquet.{FauxquetDecoder, Fauxquetable, SeekableArray}
+import main.scala.Fauxquet._
 
 /**
   * Created by james on 8/8/16.
@@ -8,6 +8,13 @@ import main.scala.Fauxquet.{FauxquetDecoder, Fauxquetable, SeekableArray}
 class KeyValue extends Fauxquetable {
   var key: String = _
   var value: String = _
+
+  private val KEY_FIELD_DESC = TField("key", 11, 1)
+  private val VALUE_FIELD_DESC = TField("value", 11, 2)
+
+  override def className: String = "KeyValue"
+
+  override def validate(): Unit = if (key == null) throw new Error("Key must not be null in KeyValue")
 
   override def doMatch(field: TField, arr: SeekableArray[Byte]): Unit = field match {
     case TField(_, 11, x) => x match {
@@ -18,9 +25,25 @@ class KeyValue extends Fauxquetable {
     case _ => FauxquetDecoder skip(arr, field Type)
   }
 
-  override def write(): Unit = ???
+  override def doWrite(): Unit = {
+    def writeKey(): Unit = {
+      FauxquetEncoder writeFieldBegin KEY_FIELD_DESC
+      FauxquetEncoder writeString key
+      FauxquetEncoder writeFieldEnd()
+    }
 
-  override def validate(): Unit = if (key == null) throw new Error("Key must not be null in KeyValue")
+    def writeValue(): Unit = {
+      FauxquetEncoder writeFieldBegin VALUE_FIELD_DESC
+      FauxquetEncoder writeString value
+      FauxquetEncoder writeFieldEnd()
+    }
 
-  override def className: String = "KeyValue"
+    if (this.key != null) {
+      writeKey()
+    }
+
+    if (this.value != null) {
+      writeValue()
+    }
+  }
 }

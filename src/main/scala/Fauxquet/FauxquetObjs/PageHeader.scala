@@ -17,9 +17,16 @@ class PageHeader extends Fauxquetable {
 
   var Type: PageType = _
 
-  override def className: String = "PageHeader"
+  private val TYPE_FIELD_DESC = TField("type", 8, 1)
+  private val UNCOMPRESSED_PAGE_SIZE_FIELD_DESC = TField("uncompressed_page_size", 8, 2)
+  private val COMPRESSED_PAGE_SIZE_FIELD_DESC = TField("compressed_page_size", 8, 3)
+  private val CRC_FIELD_DESC = TField("crc", 8, 4)
+  private val DATA_PAGE_HEADER_FIELD_DESC = TField("data_page_header", 12, 5)
+  private val INDEX_PAGE_HEADER_FIELD_DESC = TField("index_page_header", 12, 6)
+  private val DICTIONARY_PAGE_HEADER_FIELD_DESC = TField("dictionary_page_header", 12, 7)
+  private val DATA_PAGE_HEADER_V2_FIELD_DESC = TField("data_page_header_v2", 12, 8)
 
-  override def write(): Unit = ???
+  override def className: String = "PageHeader"
 
   override def validate(): Unit = {
     if (uncompressedPageSize == -1)
@@ -54,5 +61,82 @@ class PageHeader extends Fauxquetable {
       case _ => FauxquetDecoder skip(arr, 12)
     }
     case _ => FauxquetDecoder skip(arr, field.Type)
+  }
+
+  override def doWrite(): Unit = {
+    def writeType(): Unit = {
+      FauxquetEncoder writeFieldBegin TYPE_FIELD_DESC
+      FauxquetEncoder writeI32 Type.id
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeUncompressedPageSize(): Unit = {
+      FauxquetEncoder writeFieldBegin UNCOMPRESSED_PAGE_SIZE_FIELD_DESC
+      FauxquetEncoder writeI32 uncompressedPageSize
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeCompressedPageSize(): Unit = {
+      FauxquetEncoder writeFieldBegin COMPRESSED_PAGE_SIZE_FIELD_DESC
+      FauxquetEncoder writeI32 compressedPageSize
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeCrc(): Unit = {
+      FauxquetEncoder writeFieldBegin CRC_FIELD_DESC
+      FauxquetEncoder writeI32 crc
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeDataPageHeader(): Unit = {
+      FauxquetEncoder writeFieldBegin DATA_PAGE_HEADER_FIELD_DESC
+      dataPageHeader write()
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeIndexPageHeader(): Unit = {
+      FauxquetEncoder writeFieldBegin INDEX_PAGE_HEADER_FIELD_DESC
+      indexPageHeader write()
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeDictionaryPageHeader(): Unit = {
+      FauxquetEncoder writeFieldBegin DICTIONARY_PAGE_HEADER_FIELD_DESC
+      dictionaryPageHeader write()
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeDataPageHeaderV2(): Unit = {
+      FauxquetEncoder writeFieldBegin DATA_PAGE_HEADER_V2_FIELD_DESC
+      dataPageHeaderV2 write()
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    if (this.Type != null) {
+      writeType()
+    }
+
+    writeUncompressedPageSize()
+    writeCompressedPageSize()
+
+    if (crc != -1) {
+      writeCrc()
+    }
+
+    if (dataPageHeader != null) {
+      writeDataPageHeader()
+    }
+
+    if (indexPageHeader != null) {
+      writeIndexPageHeader()
+    }
+
+    if (dictionaryPageHeader != null) {
+      writeDictionaryPageHeader()
+    }
+
+    if (dataPageHeaderV2 != null) {
+      writeDataPageHeaderV2()
+    }
   }
 }

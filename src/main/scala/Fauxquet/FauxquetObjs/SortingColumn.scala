@@ -1,6 +1,6 @@
 package main.scala.Fauxquet.FauxquetObjs
 
-import main.scala.Fauxquet.{FauxquetDecoder, Fauxquetable, SeekableArray}
+import main.scala.Fauxquet._
 
 /**
   * Created by james on 8/9/16.
@@ -9,6 +9,10 @@ class SortingColumn extends Fauxquetable {
   var columnIndex: Int = -1
   var descending: Option[Boolean] = _
   var nullsFirst: Option[Boolean] = _
+
+  private val COLUMN_IDX_FIELD_DESC = TField("column_idx", 8, 1)
+  private val DESCENDING_FIELD_DESC = TField("descending", 2, 2)
+  private val NULLS_FIRST_FIELD_DESC = TField("nulls_first", 2, 3)
 
   override def doMatch(field: TField, arr: SeekableArray[Byte]): Unit = field match {
     case TField(_, 8, 1) => columnIndex = FauxquetDecoder readI32 arr
@@ -20,8 +24,29 @@ class SortingColumn extends Fauxquetable {
     case _ => FauxquetDecoder skip(arr, field Type)
   }
 
-  //TODO
-  override def write(): Unit = ???
+  override def doWrite(): Unit = {
+    def writeColumnIndex(): Unit = {
+      FauxquetEncoder writeFieldBegin COLUMN_IDX_FIELD_DESC
+      FauxquetEncoder writeI32 columnIndex
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeDescending(): Unit = {
+      FauxquetEncoder writeFieldBegin DESCENDING_FIELD_DESC
+      FauxquetEncoder writeBool descending.get
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeNullsFirst(): Unit = {
+      FauxquetEncoder writeFieldBegin NULLS_FIRST_FIELD_DESC
+      FauxquetEncoder writeBool nullsFirst.get
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    writeColumnIndex()
+    writeDescending()
+    writeNullsFirst()
+  }
 
   override def validate(): Unit = {
     if (columnIndex == -1) throw new Error("SortingColumn columnIndex not found in file")

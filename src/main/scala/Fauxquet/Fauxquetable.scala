@@ -36,7 +36,14 @@ trait Fauxquetable {
   def write() = {
     validate()
     FauxquetEncoder writeStructBegin()
+
+    doWrite()
+
+    FauxquetEncoder writeFieldStop()
+    FauxquetEncoder writeStructEnd 0 //TODO: Figure out what this value should be
   }
+
+  def doWrite()
 
   def validate()
 
