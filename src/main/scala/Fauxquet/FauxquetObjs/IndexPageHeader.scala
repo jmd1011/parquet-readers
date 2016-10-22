@@ -8,7 +8,7 @@ import main.scala.Fauxquet.{Fauxquetable, SeekableArray}
 class IndexPageHeader extends Fauxquetable {
   override def className: String = "IndexPageHeader"
 
-  override def write(): Unit = ???
+  override def doWrite(): Unit = ???
 
   override def validate(): Unit = ???
 

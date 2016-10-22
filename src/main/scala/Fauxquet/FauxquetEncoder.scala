@@ -37,6 +37,7 @@ object FauxquetEncoder {
     }
   }
   def writeFieldEnd() = {}
+  def writeListEnd() = {}
 
   def writeFieldStop() = this.writeByteDirect(0.asInstanceOf[Byte])
 
@@ -44,7 +45,7 @@ object FauxquetEncoder {
     this.encoder.write(Array[Byte](byte), 0, 1)
   }
 
-  def writeByteDirect(int: Int) = {
+  def writeByteDirect(int: Int): Unit = {
     this.writeByteDirect(int.asInstanceOf[Byte])
   }
 
@@ -98,6 +99,15 @@ object FauxquetEncoder {
 
   def writeByte(byte: Byte) = this.writeByteDirect(byte)
 
+  def writeBool(boolean: Boolean): Unit = {
+    if (this.boolField != null) {
+      this.encoder.writeBoolean(boolean)
+      boolField = null
+    } else {
+      this.writeByteDirect((if (boolean) 1 else 2).asInstanceOf[Byte])
+    }
+  }
+
   def writeI16(n: Short) = this.writeVarint32(this.intToZigZag(n))
   def writeI32(n: Int) = this.writeVarint32(this.intToZigZag(n))
   def writeI64(n: Long) = this.writeVarint64(this.longToZigZag(n))
@@ -111,6 +121,10 @@ object FauxquetEncoder {
   def writeString(str: String) = {
     val arr = str.getBytes("UTF-8")
     this.writeBinary(arr, 0, arr.length)
+  }
+
+  def writeBinary(buf: Array[Byte]): Unit = {
+    writeBinary(buf, 0, buf length)
   }
 
   def writeBinary(buf: Array[Byte], offset: Int, length: Int)  = {

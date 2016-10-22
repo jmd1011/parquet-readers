@@ -11,9 +11,9 @@ class ColumnChunk extends Fauxquetable {
 
   var metadata: ColumnMetadata = _
 
-  private val FILE_PATH_FIELD_DESC: TField = null
-  private val FILE_OFFSET_FIELD_DESC: TField = null
-  private val META_DATA_FIELD_DESC: TField = null
+  private val FILE_PATH_FIELD_DESC: TField = TField("file_path", 11, 1)
+  private val FILE_OFFSET_FIELD_DESC: TField = TField("file_offset", 10, 2)
+  private val META_DATA_FIELD_DESC: TField = TField("meta_data", 12, 3)
 
   override def doMatch(field: TField, arr: SeekableArray[Byte]): Unit = field match {
     case TField(_, 11, 1) => filePath = FauxquetDecoder readString arr
@@ -26,10 +26,7 @@ class ColumnChunk extends Fauxquetable {
     case _ => FauxquetDecoder skip(arr, field Type)
   }
 
-  //TODO
-  override def write(): Unit = {
-    super.write()
-
+  override def doWrite(): Unit = {
     if (this.filePath != null) {
       FauxquetEncoder writeFieldBegin FILE_PATH_FIELD_DESC
       FauxquetEncoder writeString filePath
@@ -45,9 +42,6 @@ class ColumnChunk extends Fauxquetable {
       this.metadata.write()
       FauxquetEncoder writeFieldEnd()
     }
-
-    FauxquetEncoder writeFieldStop()
-    FauxquetEncoder writeStructEnd 0 //TODO: figure out value for id
   }
 
   override def validate(): Unit = {

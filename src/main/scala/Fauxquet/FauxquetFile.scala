@@ -38,48 +38,137 @@ class FauxquetFile(val file: String) {
 
     array pos = 4
 
-    val records: Array[Array[Any]] = new Array[Array[Any]](fileMetaData.numRows.toInt)
+    val data: Array[Array[Any]] = new Array[Array[Any]](fileMetaData.schema.length)
+    val inds: Array[Int] = new Array[Int](fileMetaData.schema.length)
 
-    for (i <- 1 until fileMetaData.schema.length) { //skip 'm'
-      var valuesRead = 0L
-      var arrIter = 0
+    for (i <- 1 until fileMetaData.schema.length) {
+      data(i) = new Array[Any](fileMetaData.numRows.toInt)
+    }
 
-      while (valuesRead < fileMetaData.numRows) {
-        val pageHeader = new PageHeader
-        pageHeader read array
+    for (rg <- fileMetaData.rowGroups) {
+      //var i = 1
+      for (cc <- rg.columns) {
+        var valuesRead = 0L
 
-        valuesRead += pageHeader.dataPageHeader.numValues
+        while (valuesRead < rg.numRows) {
+          val pageHeader = new PageHeader
+          pageHeader read array
 
-        val numToSkip = LittleEndianDecoder readInt array
-        array.pos = array.pos + numToSkip
+          valuesRead += pageHeader.dataPageHeader.numValues
 
-        var j = 0
-        while (j < pageHeader.dataPageHeader.numValues) {
-          if (i == 1) records(arrIter) = new Array[Any](fileMetaData.schema.length)
+          val numToSkip = LittleEndianDecoder readInt array
+          array.pos = array.pos + numToSkip
 
-          fileMetaData.schema(i).Type match {
-            case TType(0, "BOOLEAN")              => records(arrIter)(i) = LittleEndianDecoder readBool array
-            case TType(1, "INT32")                => records(arrIter)(i) = LittleEndianDecoder readInt array
-            case TType(2, "INT64")                => records(arrIter)(i) = LittleEndianDecoder readLong array
-            case TType(3, "INT96")                => records(arrIter)(i) = fileMetaData.schema(i).Type.value + " should be int96"
-            case TType(4, "FLOAT")                => records(arrIter)(i) = LittleEndianDecoder readFloat array
-            case TType(5, "DOUBLE")               => records(arrIter)(i) = LittleEndianDecoder readDouble array
-            case TType(6, "BYTE_ARRAY")           => records(arrIter)(i) = LittleEndianDecoder readString array
-            case TType(7, "FIXED_LEN_BYTE_ARRAY") => records(arrIter)(i) = LittleEndianDecoder readFixedLengthString(array, 8) //figure out length
+          var j = 0
+          while (j < pageHeader.dataPageHeader.numValues) {
+            cc.metadata.Type match {
+              case TType(0, "BOOLEAN") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readBool array
+              case TType(1, "INT32") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readInt array
+              case TType(2, "INT64") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readLong array
+              case TType(3, "INT96") => /*data(i)(j + inds(i)) =*/ /*fileMetaData.schema(i).Type.value +*/ " should be int96"
+              case TType(4, "FLOAT") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readFloat array
+              case TType(5, "DOUBLE") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readDouble array
+              case TType(6, "BYTE_ARRAY") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readString array
+              case TType(7, "FIXED_LEN_BYTE_ARRAY") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readFixedLengthString(array, 8) //figure out length
+            }
+
+            j = j + 1
           }
 
-          arrIter = arrIter + 1
-          j = j + 1
+//          inds(i) = inds(i) + j
         }
 
-        //println(array pos)
-        //array pos = array.pos + pageHeader.compressedPageSize
+//        i = i + 1
       }
     }
 
-    //println("test")
+//    val records: Array[Array[Any]] = new Array[Array[Any]](fileMetaData.numRows.toInt)
+//
+//    var startAt = 0
+//    var numRg = 1
+//
+//    for (rg <- fileMetaData.rowGroups) {
+//      var i = 0
+//      println(s"rg = $numRg")
+//      numRg = numRg + 1
+//
+//      for (cc <- rg.columns) {
+//        var arrIter = startAt
+//        var valuesRead = 0L
+//
+//        if (numRg == 5 && i == 15) {
+//          println("stopping")
+//        }
+//
+//        while (valuesRead < rg.numRows) {
+//          val pageHeader = new PageHeader
+//          pageHeader read array
+//
+//          valuesRead += pageHeader.dataPageHeader.numValues
+//
+//          val numToSkip = LittleEndianDecoder readInt array
+//          array.pos = array.pos + numToSkip
+//
+//          var j = 0
+//          while (j < pageHeader.dataPageHeader.numValues) {
+//            if (records(arrIter) == null) records(arrIter) = new Array[Any](fileMetaData.schema.length - 1)
+//
+//            cc.metadata.Type match {
+//              case TType(0, "BOOLEAN") => records(arrIter)(i) = LittleEndianDecoder readBool array
+//              case TType(1, "INT32") => records(arrIter)(i) = LittleEndianDecoder readInt array
+//              case TType(2, "INT64") => records(arrIter)(i) = LittleEndianDecoder readLong array
+//              case TType(3, "INT96") => records(arrIter)(i) = fileMetaData.schema(i).Type.value + " should be int96"
+//              case TType(4, "FLOAT") => records(arrIter)(i) = LittleEndianDecoder readFloat array
+//              case TType(5, "DOUBLE") => records(arrIter)(i) = LittleEndianDecoder readDouble array
+//              case TType(6, "BYTE_ARRAY") => records(arrIter)(i) = LittleEndianDecoder readString array
+//              case TType(7, "FIXED_LEN_BYTE_ARRAY") => records(arrIter)(i) = LittleEndianDecoder readFixedLengthString(array, 8) //figure out length
+//            }
+//
+//            arrIter = arrIter + 1
+//            j = j + 1
+//          }
+//        }
+//
+//        i = i + 1
+//        println(s"now i = $i")
+//      }
+//
+//      startAt = startAt + rg.numRows.toInt
+//    }
 
-    //println("Done reading fileMetaData")
+//    for (i <- 1 until fileMetaData.schema.length) { //skip 'm'
+//      var valuesRead = 0L
+//      var arrIter = 0
+//
+//      while (valuesRead < fileMetaData.numRows) {
+//        val pageHeader = new PageHeader
+//        pageHeader read array
+//
+//        valuesRead += pageHeader.dataPageHeader.numValues
+//
+//        val numToSkip = LittleEndianDecoder readInt array
+//        array.pos = array.pos + numToSkip
+//
+//        var j = 0
+//        while (j < pageHeader.dataPageHeader.numValues) {
+//          if (i == 1) records(arrIter) = new Array[Any](fileMetaData.schema.length)
+//
+//          fileMetaData.schema(i).Type match {
+//            case TType(0, "BOOLEAN")              => records(arrIter)(i) = LittleEndianDecoder readBool array
+//            case TType(1, "INT32")                => records(arrIter)(i) = LittleEndianDecoder readInt array
+//            case TType(2, "INT64")                => records(arrIter)(i) = LittleEndianDecoder readLong array
+//            case TType(3, "INT96")                => records(arrIter)(i) = fileMetaData.schema(i).Type.value + " should be int96"
+//            case TType(4, "FLOAT")                => records(arrIter)(i) = LittleEndianDecoder readFloat array
+//            case TType(5, "DOUBLE")               => records(arrIter)(i) = LittleEndianDecoder readDouble array
+//            case TType(6, "BYTE_ARRAY")           => records(arrIter)(i) = LittleEndianDecoder readString array
+//            case TType(7, "FIXED_LEN_BYTE_ARRAY") => records(arrIter)(i) = LittleEndianDecoder readFixedLengthString(array, 8) //figure out length
+//          }
+//
+//          arrIter = arrIter + 1
+//          j = j + 1
+//        }
+//      }
+//    }
   }
 
   def isParquetFile: Boolean = {
