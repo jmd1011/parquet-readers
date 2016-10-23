@@ -6,11 +6,13 @@ package main.scala.Fauxquet
 object Loader2 extends App {
   var sum = 0L
 
-  for (i <- 0 until 30) {
+  for (i <- 0 until 1) {
     val t = time {
-      val file = new FauxquetFile("./resources/lineitem.parquet")
+      val file = new FauxquetFile("./resources/customer.parquet")
       file init()
     }
+
+    println(s" in $t seconds")
 
     sum = sum + t
   }
