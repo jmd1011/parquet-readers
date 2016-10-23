@@ -38,12 +38,13 @@ class FauxquetFile(val file: String) {
 
     array pos = 4
 
-    val data: Array[Array[Any]] = new Array[Array[Any]](fileMetaData.schema.length)
-    val inds: Array[Int] = new Array[Int](fileMetaData.schema.length)
+    //val data: Array[Array[Any]] = new Array[Array[Any]](fileMetaData.schema.length)
+    //var numRead = 0
+    //val inds: Array[Int] = new Array[Int](fileMetaData.schema.length)
 
-    for (i <- 1 until fileMetaData.schema.length) {
-      data(i) = new Array[Any](fileMetaData.numRows.toInt)
-    }
+//    for (i <- 1 until fileMetaData.schema.length) {
+//      data(i) = new Array[Any](fileMetaData.numRows.toInt)
+//    }
 
     for (rg <- fileMetaData.rowGroups) {
       //var i = 1
@@ -81,6 +82,8 @@ class FauxquetFile(val file: String) {
 //        i = i + 1
       }
     }
+
+    //print(s"Read $numRead values")
 
 //    val records: Array[Array[Any]] = new Array[Array[Any]](fileMetaData.numRows.toInt)
 //
