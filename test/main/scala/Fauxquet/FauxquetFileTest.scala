@@ -14,7 +14,7 @@ class FauxquetFileTest extends FunSuite {
     for (i <- 0 until numRuns) {
       val t0 = System.nanoTime()
 
-      val fauxquetFile = new FauxquetFile("resources/lineitem.parquet")
+      val fauxquetFile = new FauxquetFile("resources/customer.parquet")
       fauxquetFile init()
 
       val t1 = System.nanoTime()
@@ -22,6 +22,6 @@ class FauxquetFileTest extends FunSuite {
       sum += t1 - t0
     }
 
-    println(s"numRuns took ${sum / 1000000000.0} seconds.")
+    println(s"$numRuns took ${sum / 1000000000.0} seconds.")
   }
 }

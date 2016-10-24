@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07c06c13-905b-4fe6-8180-eb9e3ab5709d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lineitem.parquet" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetFileTest.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/org_apache_parquet_parquet_hadoop_1_8_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_parquet_parquet_hadoop_1_8_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetFileTest.scala" afterPath="$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetFileTest.scala" />
     </list>
     <ignored path="ParquetStuff.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,7 +32,7 @@
       <file leaf-file-name="FauxquetFile.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
+            <state relative-caret-position="828">
               <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
               <folding>
                 <element signature="e#29#55#0" expanded="true" />
@@ -47,8 +44,8 @@
       <file leaf-file-name="FauxquetFileTest.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetFileTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+            <state relative-caret-position="432">
+              <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -194,8 +191,8 @@
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala" />
         <option value="$PROJECT_DIR$/test/FauxquetTest.scala" />
         <option value="$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetTest.scala" />
-        <option value="$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetFileTest.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala" />
+        <option value="$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetFileTest.scala" />
       </list>
     </option>
   </component>
@@ -237,8 +234,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -318,6 +313,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -473,7 +470,10 @@
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
-      <method />
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
@@ -496,7 +496,10 @@
       <Profilers>
         <option name="GAPID_DISABLE_PCS" value="false" />
       </Profilers>
-      <method />
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
@@ -779,6 +782,15 @@
     <history-entry file="FauxquetFileTest_timingTest - 2016.10.22 at 22h 27m 42s.xml">
       <configuration name="FauxquetFileTest.timingTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
+    <history-entry file="FauxquetFileTest_timingTest - 2016.10.24 at 09h 39m 02s.xml">
+      <configuration name="FauxquetFileTest.timingTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="FauxquetFileTest_timingTest - 2016.10.24 at 09h 39m 30s.xml">
+      <configuration name="FauxquetFileTest.timingTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="FauxquetFileTest_timingTest - 2016.10.24 at 09h 39m 45s.xml">
+      <configuration name="FauxquetFileTest.timingTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -791,7 +803,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -800,7 +812,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3537207" sideWeight="0.5061995" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3537207" sideWeight="0.49380055" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3537207" sideWeight="0.49380055" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1298,14 +1310,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetTest.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetTest.scala" />
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1316,7 +1321,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
+        <state relative-caret-position="828">
           <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
           <folding>
             <element signature="e#29#55#0" expanded="true" />
@@ -1326,8 +1331,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/main/scala/Fauxquet/FauxquetFileTest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+        <state relative-caret-position="432">
+          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
           <folding />
         </state>
       </provider>
