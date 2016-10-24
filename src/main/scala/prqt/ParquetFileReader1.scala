@@ -3,24 +3,28 @@ package main.scala.prqt
 import java.io.InputStream
 import java.nio.charset.Charset
 
-import org.apache.hadoop.conf.Configuration
+import main.scala.Parq.Configuration
 import org.apache.hadoop.fs.{FileStatus, Path}
 import org.apache.parquet.column.ColumnDescriptor
-import org.apache.parquet.hadoop.metadata.{BlockMetaData, ParquetMetadata}
+import org.apache.parquet.column.page.PageReadStore
+import org.apache.parquet.format.converter.ParquetMetadataConverter
+import org.apache.parquet.hadoop.ParquetFileReader
+import org.apache.parquet.hadoop.metadata.{BlockMetaData, FileMetaData, ParquetMetadata}
 
 /**
   * Created by jdecker on 6/24/16.
   */
 class ParquetFileReader1 extends java.io.Closeable {
 //  def this(configuration: Configuration, path: Path, blocks: List[BlockMetaData], columns: List[ColumnDescriptor]) = this()
+//  def this(configuration: Configuration, fileMetaData: FileMetaData, path: main.scala.Parq.Path, blocks: List[BlockMetaData], columns: List[ColumnDescriptor]) = this()
+//
 //
 //  val MAGIC = "PAR1".getBytes(Charset.forName("ASCII"))
-//
-//  val parquetMetadataConverter = new ParquetMetadataConverter1()
+//  val parquetMetadataConverter = new ParquetMetadataConverter()
 //
   override def close(): Unit = {}
 //
-//  def readFooter(configuration: Configuration, path: Path): ParquetMetadata = readFooter(configuration, path, parquetMetadataConverter.NO_FILTER)
+//  def readFooter(configuration: Configuration, path: Path): ParquetMetadata = ParquetFileReader.readFooter(configuration, path, ParquetMetadataConverter.NO_FILTER)
 //
 //  def readFooter(configuration: Configuration, path: Path, metadataFilter: MetadataFilter): ParquetMetadata = {
 //    val fileSystem = path.getFileSystem(configuration)
@@ -30,8 +34,13 @@ class ParquetFileReader1 extends java.io.Closeable {
 //  def readFooter(configuration: Configuration, fileStatus: FileStatus, metadataFilter: MetadataFilter): ParquetMetadata = {
 //    val path = fileStatus.getPath
 //    val fileSystem = path.getFileSystem(configuration)
-//    val f = fileSystem.open(path)
+//    //val f = fileSystem.open(path)
+//    val f: SeekableInputStream = new ParquetInputStream(fileSystem open fileStatus.getPath)
 //
+//    readFooter(fileStatus, metadataFilter, f)
+//  }
+//
+//  def readFooter(fileStatus: FileStatus, metadataFilter: MetadataFilter, f: SeekableInputStream): ParquetMetadata = {
 //    val length = fileStatus.getLen
 //    val FOOTER_LENGTH_SIZE = 4
 //
@@ -46,7 +55,7 @@ class ParquetFileReader1 extends java.io.Closeable {
 //    val magic = new Array[Byte](MAGIC.length)
 //    f.readFully(magic)
 //
-//    if (!MAGIC.eq(magic)) {
+//    if (!(MAGIC(0) == magic(0) && MAGIC(1) == magic(1) && MAGIC(2) == magic(2) && MAGIC(3) == magic(3))) {
 //      throw new Exception("Still not a Parquet file friendo. Missing the magic number.")
 //    }
 //
@@ -58,7 +67,8 @@ class ParquetFileReader1 extends java.io.Closeable {
 //
 //    f.seek(footerIndex)
 //
-//    parquetMetadataConverter.readParquetMetadata(f, metadataFilter)
+//    //parquetMetadataConverter.readParquetMetadata(f, metadataFilter)
+//    parquetMetadataConverter.readParquetMetadata(f, ParquetMetadataConverter.NO_FILTER)
 //  }
 //
 //  def readIntLittleEndian(in: InputStream): Int = {
@@ -72,6 +82,8 @@ class ParquetFileReader1 extends java.io.Closeable {
 //
 //    (ch4 << 24) + (ch3 << 16) + (ch2 << 8) + (ch1 << 0)
 //  }
+//
+//  def readNextRowGroup(): PageReadStore = ???
 //
 //  def readNextRowGroup() = ???
 }

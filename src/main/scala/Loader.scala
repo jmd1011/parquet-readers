@@ -1,37 +1,47 @@
 package main.scala
 
-import java.io.{PrintWriter}
+import java.io._
+import java.nio.charset.Charset
 import java.util
+import java.util.Scanner
 
+import main.scala.Parq.FSDataInputStream
+import main.scala.prqt.ParquetInputStream
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.fs.Path
+import org.apache.hadoop.fs.{FSInputStream, Path}
+import org.apache.parquet.bytes.BytesUtils
+import org.apache.parquet.filter2.predicate.FilterPredicate
 import org.apache.parquet.hadoop.api.{InitContext, ReadSupport}
 import org.apache.parquet.hadoop.api.ReadSupport.ReadContext
 import org.apache.parquet.hadoop.ParquetReader
 import org.apache.parquet.io.api._
 import org.apache.parquet.schema.{GroupType, MessageType, OriginalType, Type}
 
+import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
+
 /**
   * Created by jdecker on 6/8/16.
   */
 object Loader {
   def main(args: Array[String]): Unit = {
-    //val out = new PrintWriter(new File("./resources/customer_test.txt"))
-    val out = new PrintWriter(System.out)
+    val out = new PrintWriter(new java.io.File("./resources/customer_test2.txt"))
+    //val out = new PrintWriter(System.out)
+
 
     val p = new Path("./resources/customer.parquet")
-    val reader = new ParquetReader[Record](p, new SimpleReadSupport())
+
+    val reader = new ParquetReader[Record](p, new SimpleReadSupport)
     var value = reader.read()
     var lValue = value
 
     while (value != null) {
+      value.print(out)
       lValue = value
-
-      out.println(value toString)
       value = reader.read()
     }
 
-    println(lValue toString)
+    lValue.print(out)
 
     reader.close()
   }
@@ -76,7 +86,7 @@ object Loader {
 
       override def getConverter(i: Int): Converter = converters(i)
 
-      override def end(): Unit = {}// if (parent != null) parent.record.add(name, record) }
+      override def end(): Unit = {}
 
       override def start(): Unit = {}
 
@@ -97,19 +107,38 @@ object Loader {
   }
 
   class Record() {
+    var map: mutable.Map[String, ListBuffer[Object]] = new mutable.HashMap[String, ListBuffer[Object]]()
+
     def add(name: String, value: Object): Unit = {
-      val nv = new NameValue(name, value)
-      values = values :+ nv
+      if (!map.contains(name)) {
+        map += (name -> new ListBuffer[Object]())
+      }
+
+      map(name) += value
     }
 
-    override def toString:String = {
-      ""
+    def print(out: PrintWriter): Unit = {
+      var max = -1
+
+      for (key <- map) max = math.max(key._2.size, max)
+
+      for (i <- 0 until max) {
+        out.println(s"#${i + 1}:")
+
+        for (key <- map) {
+          out.println(s"${key._1}: ${key._2(i)}")
+        }
+
+        out.println()
+      }
+    }
+
+    override def toString: String = {
+      map toString
     }
 
     class NameValue(name: String, value: Object) {
       override def toString: String = s"$name: $value"
     }
-
-    var values = List[NameValue]()
   }
 }

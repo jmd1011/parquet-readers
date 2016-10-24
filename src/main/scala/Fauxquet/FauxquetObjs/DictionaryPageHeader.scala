@@ -1,0 +1,16 @@
+package main.scala.Fauxquet.FauxquetObjs
+
+import main.scala.Fauxquet.{Fauxquetable, SeekableArray}
+
+/**
+  * Created by james on 8/30/16.
+  */
+class DictionaryPageHeader extends Fauxquetable {
+  override def className: String = ???
+
+  override def validate(): Unit = ???
+
+  override def doMatch(field: TField, arr: SeekableArray[Byte]): Unit = ???
+
+  override def doWrite(): Unit = ???
+}
