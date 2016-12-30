@@ -5,12 +5,16 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/9/16.
   */
-class SchemaElement extends Fauxquetable {
+class SchemaElement(parent: SchemaElement = null) extends Fauxquetable {
   var name: String = _
   var numChildren: Int = -1
   var scale: Int = -1
   var precision: Int = -1
   var fieldId: Int = -1
+  var definition: Int = 0
+  var repetition: Int = 0
+
+  var children: Vector[SchemaElement] = Vector[SchemaElement]()
 
   var Type: TType = _
   var typeLength: Int = -1
@@ -28,11 +32,19 @@ class SchemaElement extends Fauxquetable {
   private val PRECISION_FIELD_DESC = TField("precision", 8, 8)
   private val FIELD_ID_FIELD_DESC = TField("field_id", 8, 9)
 
+  if (parent != null) { repetition = parent.repetition; definition = parent.definition }
+
   override def doMatch(field: TField, arr: SeekableArray[Byte]): Unit = field match {
     case TField(_, 8, x) => x match {
       case 1 => Type = TTypeManager getType(FauxquetDecoder readI32 arr)
       case 2 => typeLength = FauxquetDecoder readI32 arr
-      case 3 => fieldRepetitionType = FieldRepetitionTypeManager getFieldRepetitionTypeById(FauxquetDecoder readI32 arr)
+      case 3 =>
+        fieldRepetitionType = FieldRepetitionTypeManager getFieldRepetitionTypeById(FauxquetDecoder readI32 arr)
+
+        fieldRepetitionType match {
+          case FieldRepetitionType(1, _) => definition = parent.definition + 1
+          case FieldRepetitionType(2, _) => repetition = parent.definition + 1; definition = parent.definition + 1
+        }
       case 5 => numChildren = FauxquetDecoder readI32 arr
       case 6 => convertedType = ConvertedTypeManager getConvertedTypeById(FauxquetDecoder readI32 arr)
       case 7 => scale = FauxquetDecoder readI32 arr
