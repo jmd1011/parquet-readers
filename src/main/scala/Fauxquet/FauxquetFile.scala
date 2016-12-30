@@ -46,6 +46,8 @@ class FauxquetFile(val file: String) {
 //      data(i) = new Array[Any](fileMetaData.numRows.toInt)
 //    }
 
+    var test = 0
+
     for (rg <- fileMetaData.rowGroups) {
       //var i = 1
       for (cc <- rg.columns) {
@@ -62,6 +64,8 @@ class FauxquetFile(val file: String) {
 
           var j = 0
           while (j < pageHeader.dataPageHeader.numValues) {
+            test += 1
+
             cc.metadata.Type match {
               case TType(0, "BOOLEAN") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readBool array
               case TType(1, "INT32") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readInt array
@@ -82,6 +86,8 @@ class FauxquetFile(val file: String) {
 //        i = i + 1
       }
     }
+
+    //println(s"read in $test values")
 
     //print(s"Read $numRead values")
 
@@ -182,10 +188,10 @@ class FauxquetFile(val file: String) {
     val footerLengthIndex = l - 4 - MAGIC.length
 
     val footerLength = {
-      val x1 = array(footerLengthIndex)
-      val x2 = array(footerLengthIndex + 1)
-      val x3 = array(footerLengthIndex + 2)
-      val x4 = array(footerLengthIndex + 3)
+      val x1 = array(footerLengthIndex) & 255
+      val x2 = array(footerLengthIndex + 1) & 255
+      val x3 = array(footerLengthIndex + 2) & 255
+      val x4 = array(footerLengthIndex + 3) & 255
 
       if ((x1 | x2 | x3 | x4) < 0) throw new Error("Hit EOF early")
 
