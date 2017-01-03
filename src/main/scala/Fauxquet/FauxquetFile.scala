@@ -3,9 +3,10 @@ package main.scala.Fauxquet
 import java.io.PrintWriter
 import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
-import FauxquetObjs.TType
 
+import FauxquetObjs.TType
 import main.scala.Fauxquet.FauxquetObjs.{FileMetadata, PageHeader}
+import main.scala.Fauxquet.ValueReaders.bitpacking.{ByteBitPackingValuesReader, BytePacker_BE_1}
 
 /**
   * Created by james on 8/5/16.
@@ -58,6 +59,9 @@ class FauxquetFile(val file: String) {
           pageHeader read array
 
           valuesRead += pageHeader.dataPageHeader.numValues
+
+          val byteBitPackingValuesReader = new ByteBitPackingValuesReader(0)
+          byteBitPackingValuesReader.initFromPage(rg.numRows, array.array, array.pos)
 
           val numToSkip = LittleEndianDecoder readInt array
           array.pos = array.pos + numToSkip

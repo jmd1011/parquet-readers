@@ -27,25 +27,32 @@ class FileMetadata extends Fauxquetable {
     case TField(_, 15, x) => x match {
       case 2 =>
         val schema = FauxquetDecoder readListBegin arr
-        var i = 0
-        while (i <= schema.size) {
+        for (i <- 0 until schema.size) {
           val se = new SchemaElement
           se read arr
-
-          if (i > 1 && se.fieldRepetitionType != null) {
-            se.repetition = if (se.fieldRepetitionType.id == 2) 1 else 0
-            se.definition = if (se.fieldRepetitionType.id == 0) 0 else 1
-          }
-
-          for (j <- 0 until se.numChildren) {
-            val sec = new SchemaElement(parent = se)
-            sec read arr
-            se.children :+= sec
-            i += 1
-          }
-
           if (se.name != null) this.schema :+= se
         }
+
+//        val schema = FauxquetDecoder readListBegin arr
+//        var i = 0
+//        while (i <= schema.size) {
+//          val se = new SchemaElement
+//          se read arr
+//
+//          if (i > 1 && se.fieldRepetitionType != null) {
+//            se.repetition = if (se.fieldRepetitionType.id == 2) 1 else 0
+//            se.definition = if (se.fieldRepetitionType.id == 0) 0 else 1
+//          }
+//
+//          for (j <- 0 until se.numChildren) {
+//            val sec = new SchemaElement(parent = se)
+//            sec read arr
+//            se.children :+= sec
+//            i += 1
+//          }
+//
+//          if (se.name != null) this.schema :+= se
+//        }
       case 4 =>
         val list = FauxquetDecoder readListBegin arr
         for (i <- 0 until list.size) rowGroups :+= {

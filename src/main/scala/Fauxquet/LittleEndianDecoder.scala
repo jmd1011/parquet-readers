@@ -45,4 +45,31 @@ object LittleEndianDecoder {
 
     new String(ret)
   }
+
+  def readIntPaddedOnBitWidth(arr: SeekableArray[Byte], bitWidth: Int): Int = {
+    val bytesWidth = 0
+
+    bytesWidth match {
+      case 0 => 0
+      case 1 => val x = arr.next; if (x < 0) throw new Error("EOF error") else x
+      case 2 =>
+        val ch1 = arr.next
+        val ch2 = arr.next
+        if ((ch1 | ch2) < 0)
+          throw new Error("EOF error")
+        else
+          (ch2 << 8) + (ch1 << 0)
+      case 3 =>
+        val ch1 = arr.next
+        val ch2 = arr.next
+        val ch3 = arr.next
+
+        if ((ch1 | ch2 | ch3) < 0)
+          throw new Error ("EOF error")
+        else
+          (ch3 << 16) + (ch2 << 8) + (ch1 << 0)
+      case 4 => readInt(arr)
+      case _ => throw new Error("bytesWidth < 0 || bytesWidth > 4")
+    }
+  }
 }
