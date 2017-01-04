@@ -1,9 +1,7 @@
 package main.scala.Fauxquet.ValueReaders.rle
 
-import java.io.{BufferedInputStream, DataInputStream}
-
 import main.scala.Fauxquet.ValueReaders.bitpacking.BytePacker_LE_1
-import main.scala.Fauxquet.{FauxquetDecoder, LittleEndianDecoder, SeekableArray}
+import main.scala.Fauxquet.{LittleEndianDecoder, SeekableArray}
 
 /**
   * Created by james on 1/3/17.
