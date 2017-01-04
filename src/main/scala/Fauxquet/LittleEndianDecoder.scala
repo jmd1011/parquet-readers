@@ -47,7 +47,7 @@ object LittleEndianDecoder {
   }
 
   def readIntPaddedOnBitWidth(arr: SeekableArray[Byte], bitWidth: Int): Int = {
-    val bytesWidth = 0
+    val bytesWidth = (bitWidth + 7) / 8
 
     bytesWidth match {
       case 0 => 0
