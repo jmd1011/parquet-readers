@@ -6,7 +6,7 @@ import main.scala.Fauxquet.{LittleEndianDecoder, SeekableArray}
 /**
   * Created by james on 1/3/17.
   */
-                                                      //should probably be InputStream or something similar
+                                                      
 class RunLengthBitPackingHybridDecoder(bitWidth: Int, in: SeekableArray[Byte]) {
   var mode: Mode = Mode(0, "N/A")
   var currentCount: Int = 0
@@ -17,7 +17,6 @@ class RunLengthBitPackingHybridDecoder(bitWidth: Int, in: SeekableArray[Byte]) {
     if (currentCount == 0) readNext()
 
     currentCount -= 1
-
 
     mode match {
       case Mode(1, "RLE") => currentValue

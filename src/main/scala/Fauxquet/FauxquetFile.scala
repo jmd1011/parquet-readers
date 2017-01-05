@@ -7,6 +7,7 @@ import java.nio.file.{Files, Paths}
 import FauxquetObjs.TType
 import main.scala.Fauxquet.FauxquetObjs.{FileMetadata, PageHeader}
 import main.scala.Fauxquet.ValueReaders.bitpacking.{ByteBitPackingValuesReader, BytePacker_BE_1}
+import main.scala.Fauxquet.ValueReaders.rle.RunLengthBitPackingValuesReader
 
 /**
   * Created by james on 8/5/16.
@@ -51,17 +52,21 @@ class FauxquetFile(val file: String) {
 
     for (rg <- fileMetaData.rowGroups) {
       //var i = 1
-      for (cc <- rg.columns) {
+      for (ci <- rg.columns.indices) {
+        val cc = rg.columns(ci)
         var valuesRead = 0L
+
+        val repetitionReader = new ByteBitPackingValuesReader(0)
+        repetitionReader.initFromPage(rg.numRows.asInstanceOf[Int], array.array, array.pos)
+
+        val definitionReader = new RunLengthBitPackingValuesReader(1)
+        definitionReader.initFromPage(rg.numRows.asInstanceOf[Int], array.array, array.pos)
 
         while (valuesRead < rg.numRows) {
           val pageHeader = new PageHeader
           pageHeader read array
 
           valuesRead += pageHeader.dataPageHeader.numValues
-
-          val byteBitPackingValuesReader = new ByteBitPackingValuesReader(0)
-          byteBitPackingValuesReader.initFromPage(rg.numRows, array.array, array.pos)
 
           val numToSkip = LittleEndianDecoder readInt array
           array.pos = array.pos + numToSkip
@@ -70,16 +75,23 @@ class FauxquetFile(val file: String) {
           while (j < pageHeader.dataPageHeader.numValues) {
             test += 1
 
-            cc.metadata.Type match {
-              case TType(0, "BOOLEAN") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readBool array
-              case TType(1, "INT32") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readInt array
-              case TType(2, "INT64") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readLong array
-              case TType(3, "INT96") => /*data(i)(j + inds(i)) =*/ /*fileMetaData.schema(i).Type.value +*/ " should be int96"
-              case TType(4, "FLOAT") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readFloat array
-              case TType(5, "DOUBLE") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readDouble array
-              case TType(6, "BYTE_ARRAY") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readString array
-              case TType(7, "FIXED_LEN_BYTE_ARRAY") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readFixedLengthString(array, 8) //figure out length
-            }
+            val r = repetitionReader.readInt()
+            val d = definitionReader.readInt()
+
+            if (d > fileMetaData.schema(ci + 1).definition)
+              println("Bad juju")
+
+            if (d <= fileMetaData.schema(ci + 1).definition)
+              cc.metadata.Type match {
+                case TType(0, "BOOLEAN") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readBool array
+                case TType(1, "INT32") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readInt array
+                case TType(2, "INT64") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readLong array
+                case TType(3, "INT96") => /*data(i)(j + inds(i)) =*/ /*fileMetaData.schema(i).Type.value +*/ " should be int96"
+                case TType(4, "FLOAT") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readFloat array
+                case TType(5, "DOUBLE") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readDouble array
+                case TType(6, "BYTE_ARRAY") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readString array
+                case TType(7, "FIXED_LEN_BYTE_ARRAY") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readFixedLengthString(array, 8) //figure out length
+              }
 
             j = j + 1
           }
