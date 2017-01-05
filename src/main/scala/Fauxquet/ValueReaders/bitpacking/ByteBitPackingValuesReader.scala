@@ -1,5 +1,7 @@
 package main.scala.Fauxquet.ValueReaders.bitpacking
 
+import main.scala.Fauxquet.ValueReaders.ValuesReader
+
 /**
   * Created by james on 1/3/17.
   */
@@ -8,7 +10,7 @@ class ByteBitPackingValuesReader(bound: Int) extends ValuesReader {
 
   var nextOffset: Int = 0
   val bitWidth: Int = 32 - Integer.numberOfLeadingZeros(bound)
-  val bytePacker: BytePacker = new BytePacker_BE_1
+  val bytePacker: BytePacker = BytePacker_BE_1
 
   val decoded: Array[Int] = new Array[Int](VALUES_AT_A_TIME)
   var decodedPos: Int = VALUES_AT_A_TIME - 1
