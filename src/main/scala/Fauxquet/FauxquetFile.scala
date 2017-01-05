@@ -56,17 +56,17 @@ class FauxquetFile(val file: String) {
         val cc = rg.columns(ci)
         var valuesRead = 0L
 
-        val repetitionReader = new ByteBitPackingValuesReader(0)
-        repetitionReader.initFromPage(rg.numRows.asInstanceOf[Int], array.array, array.pos)
-
-        val definitionReader = new RunLengthBitPackingValuesReader(1)
-        definitionReader.initFromPage(rg.numRows.asInstanceOf[Int], array.array, array.pos)
-
         while (valuesRead < rg.numRows) {
           val pageHeader = new PageHeader
           pageHeader read array
 
           valuesRead += pageHeader.dataPageHeader.numValues
+
+          val repetitionReader = new ByteBitPackingValuesReader(0)
+          repetitionReader.initFromPage(rg.numRows.asInstanceOf[Int], array.array, array.pos)
+
+          val definitionReader = new RunLengthBitPackingValuesReader(1)
+          definitionReader.initFromPage(rg.numRows.asInstanceOf[Int], array.array, array.pos)
 
           val numToSkip = LittleEndianDecoder readInt array
           array.pos = array.pos + numToSkip

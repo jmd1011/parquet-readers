@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07c06c13-905b-4fe6-8180-eb9e3ab5709d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/org_apache_parquet_parquet_hadoop_1_8_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_parquet_parquet_hadoop_1_8_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/bitpacking/ByteBitPackingValuesReader.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/bitpacking/ByteBitPackingValuesReader.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingHybridDecoder.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingHybridDecoder.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingValuesReader.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingValuesReader.scala" />
     </list>
     <ignored path="ParquetStuff.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FauxquetFile.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FauxquetFile.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+            <state relative-caret-position="190">
+              <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
               <folding>
                 <element signature="e#29#55#0" expanded="true" />
               </folding>
@@ -45,21 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Loader2.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Loader2.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="53" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ByteBitPackingValuesReader.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/bitpacking/ByteBitPackingValuesReader.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+            <state relative-caret-position="532">
+              <caret line="59" column="4" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -69,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingValuesReader.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="36" column="43" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
+              <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
               <folding>
                 <element signature="e#46#109#0" expanded="true" />
               </folding>
@@ -77,14 +63,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RunLengthBitPackingHybridDecoder.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RunLengthBitPackingHybridDecoder.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingHybridDecoder.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-184">
-              <caret line="8" column="54" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
+            <state relative-caret-position="190">
+              <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
               <folding>
                 <element signature="e#46#112#0" expanded="true" />
-                <element signature="e#822#1097#0" expanded="false" />
+                <element signature="e#824#1099#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -93,8 +79,8 @@
       <file leaf-file-name="LittleEndianDecoder.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/LittleEndianDecoder.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state relative-caret-position="154">
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -212,8 +198,8 @@
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/bitpacking/BytePacker.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/bitpacking/ByteBitPackingValuesReader.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingValuesReader.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingHybridDecoder.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala" />
       </list>
     </option>
   </component>
@@ -963,7 +949,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3537207" sideWeight="0.5061995" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3537207" sideWeight="0.49380055" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3537207" sideWeight="0.49380055" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948717" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -972,7 +958,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35881755" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35881755" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1204,8 +1190,14 @@
           <properties />
           <option name="timeStamp" value="303" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingHybridDecoder.scala</url>
+          <line>21</line>
+          <properties />
+          <option name="timeStamp" value="305" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="304" />
+      <option name="time" value="308" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1522,26 +1514,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/LittleEndianDecoder.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/bitpacking/BytePacker.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="77" column="7" selection-start-line="77" selection-start-column="7" selection-end-line="77" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/bitpacking/ByteBitPackingValuesReader.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -1554,20 +1530,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/LittleEndianDecoder.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
-          <folding>
-            <element signature="e#29#55#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="154">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/bitpacking/ByteBitPackingValuesReader.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="59" column="4" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingValuesReader.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="36" column="43" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
+          <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
           <folding>
             <element signature="e#46#109#0" expanded="true" />
           </folding>
@@ -1576,11 +1558,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValueReaders/rle/RunLengthBitPackingHybridDecoder.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-184">
-          <caret line="8" column="54" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
+        <state relative-caret-position="190">
+          <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
           <folding>
             <element signature="e#46#112#0" expanded="true" />
-            <element signature="e#822#1097#0" expanded="false" />
+            <element signature="e#824#1099#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFile.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+          <folding>
+            <element signature="e#29#55#0" expanded="true" />
           </folding>
         </state>
       </provider>
