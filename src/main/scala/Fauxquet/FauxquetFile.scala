@@ -9,6 +9,8 @@ import main.scala.Fauxquet.FauxquetObjs.{FileMetadata, PageHeader}
 import main.scala.Fauxquet.ValueReaders.bitpacking.{ByteBitPackingValuesReader, BytePacker_BE_1}
 import main.scala.Fauxquet.ValueReaders.rle.RunLengthBitPackingValuesReader
 
+import scala.collection.mutable
+
 /**
   * Created by james on 8/5/16.
   */
@@ -39,6 +41,8 @@ class FauxquetFile(val file: String) {
     fileMetaData read array
 
     array pos = 4
+
+    var data: mutable.Map[Int, Map[String, Vector[String]]] = new mutable.HashMap[Int, Map[String, Vector[String]]]()
 
     //val data: Array[Array[Any]] = new Array[Array[Any]](fileMetaData.schema.length)
     //var numRead = 0
@@ -79,9 +83,8 @@ class FauxquetFile(val file: String) {
             val d = definitionReader.readInt()
 
             if (d > fileMetaData.schema(ci + 1).definition)
-              println("Bad juju")
-
-            if (d <= fileMetaData.schema(ci + 1).definition)
+              println("<NULL>")
+            else
               cc.metadata.Type match {
                 case TType(0, "BOOLEAN") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readBool array
                 case TType(1, "INT32") => /*data(i)(j + inds(i)) =*/ LittleEndianDecoder readInt array
@@ -103,7 +106,7 @@ class FauxquetFile(val file: String) {
       }
     }
 
-    //println(s"read in $test values")
+    //-98println(s"read in $test values")
 
     //print(s"Read $numRead values")
 

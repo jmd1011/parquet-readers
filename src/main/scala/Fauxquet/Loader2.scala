@@ -6,7 +6,7 @@ package main.scala.Fauxquet
 object Loader2 extends App {
   var sum = 0L
 
-  for (i <- 0 until 30) {
+  for (i <- 0 until 1) {
     var t0 = System.nanoTime()
 
     val file = new FauxquetFile("./resources/customer.parquet")
