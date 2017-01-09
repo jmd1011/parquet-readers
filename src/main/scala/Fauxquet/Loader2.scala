@@ -7,12 +7,12 @@ object Loader2 extends App {
   var sum = 0L
 
   for (i <- 0 until 1) {
-    var t0 = System.nanoTime()
+    val t0 = System.nanoTime()
 
     val file = new FauxquetFile("./resources/customer.parquet")
-    file init()
+    file.read()
 
-    var t1 = System.nanoTime()
+    val t1 = System.nanoTime()
 
     sum += t1 - t0
   }
