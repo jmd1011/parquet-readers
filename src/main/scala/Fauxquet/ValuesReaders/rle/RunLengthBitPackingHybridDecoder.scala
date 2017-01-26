@@ -1,6 +1,6 @@
-package main.scala.Fauxquet.ValueReaders.rle
+package main.scala.Fauxquet.ValuesReaders.rle
 
-import main.scala.Fauxquet.ValueReaders.bitpacking.BytePacker_LE_1
+import main.scala.Fauxquet.ValuesReaders.bitpacking.BytePacker_LE_1
 import main.scala.Fauxquet.{LittleEndianDecoder, SeekableArray}
 
 /**

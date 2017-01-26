@@ -1,4 +1,4 @@
-package main.scala.Fauxquet.ValueReaders
+package main.scala.Fauxquet.ValuesReaders
 
 /**
   * Created by james on 1/3/17.

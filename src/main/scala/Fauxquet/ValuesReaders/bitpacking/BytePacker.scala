@@ -1,4 +1,4 @@
-package main.scala.Fauxquet.ValueReaders.bitpacking
+package main.scala.Fauxquet.ValuesReaders.bitpacking
 
 /**
   * Created by james on 1/2/17.
