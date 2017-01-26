@@ -1,6 +1,7 @@
 package main.scala.Fauxquet.ValuesWriters.plain
 
 import main.scala.Fauxquet.Encoders.LittleEndianEncoder
+import main.scala.Fauxquet.FauxquetObjs.{Encoding, PLAIN}
 import main.scala.Fauxquet.ValuesWriters.ValuesWriter
 import main.scala.Fauxquet.bytes.CapacityByteArrayOutputStream
 
@@ -32,4 +33,6 @@ class PlainValuesWriter(capacityByteArrayOutputStream: CapacityByteArrayOutputSt
   override def getAllocatedSize: Long = capacityByteArrayOutputStream.bytesAllocated
 
   def reset() = capacityByteArrayOutputStream.reset()
+
+  override def encoding: Encoding = PLAIN
 }

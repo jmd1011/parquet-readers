@@ -1,6 +1,6 @@
 package main.scala.Fauxquet.FauxquetObjs
 
-import main.scala.Fauxquet.{Fauxquetable, SeekableArray}
+import main.scala.Fauxquet.SeekableArray
 
 /**
   * Created by james on 8/30/16.
