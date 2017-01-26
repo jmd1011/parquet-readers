@@ -98,6 +98,7 @@ class CapacityByteArrayOutputStream(var initialSlabSize: Int, val maxCapacityHin
   }
 
   def currentIndex = bytesUsed - 1
+  def size = bytesUsed
 
   def setByte(index: Long, value: Byte) = {
     if (index >= bytesUsed) throw new Error("index too large in CBAOS.setByte")
