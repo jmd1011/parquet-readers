@@ -1,6 +1,6 @@
-package main.scala.Fauxquet
+package main.scala.Fauxquet.FauxquetObjs
 
-import main.scala.Fauxquet.FauxquetObjs.{KeyValue, TField}
+import main.scala.Fauxquet.{FauxquetDecoder, FauxquetEncoder, SeekableArray}
 
 /**
   * Created by james on 8/5/16.
