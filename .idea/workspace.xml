@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07c06c13-905b-4fe6-8180-eb9e3ab5709d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriters/ColumnWriter.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriters/ColumnWriterImpl.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/bitpacking/ByteBitPackingValuesWriter.scala" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/LittleEndianDataOutputStream.scala" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/Fauxquetable.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/Fauxquetable.scala" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/Encoders/ByteBasedBitPackingEncoder.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/DataPageHeaderV2.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/DataPageHeaderV2.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/DictionaryPageHeader.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/DictionaryPageHeader.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/EncodingManager.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/EncodingManager.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/IndexPageHeader.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/IndexPageHeader.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/ValuesWriter.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/ValuesWriter.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/bitpacking/ByteBitPackingValuesWriter.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/bitpacking/ByteBitPackingValuesWriter.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/plain/PlainValuesWriter.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/plain/PlainValuesWriter.scala" />
     </list>
     <ignored path="ParquetStuff.iws" />
@@ -45,19 +38,21 @@
       <file leaf-file-name="ValuesWriter.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/ValuesWriter.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="234">
+              <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlainValuesWriter.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlainValuesWriter.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/plain/PlainValuesWriter.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-149">
-              <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
-              <folding />
+            <state relative-caret-position="409">
+              <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+              <folding>
+                <element signature="e#49#104#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -82,14 +77,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ByteBitPackingValuesWriter.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ByteBitPackingValuesWriter.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/bitpacking/ByteBitPackingValuesWriter.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
+            <state relative-caret-position="396">
+              <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
               <folding>
                 <element signature="e#54#116#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ByteBasedBitPackingEncoder.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Encoders/ByteBasedBitPackingEncoder.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="445">
+              <caret line="50" column="59" selection-start-line="50" selection-start-column="59" selection-end-line="50" selection-end-column="59" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -125,7 +130,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/LittleEndianEncoder.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetDecoder.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/Fauxquetable.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/ColumnChunk.scala" />
@@ -172,10 +176,11 @@
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/Fauxquetable.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriter.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriters/ColumnWriter.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/ValuesWriter.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/EncodingManager.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/bitpacking/ByteBitPackingValuesWriter.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/Encoders/ByteBasedBitPackingEncoder.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/ValuesWriter.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/plain/PlainValuesWriter.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/bitpacking/ByteBitPackingValuesWriter.scala" />
       </list>
     </option>
   </component>
@@ -1300,20 +1305,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/PageHeader.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="38" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/org/apache/parquet/format/converter/ParquetMetadataConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="650" column="0" selection-start-line="650" selection-start-column="0" selection-end-line="650" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/org/apache/parquet/schema/Types.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14652">
@@ -1584,14 +1575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Encoders/Encoder.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/DataPageHeader.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="771">
@@ -1648,37 +1631,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/ValuesWriter.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/ColumnMetadata.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriters/ColumnWriterImpl.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/bitpacking/ByteBitPackingValuesWriter.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
-          <folding>
-            <element signature="e#54#116#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1698,11 +1655,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriters/ColumnWriterImpl.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Encoders/Encoder.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/scala-library-2.11.7.jar!/scala/package.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/ValuesWriter.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/plain/PlainValuesWriter.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-149">
-          <caret line="3" column="51" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="51" />
+        <state relative-caret-position="409">
+          <caret line="34" column="11" selection-start-line="34" selection-start-column="11" selection-end-line="34" selection-end-column="11" />
+          <folding>
+            <element signature="e#49#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/Encoders/ByteBasedBitPackingEncoder.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="50" column="59" selection-start-line="50" selection-start-column="59" selection-end-line="50" selection-end-column="59" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/bitpacking/ByteBitPackingValuesWriter.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+          <folding>
+            <element signature="e#54#116#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
