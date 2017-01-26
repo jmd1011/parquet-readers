@@ -1,6 +1,6 @@
-package main.scala.Fauxquet.ValueReaders.bitpacking
+package main.scala.Fauxquet.ValuesReaders.bitpacking
 
-import main.scala.Fauxquet.ValueReaders.ValuesReader
+import main.scala.Fauxquet.ValuesReaders.ValuesReader
 
 /**
   * Created by james on 1/3/17.

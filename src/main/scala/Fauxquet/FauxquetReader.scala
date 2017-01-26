@@ -4,8 +4,8 @@ import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
 
 import main.scala.Fauxquet.FauxquetObjs.{FileMetadata, PageHeader, TType}
-import main.scala.Fauxquet.ValueReaders.bitpacking.ByteBitPackingValuesReader
-import main.scala.Fauxquet.ValueReaders.rle.RunLengthBitPackingValuesReader
+import main.scala.Fauxquet.ValuesReaders.bitpacking.ByteBitPackingValuesReader
+import main.scala.Fauxquet.ValuesReaders.rle.RunLengthBitPackingValuesReader
 
 import scala.collection.mutable
 
