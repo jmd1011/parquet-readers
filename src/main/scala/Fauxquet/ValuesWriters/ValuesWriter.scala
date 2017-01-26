@@ -11,13 +11,14 @@ abstract class ValuesWriter {
   //bunch of other stuff in Parquet -- do we need it?
   def getAllocatedSize: Long
   def encoding: Encoding
+  def reset(): Unit
   // end of other stuff
 
-  def writeByte(value: Int) = ???
-  def writeBytes(bytes: Array[Byte]) = ???
-  def writeBoolean(b: Boolean) = ???
-  def writeInt(i: Int) = ???
-  def writeLong(l: Long) = ???
-  def writeDouble(d: Double) = ???
-  def writeFloat(f: Float) = ???
+  def writeByte(value: Int): Unit = ???
+  def writeBytes(bytes: Array[Byte]): Unit = ???
+  def writeBoolean(b: Boolean): Unit = ???
+  def writeInt(i: Int): Unit = ???
+  def writeLong(l: Long): Unit = ???
+  def writeDouble(d: Double): Unit = ???
+  def writeFloat(f: Float): Unit = ???
 }

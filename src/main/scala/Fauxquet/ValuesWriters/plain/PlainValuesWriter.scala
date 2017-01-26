@@ -32,7 +32,7 @@ class PlainValuesWriter(capacityByteArrayOutputStream: CapacityByteArrayOutputSt
 
   override def getAllocatedSize: Long = capacityByteArrayOutputStream.bytesAllocated
 
-  def reset() = capacityByteArrayOutputStream.reset()
+  override def reset() = capacityByteArrayOutputStream.reset()
 
   override def encoding: Encoding = PLAIN
 }
