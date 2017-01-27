@@ -10,4 +10,4 @@ Still on the way:
 - Reading data from Parquet files (only metadata is currently being read in)
 - Writing to Parquet files
 
-It is expected that this project will be completed by the end of August 2016.
+It is expected that this project will be completed by the end of February 2017.
