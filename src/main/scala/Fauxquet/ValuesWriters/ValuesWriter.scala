@@ -9,9 +9,10 @@ abstract class ValuesWriter {
   def bufferedSize(): Long
 
   //bunch of other stuff in Parquet -- do we need it?
-  def getAllocatedSize: Long
-  def encoding: Encoding
-  def reset(): Unit
+  def getAllocatedSize: Long = ???
+  def encoding: Encoding = ???
+  def reset(): Unit = ???
+  def close(): Unit = ???
   // end of other stuff
 
   def writeByte(value: Int): Unit = ???

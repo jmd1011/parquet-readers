@@ -35,4 +35,9 @@ class PlainValuesWriter(capacityByteArrayOutputStream: CapacityByteArrayOutputSt
   override def reset() = capacityByteArrayOutputStream.reset()
 
   override def encoding: Encoding = PLAIN
+
+  override def close(): Unit = {
+    capacityByteArrayOutputStream.close()
+    out.close()
+  }
 }
