@@ -7,4 +7,5 @@ import java.io.ByteArrayOutputStream
   */
 object BAOS extends ByteArrayOutputStream {
   def apply(size: Int): Unit = this.buf = new Array[Byte](size) //this is icky -- talk to Tiark?
+  def getBuf = buf
 }
