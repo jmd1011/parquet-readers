@@ -1,5 +1,8 @@
 package main.scala.Fauxquet.FauxquetObjs
 
+import java.io.OutputStream
+
+import main.scala.Fauxquet.Encoders.Encoder
 import main.scala.Fauxquet.{FauxquetDecoder, FauxquetEncoder, SeekableArray}
 
 /**
@@ -33,7 +36,9 @@ trait Fauxquetable {
     }
   }
 
-  def write() = {
+  def write(encoder: Encoder = _) = {
+    if (encoder != null) FauxquetEncoder.encoder = encoder
+
     validate()
     FauxquetEncoder writeStructBegin()
 

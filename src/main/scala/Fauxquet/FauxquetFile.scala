@@ -1,7 +1,5 @@
 package main.scala.Fauxquet
 
-import java.io.PrintWriter
-
 /**
   * Created by james on 8/5/16.
   */

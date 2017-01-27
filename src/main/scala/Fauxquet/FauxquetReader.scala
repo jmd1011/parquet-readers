@@ -62,7 +62,7 @@ class FauxquetReader(path: String) {
           val definitionReader = new RunLengthBitPackingValuesReader(1)
           definitionReader.initFromPage(rg.numRows.asInstanceOf[Int], array.array, array.pos)
 
-          //for alignment? think so...
+          //for alignment
           val numToSkip = LittleEndianDecoder readInt array
           array.pos = array.pos + numToSkip
           maxSkip = math.max(maxSkip, numToSkip)
