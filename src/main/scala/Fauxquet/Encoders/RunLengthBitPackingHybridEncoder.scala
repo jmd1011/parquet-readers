@@ -17,7 +17,10 @@ class RunLengthBitPackingHybridEncoder(bitWidth: Int, capacityByteArrayOutputStr
   var bitPackedRunHeaderPointer = -1
   var toBytesCalled = false
 
-  def reset(resetCapacityByteArrayOutputStream: Boolean): Unit = {
+  def bufferedSize = capacityByteArrayOutputStream.size
+  def allocatedSize = capacityByteArrayOutputStream.capacity
+
+  def reset(resetCapacityByteArrayOutputStream: Boolean = true): Unit = {
     if (resetCapacityByteArrayOutputStream) {
       capacityByteArrayOutputStream.reset()
     }

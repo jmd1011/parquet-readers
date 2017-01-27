@@ -8,5 +8,5 @@ import java.nio.ByteBuffer
 trait ByteBufferAllocator {
   def allocate(size: Int): ByteBuffer
   def release(bb: ByteBuffer): Unit
-  var isDirect: Boolean
+  val isDirect: Boolean
 }
