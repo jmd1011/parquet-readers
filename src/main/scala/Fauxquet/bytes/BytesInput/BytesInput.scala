@@ -1,6 +1,6 @@
 package main.scala.Fauxquet.bytes.BytesInput
 
-import java.io.{ByteArrayOutputStream, InputStream}
+import java.io.{ByteArrayOutputStream, InputStream, OutputStream}
 import java.nio.ByteBuffer
 
 import main.scala.Fauxquet.bytes.CapacityByteArrayOutputStream
@@ -63,8 +63,17 @@ trait BytesInput {
   def copy(bytesInput: BytesInput): BytesInput = from(bytesInput.toByteArray)
 
   def toByteArray: Array[Byte] = {
-    val baos = BAOS
+    BAOS.apply(size.asInstanceOf[Int])
+    writeAllTo(BAOS)
+    BAOS.getBuf
   }
+
+  def toByteBuffer: ByteBuffer = {
+    ByteBuffer.wrap(this.toByteArray)
+  }
+
+  def size: Long = ???
+  def writeAllTo(out: OutputStream): Unit = ???
 }
 
 object BytesInputManager extends BytesInput { }
