@@ -5,14 +5,14 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/30/16.
   */
-class DataPageHeader extends Fauxquetable {
-  var numValues = -1
+class DataPageHeader(var numValues: Int = -1, var encoding: Encoding = _, var definitionLevelEncoding: Encoding = _, var repetitionLevelEncoding: Encoding = _, var statistics: Statistics = _) extends Fauxquetable {
+  //var numValues = -1
 
-  var encoding: Encoding = _
-  var definitionLevelEncoding: Encoding = _
-  var repetitionLevelEncoding: Encoding = _
+  //var encoding: Encoding = _
+  //var definitionLevelEncoding: Encoding = _
+  //var repetitionLevelEncoding: Encoding = _
 
-  var statistics: Statistics = _
+  //var statistics: Statistics = _
 
   private val NUM_VALUES_FIELD_DESC = TField("num_values", 8, 1)
   private val ENCODING_FIELD_DESC = TField("encoding", 8, 2)
