@@ -145,10 +145,14 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: Vector[SchemaElement
 
   def serializeFooter(footer: FauxquetMetadata): Unit = {
     val footerIndex = out.pos
-    val metadata = convertFauxquetMetadata(footer)
-    //writeMetadata(metadata, out)
+    val metadata: FileMetadata = convertFauxquetMetadata(footer)
+    writeMetadata(metadata)
     writeIntLittleEndian((out.pos - footerIndex).asInstanceOf[Int])
     out.write(MAGIC)
+  }
+
+  def writeMetadata(metadata: FileMetadata): Unit = {
+    metadata.write(new PlainEncoder(out))
   }
 
   def writeIntLittleEndian(v: Int): Unit = {
