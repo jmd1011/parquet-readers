@@ -3,6 +3,7 @@ package main.scala.Fauxquet.ValuesWriters.plain
 import main.scala.Fauxquet.Encoders.LittleEndianEncoder
 import main.scala.Fauxquet.FauxquetObjs.{Encoding, PLAIN}
 import main.scala.Fauxquet.ValuesWriters.ValuesWriter
+import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, BytesInputManager}
 import main.scala.Fauxquet.bytes.CapacityByteArrayOutputStream
 
 /**
@@ -39,5 +40,10 @@ class PlainValuesWriter(capacityByteArrayOutputStream: CapacityByteArrayOutputSt
   override def close(): Unit = {
     capacityByteArrayOutputStream.close()
     out.close()
+  }
+
+  override def toBytes: BytesInput = {
+    out.flush()
+    BytesInputManager.from(capacityByteArrayOutputStream)
   }
 }
