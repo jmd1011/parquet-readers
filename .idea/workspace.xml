@@ -44,18 +44,18 @@
       <file leaf-file-name="MessageColumnIO.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="91" column="24" selection-start-line="91" selection-start-column="24" selection-end-line="91" selection-end-column="24" />
+            <state relative-caret-position="509">
+              <caret line="257" column="116" selection-start-line="257" selection-start-column="116" selection-end-line="257" selection-end-column="116" />
               <folding>
                 <element signature="e#32#82#0" expanded="true" />
-                <element signature="e#4267#4648#0" expanded="false" />
-                <element signature="e#4654#4806#0" expanded="false" />
-                <element signature="e#4812#5194#0" expanded="false" />
-                <element signature="e#5200#5614#0" expanded="false" />
-                <element signature="e#5620#5785#0" expanded="false" />
-                <element signature="e#5791#6257#0" expanded="false" />
-                <element signature="e#6263#6573#0" expanded="false" />
-                <element signature="e#6579#6843#0" expanded="false" />
+                <element signature="e#4354#4735#0" expanded="false" />
+                <element signature="e#4741#4893#0" expanded="false" />
+                <element signature="e#4899#5281#0" expanded="false" />
+                <element signature="e#5287#5701#0" expanded="false" />
+                <element signature="e#5707#5872#0" expanded="false" />
+                <element signature="e#5878#6344#0" expanded="false" />
+                <element signature="e#6350#6660#0" expanded="false" />
+                <element signature="e#6666#6930#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1576,18 +1576,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="91" column="24" selection-start-line="91" selection-start-column="24" selection-end-line="91" selection-end-column="24" />
+        <state relative-caret-position="509">
+          <caret line="257" column="116" selection-start-line="257" selection-start-column="116" selection-end-line="257" selection-end-column="116" />
           <folding>
             <element signature="e#32#82#0" expanded="true" />
-            <element signature="e#4267#4648#0" expanded="false" />
-            <element signature="e#4654#4806#0" expanded="false" />
-            <element signature="e#4812#5194#0" expanded="false" />
-            <element signature="e#5200#5614#0" expanded="false" />
-            <element signature="e#5620#5785#0" expanded="false" />
-            <element signature="e#5791#6257#0" expanded="false" />
-            <element signature="e#6263#6573#0" expanded="false" />
-            <element signature="e#6579#6843#0" expanded="false" />
+            <element signature="e#4354#4735#0" expanded="false" />
+            <element signature="e#4741#4893#0" expanded="false" />
+            <element signature="e#4899#5281#0" expanded="false" />
+            <element signature="e#5287#5701#0" expanded="false" />
+            <element signature="e#5707#5872#0" expanded="false" />
+            <element signature="e#5878#6344#0" expanded="false" />
+            <element signature="e#6350#6660#0" expanded="false" />
+            <element signature="e#6666#6930#0" expanded="false" />
           </folding>
         </state>
       </provider>
