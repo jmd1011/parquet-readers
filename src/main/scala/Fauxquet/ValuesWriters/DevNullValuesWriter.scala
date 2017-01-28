@@ -30,5 +30,5 @@ object DevNullValuesWriter extends ValuesWriter {
 
   override def writeLong(l: Long): Unit = {}
 
-  override def bytes(): BytesInput = EmptyBytesInput
+  override def toBytes(): BytesInput = EmptyBytesInput
 }

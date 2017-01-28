@@ -9,8 +9,8 @@ object Loader2 extends App {
   for (i <- 0 until 1) {
     val t0 = System.nanoTime()
 
-    val file = new FauxquetFile("./resources/customer.parquet")
-    file.read()
+    val file = new FauxquetFile()
+    file.read("./resources/customer.parquet")
 
     val t1 = System.nanoTime()
 

@@ -5,7 +5,7 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/5/16.
   */
-class FileMetadata(var schema: Vector[SchemaElement] = Vector[SchemaElement]()) extends Fauxquetable {
+class FileMetadata(var schema: Vector[SchemaElement] = Vector[SchemaElement](), val extraMetaData: Map[String, String] = null) extends Fauxquetable {
   var numRows: Long = _
   var version: Int = _
   var createdBy: String = _

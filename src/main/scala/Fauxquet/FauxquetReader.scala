@@ -3,7 +3,7 @@ package main.scala.Fauxquet
 import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
 
-import main.scala.Fauxquet.FauxquetObjs.{FileMetadata, PageHeader, TType}
+import main.scala.Fauxquet.FauxquetObjs._
 import main.scala.Fauxquet.ValuesReaders.bitpacking.ByteBitPackingValuesReader
 import main.scala.Fauxquet.ValuesReaders.rle.RunLengthBitPackingValuesReader
 
@@ -12,7 +12,7 @@ import scala.collection.mutable
 /**
   * Created by james on 1/10/17.
   */
-class FauxquetReader(path: String) {
+class FauxquetReader(val path: String) {
   val fileMetaData = new FileMetadata()
   lazy val array = new SeekableArray[Byte](Files.readAllBytes(Paths.get(path)))
   val MAGIC = "PAR1".getBytes(Charset.forName("ASCII"))
@@ -78,14 +78,14 @@ class FauxquetReader(path: String) {
               println("<NULL>")
             else
               cc.metadata.Type match {
-                case TType(0, "BOOLEAN") => data(col) :+= LittleEndianDecoder readBool array
-                case TType(1, "INT32") => data(col) :+= LittleEndianDecoder readInt array
-                case TType(2, "INT64") => data(col) :+= LittleEndianDecoder readLong array
-                case TType(3, "INT96") => data(col) :+= /*fileMetaData.schema(i).Type.value +*/ " should be int96"
-                case TType(4, "FLOAT") => data(col) :+= LittleEndianDecoder readFloat array
-                case TType(5, "DOUBLE") => data(col) :+= LittleEndianDecoder readDouble array
-                case TType(6, "BYTE_ARRAY") => data(col) :+= LittleEndianDecoder readString array
-                case TType(7, "FIXED_LEN_BYTE_ARRAY") => data(col) :+= LittleEndianDecoder readFixedLengthString(array, 8) //figure out length
+                case BOOLEAN => data(col) :+= LittleEndianDecoder readBool array
+                case INT32 => data(col) :+= LittleEndianDecoder readInt array
+                case INT64 => data(col) :+= LittleEndianDecoder readLong array
+                case INT96 => data(col) :+= /*fileMetaData.schema(i).Type.value +*/ " should be int96"
+                case FLOAT => data(col) :+= LittleEndianDecoder readFloat array
+                case DOUBLE => data(col) :+= LittleEndianDecoder readDouble array
+                case BYTE_ARRAY => data(col) :+= LittleEndianDecoder readString array
+                case FIXED_LEN_BYTE_ARRAY => data(col) :+= LittleEndianDecoder readFixedLengthString(array, 8) //figure out length
               }
 
             j = j + 1

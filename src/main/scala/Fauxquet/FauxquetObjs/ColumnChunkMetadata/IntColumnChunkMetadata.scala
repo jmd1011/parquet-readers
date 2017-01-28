@@ -1,4 +1,5 @@
 package main.scala.Fauxquet.FauxquetObjs.ColumnChunkMetadata
+import main.scala.Fauxquet.FauxquetObjs.{Encoding, INT32, TType}
 
 /**
   * Created by james on 1/27/17.
@@ -27,4 +28,8 @@ class IntColumnChunkMetadata(fdp: Long, dpo: Long, vc: Long, ts: Long, tuc: Long
   override def totalSize: Long = intToPositiveLong(totSize)
 
   override def totalUncompressedSize: Long = intToPositiveLong(totUncompressedSize)
+
+  override var Type: TType = INT32
+  override var encodings: List[Encoding] = _
+  override var path: Vector[String] = _
 }

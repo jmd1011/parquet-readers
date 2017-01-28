@@ -42,8 +42,10 @@ class SchemaElement(parent: SchemaElement = null) extends Fauxquetable {
         fieldRepetitionType = FieldRepetitionTypeManager getFieldRepetitionTypeById(FauxquetDecoder readI32 arr)
 
         fieldRepetitionType match {
-          case FieldRepetitionType(1, _) => definition = if (parent != null) parent.definition + 1 else 1
-          case FieldRepetitionType(2, _) => repetition = if (parent != null) parent.repetition + 1 else 1; if (parent != null) definition = parent.definition + 1 else 1
+          case OPTIONAL => definition = if (parent != null) parent.definition + 1 else 1
+          case REPEATED =>
+            repetition = if (parent != null) parent.repetition + 1 else 1
+            definition = if (parent != null) parent.definition + 1 else 1
         }
       case 5 => numChildren = FauxquetDecoder readI32 arr
       case 6 => convertedType = ConvertedTypeManager getConvertedTypeById(FauxquetDecoder readI32 arr)
