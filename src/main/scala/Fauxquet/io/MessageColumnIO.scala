@@ -102,6 +102,10 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
       setRepetitionLevels()
     }
 
+    override def flush(): Unit = {
+      flushCachedNulls(MessageColumnIO.this)
+    }
+
     override def startMessage(): Unit = {
       currentColumnIO = MessageColumnIO.this
       r(0) = 0
@@ -246,7 +250,11 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     init()
   }
 
+  def setLevels(): Unit = {
+    setLevels(0, 0, new Array[String](0), new Array[Int](0), List[ColumnIO](this), List[ColumnIO](this))
+  }
+
   def getRecordWriter(columns: ColumnWriteStore): RecordConsumer = {
-    new MessageColumnIORecordConsumer(null)
+    new MessageColumnIORecordConsumer(columns) //TODO: Something about validating here, but seems to always be false
   }
 }
