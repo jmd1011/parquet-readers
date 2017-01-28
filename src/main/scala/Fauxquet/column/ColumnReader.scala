@@ -1,7 +1,9 @@
-package main.scala.Parq
+package main.scala.Fauxquet.column
+
+import main.scala.Fauxquet.FauxquetObjs.ColumnDescriptor
 
 /**
-  * Created by James on 8/1/2016.
+  * Created by james on 1/28/17.
   */
 trait ColumnReader {
   def getTotalValueCount: Long
@@ -17,7 +19,7 @@ trait ColumnReader {
   def getInteger: Int
   def getBoolean: Boolean
   def getLong: Long
-  def getBinary: Binary
+  //def getBinary: Binary //TODO: Probably need to make Binary :(
   def getFloat: Float
   def getDouble: Double
 

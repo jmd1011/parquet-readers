@@ -1,4 +1,4 @@
-package main.scala.Fauxquet.Types
+package main.scala.Fauxquet.schema
 
 /**
   * Created by james on 1/28/17.
