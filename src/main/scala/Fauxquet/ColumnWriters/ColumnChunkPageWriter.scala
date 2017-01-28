@@ -43,6 +43,11 @@ class ColumnChunkPageWriter(path: ColumnDescriptor) extends PageWriter {
     buf.collect(BytesInputManager.concat(BytesInputManager.from(tempOutputStream), bytes))
   }
 
+  def writeToFileWriter(): Unit = {
+
+  }
+
+
   override def memSize: Long = ???
 
   override def allocatedSize: Long = ???

@@ -3,12 +3,15 @@ package main.scala.Fauxquet
 import java.io.{BufferedOutputStream, FileOutputStream, PrintWriter}
 import java.nio.charset.Charset
 
+import main.scala.Fauxquet.FauxquetObjs.ColumnDescriptor
+
 /**
   * Created by james on 1/10/17.
   */
 class FauxquetWriter(path: String) {
   var state: WriteState = NOT_STARTED
   var out = new FauxquetOutputStream(new BufferedOutputStream(new FileOutputStream(path)))
+  val alignment: AlignmentStrategy = NoAlignment
   val MAGIC = "PAR1".getBytes(Charset.forName("ASCII"))
 
   def writeToCSV(data: Map[String, Vector[Any]]) = {
@@ -52,6 +55,11 @@ class FauxquetWriter(path: String) {
 
   def startBlock(recordCount: Long) = {
     state = state.startBlock()
+
+  }
+
+  def startColumn(descriptor: ColumnDescriptor, valueCount: Long): Unit = {
+    state = state.startColumn()
 
   }
 }

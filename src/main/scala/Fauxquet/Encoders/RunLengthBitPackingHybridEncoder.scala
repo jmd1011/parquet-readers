@@ -1,6 +1,7 @@
 package main.scala.Fauxquet.Encoders
 
 import main.scala.Fauxquet.ValuesReaders.bitpacking.BytePacker_LE_1
+import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, BytesInputManager}
 import main.scala.Fauxquet.bytes.CapacityByteArrayOutputStream
 
 /**
@@ -19,6 +20,26 @@ class RunLengthBitPackingHybridEncoder(bitWidth: Int, capacityByteArrayOutputStr
 
   def bufferedSize = capacityByteArrayOutputStream.size
   def allocatedSize = capacityByteArrayOutputStream.capacity
+
+  def toBytes: BytesInput = {
+    if (this.repeatCount >= 8) {
+      writeRleRun()
+    }
+    else if (this.numBufferedValues > 0) {
+      for (i <- this.numBufferedValues until 8) {
+        this.bufferedValues(i) = 0
+      }
+
+      writeOrAppendBitPackedRun()
+      endPreviousBitPackedRun()
+    }
+    else {
+      endPreviousBitPackedRun()
+    }
+
+    toBytesCalled = true
+    BytesInputManager.from(capacityByteArrayOutputStream)
+  }
 
   def reset(resetCapacityByteArrayOutputStream: Boolean = true): Unit = {
     if (resetCapacityByteArrayOutputStream) {
