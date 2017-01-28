@@ -1,6 +1,4 @@
-package main.scala.Fauxquet.Types
-
-import main.scala.Fauxquet.Types.OriginalType.OriginalType
+package main.scala.Fauxquet.schema
 
 /**
   * Created by james on 1/28/17.
