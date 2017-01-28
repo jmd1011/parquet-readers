@@ -1,6 +1,6 @@
 package main.scala.Fauxquet.io
 
-import main.scala.Fauxquet.FauxquetObjs.ColumnDescriptor
+import main.scala.Fauxquet.column.ColumnDescriptor
 import main.scala.Fauxquet.schema.BaseType
 
 /**

@@ -6,9 +6,9 @@ import main.scala.Fauxquet.io.api.RecordConsumer
 /**
   * Created by james on 1/28/17.
   */
-trait PrimitiveTypeName[T] {
+trait PrimitiveTypeName {
   val name: String
-  type scalaType = T
+  //type scalaType = T
 
   //def addValueToRecordConsumer(recordConsumer: RecordConsumer, columnReader: ColumnReader) //TODO: Figure out if we actually need this, think not
 }

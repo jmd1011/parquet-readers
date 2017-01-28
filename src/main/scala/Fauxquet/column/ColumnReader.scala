@@ -1,7 +1,5 @@
 package main.scala.Fauxquet.column
 
-import main.scala.Fauxquet.FauxquetObjs.ColumnDescriptor
-
 /**
   * Created by james on 1/28/17.
   */

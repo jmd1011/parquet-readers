@@ -1,4 +1,4 @@
-package main.scala.Fauxquet.ColumnWriters
+package main.scala.Fauxquet.column.ColumnWriters
 
 /**
   * Created by james on 1/26/17.

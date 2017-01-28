@@ -1,9 +1,10 @@
-package main.scala.Fauxquet.ColumnWriters
+package main.scala.Fauxquet.column.ColumnWriters
 import java.io.ByteArrayOutputStream
 
 import main.scala.Fauxquet.Encoders.PlainEncoder
 import main.scala.Fauxquet.FauxquetObjs._
 import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, BytesInputManager, ConcatenatingByteArrayCollector}
+import main.scala.Fauxquet.column.ColumnDescriptor
 import main.scala.Fauxquet.page.DictionaryPage
 
 /**

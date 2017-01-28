@@ -3,8 +3,9 @@ package main.scala.Fauxquet
 import java.io.{BufferedOutputStream, FileOutputStream, PrintWriter}
 import java.nio.charset.Charset
 
-import main.scala.Fauxquet.ColumnWriters.{ColumnChunkPageWriter, ColumnWriterImpl}
+import main.scala.Fauxquet.column.ColumnWriters.{ColumnChunkPageWriter, ColumnWriterImpl}
 import main.scala.Fauxquet.FauxquetObjs._
+import main.scala.Fauxquet.column.ColumnDescriptor
 
 /**
   * Created by james on 1/10/17.

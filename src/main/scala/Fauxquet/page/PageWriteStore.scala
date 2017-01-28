@@ -1,7 +1,7 @@
 package main.scala.Fauxquet.page
 
-import main.scala.Fauxquet.ColumnWriters.PageWriter
-import main.scala.Fauxquet.FauxquetObjs.ColumnDescriptor
+import main.scala.Fauxquet.column.ColumnWriters.PageWriter
+import main.scala.Fauxquet.column.ColumnDescriptor
 
 /**
   * Created by james on 1/26/17.

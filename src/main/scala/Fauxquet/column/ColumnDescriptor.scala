@@ -1,6 +1,8 @@
-package main.scala.Fauxquet.FauxquetObjs
+package main.scala.Fauxquet.column
 
 import java.util
+
+import main.scala.Fauxquet.FauxquetObjs.TType
 
 /**
   * Created by james on 1/26/17.
