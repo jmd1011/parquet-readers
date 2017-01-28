@@ -5,13 +5,13 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/5/16.
   */
-class FileMetadata extends Fauxquetable {
+class FileMetadata(var schema: Vector[SchemaElement] = Vector[SchemaElement]()) extends Fauxquetable {
   var numRows: Long = _
   var version: Int = _
   var createdBy: String = _
   var rowGroups: List[RowGroup] = Nil
 
-  var schema: Vector[SchemaElement] = Vector[SchemaElement]()
+  //var schema: Vector[SchemaElement] = Vector[SchemaElement]()
 
   private val VERSION_FIELD_DESC = TField("version", 8, 1)
   private val SCHEMA_FIELD_DESC = TField("schema", 15, 2)
