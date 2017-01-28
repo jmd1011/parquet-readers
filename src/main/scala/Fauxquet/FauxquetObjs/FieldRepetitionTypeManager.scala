@@ -5,11 +5,29 @@ package main.scala.Fauxquet.FauxquetObjs
   */
 object FieldRepetitionTypeManager {
   def getFieldRepetitionTypeById(id: Int): FieldRepetitionType = id match {
-    case 0 => FieldRepetitionType(0, "REQUIRED")
-    case 1 => FieldRepetitionType(1, "OPTIONAL")
-    case 2 => FieldRepetitionType(2, "REPEATED")
+    case 0 => REQUIRED
+    case 1 => OPTIONAL
+    case 2 => REPEATED
     case _ => null
   }
 }
 
-case class FieldRepetitionType(id: Int, value: String)
+trait FieldRepetitionType {
+  val id: Int
+  val value: String
+}
+
+object REQUIRED extends FieldRepetitionType {
+  override val id: Int = 0
+  override val value: String = "REQUIRED"
+}
+
+object OPTIONAL extends FieldRepetitionType {
+  override val id: Int = 1
+  override val value: String = "OPTIONAL"
+}
+
+object REPEATED extends FieldRepetitionType {
+  override val id: Int = 2
+  override val value: String = "REPEATED"
+}
