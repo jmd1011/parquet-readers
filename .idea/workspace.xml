@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07c06c13-905b-4fe6-8180-eb9e3ab5709d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnWriteStore.scala" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriters/ColumnChunkPageWriter.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnWriters/ColumnChunkPageWriter.scala" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriters/ColumnWriter.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnWriters/ColumnWriter.scala" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriters/ColumnWriterImpl.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnWriters/ColumnWriterImpl.scala" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/ColumnWriters/PageWriter.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnWriters/PageWriter.scala" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/ColumnDescriptor.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnDescriptor.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFileWriter.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetFileWriter.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetWriter.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetWriter.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnReader.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnReader.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/io/PrimitiveColumnIO.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/io/PrimitiveColumnIO.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/io/api/RecordConsumer.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/io/api/RecordConsumer.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/page/ColumnChunkPageWriteStore.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/page/ColumnChunkPageWriteStore.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/page/PageWriteStore.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/page/PageWriteStore.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/BaseType.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/BaseType.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/MessageType.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/MessageType.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/PrimitiveType.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/PrimitiveType.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/PrimitiveTypeName.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/PrimitiveTypeName.scala" />
     </list>
     <ignored path="ParquetStuff.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -62,73 +44,19 @@
       <file leaf-file-name="MessageColumnIO.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="26" column="85" selection-start-line="26" selection-start-column="85" selection-end-line="26" selection-end-column="85" />
+            <state relative-caret-position="365">
+              <caret line="91" column="24" selection-start-line="91" selection-start-column="24" selection-end-line="91" selection-end-column="24" />
               <folding>
                 <element signature="e#32#82#0" expanded="true" />
+                <element signature="e#4267#4648#0" expanded="false" />
+                <element signature="e#4654#4806#0" expanded="false" />
+                <element signature="e#4812#5194#0" expanded="false" />
+                <element signature="e#5200#5614#0" expanded="false" />
+                <element signature="e#5620#5785#0" expanded="false" />
+                <element signature="e#5791#6257#0" expanded="false" />
+                <element signature="e#6263#6573#0" expanded="false" />
+                <element signature="e#6579#6843#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecordConsumer.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/io/api/RecordConsumer.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrimitiveType.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/schema/PrimitiveType.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TypeVisitor.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/schema/TypeVisitor.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrimitiveTypeName.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/schema/PrimitiveTypeName.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-              <folding>
-                <element signature="e#36#82#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseType.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/schema/BaseType.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrimitiveColumnIO.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/io/PrimitiveColumnIO.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="15" column="60" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -203,8 +131,8 @@
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnDescriptor.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnWriteStore.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/column/MessageColumnIORecordConsumer.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/io/api/RecordConsumer.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala" />
       </list>
     </option>
   </component>
@@ -1232,16 +1160,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/ValuesWriters/bitpacking/ByteBitPackingValuesWriter.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="52" selection-start-line="27" selection-start-column="52" selection-end-line="27" selection-end-column="52" />
-          <folding>
-            <element signature="e#54#116#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/page/ColumnChunkPageWriteStore.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1648,12 +1566,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/column/ColumnWriters/ColumnWriter.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="26" column="85" selection-start-line="26" selection-start-column="85" selection-end-line="26" selection-end-column="85" />
+        <state relative-caret-position="365">
+          <caret line="91" column="24" selection-start-line="91" selection-start-column="24" selection-end-line="91" selection-end-column="24" />
           <folding>
             <element signature="e#32#82#0" expanded="true" />
+            <element signature="e#4267#4648#0" expanded="false" />
+            <element signature="e#4654#4806#0" expanded="false" />
+            <element signature="e#4812#5194#0" expanded="false" />
+            <element signature="e#5200#5614#0" expanded="false" />
+            <element signature="e#5620#5785#0" expanded="false" />
+            <element signature="e#5791#6257#0" expanded="false" />
+            <element signature="e#6263#6573#0" expanded="false" />
+            <element signature="e#6579#6843#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -35,9 +35,15 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
 
     var fieldsWritten: Array[FieldsMarker] = _
     var r: Array[Int] = _
+
+    var currentColumnIO: ColumnIO = _
+    var currentLevel: Int = 0
+    var emptyField: Boolean = true
+
     val columnWriter = new Array[ColumnWriter](leaves.size) //TODO: I think this can be simplified to having just one ColumnWriter for us
 
     var groupToLeafWriter: Map[GroupColumnIO, List[ColumnWriter]] = Map[GroupColumnIO, List[ColumnWriter]]()
+    var groupNullCache: Map[GroupColumnIO, List[Int]] = Map[GroupColumnIO, List[Array[Int]]]()
 
     def buildGroupToLeafWritersMap(primitiveColumnIO: PrimitiveColumnIO, writer: ColumnWriter): Unit = {
       var parent = primitiveColumnIO.parent
@@ -55,6 +61,167 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
         writers = List[ColumnWriter]()
         groupToLeafWriter += (groupColumnIO -> writers)
       }
+
+      writers
+    }
+
+    def curColumnWriter = columnWriter(currentColumnIO.asInstanceOf[PrimitiveColumnIO].id)
+
+    override def addInteger(int: Int): Unit = {
+      emptyField = false
+      curColumnWriter.write(int, r(currentLevel), currentColumnIO.definitionLevel)
+
+      setRepetitionLevels()
+    }
+
+    override def addLong(long: Long): Unit = {
+      emptyField = false
+      curColumnWriter.write(long, r(currentLevel), currentColumnIO.definitionLevel)
+
+      setRepetitionLevels()
+    }
+
+    override def addBool(boolean: Boolean): Unit = {
+      emptyField = false
+      curColumnWriter.write(boolean, r(currentLevel), currentColumnIO.definitionLevel)
+
+      setRepetitionLevels()
+    }
+
+    override def addFloat(float: Float): Unit = {
+      emptyField = false
+      curColumnWriter.write(float, r(currentLevel), currentColumnIO.definitionLevel)
+
+      setRepetitionLevels()
+    }
+
+    override def addDouble(double: Double): Unit = {
+      emptyField = false
+      curColumnWriter.write(double, r(currentLevel), currentColumnIO.definitionLevel)
+
+      setRepetitionLevels()
+    }
+
+    override def startMessage(): Unit = {
+      currentColumnIO = MessageColumnIO.this
+      r(0) = 0
+
+      val numberOfFieldsToVisit = currentColumnIO.asInstanceOf[GroupColumnIO].childrenSize
+      fieldsWritten(0).reset(numberOfFieldsToVisit)
+    }
+
+    override def endMessage(): Unit = {
+      writeNullForMissingFieldsAtCurrentLevel()
+      columns.endRecord()
+    }
+
+    override def startField(field: String, index: Int): Unit = {
+      currentColumnIO = currentColumnIO.asInstanceOf[GroupColumnIO].getChild(index)
+      emptyField = true
+    }
+
+    override def endField(field: String, index: Int): Unit = {
+      currentColumnIO = currentColumnIO.parent
+
+      if (emptyField) throw new Error("Empty fields are illegal, like everything else in this country")
+
+      fieldsWritten(currentLevel).markWritten(index)
+      r(currentLevel) = if (currentLevel == 0) 0 else r(currentLevel - 1)
+    }
+
+    def setRepetitionLevels(): Unit = r(currentLevel) = currentColumnIO.repetitionLevel
+
+    override def startGroup(): Unit = {
+      val group = currentColumnIO.asInstanceOf[GroupColumnIO]
+
+      if (hasNullCache(group)) {
+        flushCachedNulls(group)
+      }
+
+      currentLevel += 1
+      r(currentLevel) = r(currentLevel - 1)
+
+      val fieldsCount = currentColumnIO.asInstanceOf[GroupColumnIO].childrenSize
+      fieldsWritten(currentLevel).reset(fieldsCount)
+    }
+
+    def hasNullCache(groupColumnIO: GroupColumnIO): Boolean = {
+      val nulls = groupNullCache(groupColumnIO)
+
+      nulls != null && nulls.nonEmpty
+    }
+
+    def flushCachedNulls(groupColumnIO: GroupColumnIO): Unit = {
+      for (i <- 0 until groupColumnIO.childrenSize) {
+        val child = groupColumnIO.getChild(i)
+
+        //TODO: Is this actually faster/better?
+        child match {
+          case o: GroupColumnIO =>
+            flushCachedNulls(o)
+          case _ =>
+        }
+      }
+
+      writeNullToLeaves(groupColumnIO)
+    }
+
+    def writeNullToLeaves(groupColumnIO: GroupColumnIO): Unit = {
+      var nulls = groupNullCache(groupColumnIO)
+
+      if (nulls == null || nulls.isEmpty) return
+
+      val parentDLevel = groupColumnIO.parent.definitionLevel
+
+      for (leafWriter <- groupToLeafWriter(groupColumnIO)) {
+        for (int <- nulls) {
+          leafWriter.writeNull(int, parentDLevel)
+        }
+      }
+
+      nulls = List[Int]()
+    }
+
+    override def endGroup(): Unit = {
+      emptyField = false
+      writeNullForMissingFieldsAtCurrentLevel()
+      currentLevel -= 1
+
+      setRepetitionLevels()
+    }
+
+    def writeNullForMissingFieldsAtCurrentLevel(): Unit = {
+      val currentFieldsCount = currentColumnIO.asInstanceOf[GroupColumnIO].childrenSize
+
+
+      for (i <- 0 until currentFieldsCount) {
+        if (!fieldsWritten(currentLevel).isWritten(i)) {
+          val undefinedField = currentColumnIO.asInstanceOf[GroupColumnIO].getChild(i)
+          val d = currentColumnIO.definitionLevel
+
+          writeNull(undefinedField, r(currentLevel), d)
+        }
+      }
+    }
+
+    def writeNull(undefinedField: ColumnIO, r: Int, d: Int): Unit = {
+      if (undefinedField.baseType.isPrimitive) {
+        columnWriter(undefinedField.asInstanceOf[PrimitiveColumnIO].id).writeNull(r, d)
+      }
+      else {
+        cacheNullForGroup(undefinedField.asInstanceOf[GroupColumnIO], r)
+      }
+    }
+
+    def cacheNullForGroup(groupColumnIO: GroupColumnIO, r: Int): Unit = {
+      var nulls = groupNullCache(groupColumnIO)
+
+      if (nulls == null) {
+        nulls = List[Array[Int]]()
+        groupNullCache += (groupColumnIO -> nulls)
+      }
+
+      nulls ::= r
     }
 
     def init() = {
@@ -75,6 +242,7 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
 
       r = new Array[Int](maxDepth)
     }
+
     init()
   }
 
