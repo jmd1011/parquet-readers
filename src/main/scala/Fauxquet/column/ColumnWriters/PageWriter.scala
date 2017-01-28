@@ -1,4 +1,4 @@
-package main.scala.Fauxquet.ColumnWriters
+package main.scala.Fauxquet.column.ColumnWriters
 
 import main.scala.Fauxquet.FauxquetObjs.{Encoding, Statistics}
 import main.scala.Fauxquet.bytes.BytesInput.BytesInput

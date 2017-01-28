@@ -1,6 +1,7 @@
 package main.scala.Fauxquet.schema
 
-import main.scala.Fauxquet.FauxquetObjs.{ColumnDescriptor, INT32}
+import main.scala.Fauxquet.FauxquetObjs.INT32
+import main.scala.Fauxquet.column.ColumnDescriptor
 
 /**
   * Created by james on 1/28/17.

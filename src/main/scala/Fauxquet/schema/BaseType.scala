@@ -1,5 +1,7 @@
 package main.scala.Fauxquet.schema
 
+import main.scala.Fauxquet.schema.OriginalType.OriginalType
+
 /**
   * Created by james on 1/28/17.
   */
@@ -9,6 +11,11 @@ abstract class BaseType(val name: String, val repetition: Repetition, val origin
   def isPrimitive: Boolean
 
   def accept(visitor: TypeVisitor)
+
+  def asPrimitiveType: PrimitiveType = {
+    if (!this.isPrimitive) throw new Error("That won't work")
+    else this.asInstanceOf[PrimitiveType]
+  }
 
   def asGroupType: GroupType = {
     if (this.isPrimitive) throw new Error("Primitive != GroupType")

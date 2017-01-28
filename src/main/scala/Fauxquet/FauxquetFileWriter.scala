@@ -6,6 +6,7 @@ import main.scala.Fauxquet.Encoders.PlainEncoder
 import main.scala.Fauxquet.FauxquetObjs.ColumnChunkMetadata.ColumnChunkMetadataManager
 import main.scala.Fauxquet.FauxquetObjs._
 import main.scala.Fauxquet.bytes.BytesInput.BytesInput
+import main.scala.Fauxquet.column.ColumnDescriptor
 import main.scala.Fauxquet.page.DictionaryPage
 
 /**
