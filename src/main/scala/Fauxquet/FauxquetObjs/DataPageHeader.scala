@@ -5,7 +5,7 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/30/16.
   */
-class DataPageHeader(var numValues: Int = -1, var encoding: Encoding = _, var definitionLevelEncoding: Encoding = _, var repetitionLevelEncoding: Encoding = _, var statistics: Statistics = _) extends Fauxquetable {
+class DataPageHeader(var numValues: Int = -1, var encoding: Encoding = null, var definitionLevelEncoding: Encoding = null, var repetitionLevelEncoding: Encoding = null, var statistics: Statistics = null) extends Fauxquetable {
   //var numValues = -1
 
   //var encoding: Encoding = _
@@ -39,7 +39,7 @@ class DataPageHeader(var numValues: Int = -1, var encoding: Encoding = _, var de
     }
     case TField(_, 12, 5) =>
       statistics = new Statistics()
-      statistics read arr
+      statistics.read(arr)
     case _ => FauxquetDecoder skip(arr, field Type)
   }
 

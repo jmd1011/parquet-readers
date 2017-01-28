@@ -3,7 +3,7 @@ package main.scala.Fauxquet
 /**
   * Created by james on 8/5/16.
   */
-class FauxquetFile(val file: String) {
+class FauxquetFile() {
   type Schema = Vector[String]
   type Fields = Vector[String]
 
@@ -14,19 +14,17 @@ class FauxquetFile(val file: String) {
 
   def Schema(schema: List[String]) = schema.toVector
 
-  //val fauxquetReader = new FauxquetReader(file)
-
   var data: Map[String, Vector[Any]] = Map[String, Vector[Any]]() //need to change this when dealing with Record
   var schema: Schema = _
   var fields: Fields = _
 
-  def read() = {
+  def read(file: String) = {
     val fauxquetReader = new FauxquetReader(file)
     data = fauxquetReader.read()
   }
 
-  def write() = {
+  def write(file: String) = {
     val fauxquetWriter = new FauxquetWriter(file)
-    fauxquetWriter.writeToCSV(data) //fauxquetWriter.write(data)
+    fauxquetWriter.write(data)
   }
 }

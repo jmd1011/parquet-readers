@@ -5,23 +5,15 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/9/16.
   */
-class ColumnMetadata extends Fauxquetable {
-  var numValues: Long = -1L
+class ColumnMetadata(var Type: TType = null, var encodings: List[Encoding] = Nil, var pathInSchema: List[String] = Nil, var codec: CompressionCodec = UNCOMPRESSED,
+                     var numValues: Long = -1L, var totalUncompressedSize: Long = -1, var totalCompressedSize: Long = -1L, var dataPageOffset: Long = -1L
+                    ) extends Fauxquetable {
 
-  var totalUncompressedSize: Long = -1L
-  var totalCompressedSize: Long = -1L
-
-  var dataPageOffset: Long = -1L
   var indexPageOffset: Long = -1L
   var dictionaryPageOffset: Long = -1L
 
-  var Type: TType = _
-
-  var encodings: List[Encoding] = Nil
-  var pathInSchema: List[String] = Nil
   var encodingStats: List[PageEncodingStats] = Nil
 
-  var codec: CompressionCodec = _
   var statistics: Statistics = _
 
   private val TYPE_FIELD_DESC = TField("type", 8, 1)

@@ -10,8 +10,8 @@ class ConcatenatingByteArrayCollector extends BytesInput {
 
   def collect(bytesInput: BytesInput) = {
     val bytes = bytesInput.toByteArray
-    slabs = slabs :: bytes
-    size += bytes.length
+    slabs ::= bytes
+    size_ += bytes.length
   }
 
   def reset() = {

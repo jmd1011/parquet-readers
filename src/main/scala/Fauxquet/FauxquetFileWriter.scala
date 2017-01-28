@@ -11,7 +11,7 @@ import main.scala.Fauxquet.page.DictionaryPage
 /**
   * Created by james on 1/27/17.
   */
-class FauxquetFileWriter(out: FauxquetOutputStream, alignmentStrategy: AlignmentStrategy = NoAlignment) {
+class FauxquetFileWriter(out: FauxquetOutputStream, schema: Vector[SchemaElement], alignmentStrategy: AlignmentStrategy = NoAlignment) {
   //block data
   var blocks = List[BlockMetadata]()
   var currentBlock = new BlockMetadata()
@@ -27,7 +27,7 @@ class FauxquetFileWriter(out: FauxquetOutputStream, alignmentStrategy: Alignment
 //  private CompressionCodecName currentChunkCodec; // set in startColumn
 //  private ColumnPath currentChunkPath;            // set in startColumn
 //  private PrimitiveTypeName currentChunkType;     // set in startColumn
-
+  var currentChunkType: TType                = _
   var currentChunkValueCount: Long           = -1
   var currentChunkFirstDataPage: Long        = -1
   var currentChunkDictionaryPageOffset: Long = -1
@@ -55,8 +55,11 @@ class FauxquetFileWriter(out: FauxquetOutputStream, alignmentStrategy: Alignment
 
   def startColumn(descriptor: ColumnDescriptor, valueCount: Long): Unit = {
     state = state.startColumn()
+
+    currentChunkType = descriptor.tType
     currentChunkValueCount = valueCount
     currentChunkFirstDataPage = out.pos
+
     compressedLength = 0
     uncompressedLength = 0
   }
@@ -135,6 +138,74 @@ class FauxquetFileWriter(out: FauxquetOutputStream, alignmentStrategy: Alignment
   def end(extraMetadata: Map[String, String]): Unit = {
     state = state.end()
 
-    val footer = new FauxquetMetadata(new FileMetadata(), blocks)
+    val footer = new FauxquetMetadata(new FileMetadata(schema, extraMetadata), blocks)
+    serializeFooter(footer)
+    out.close()
+  }
+
+  def serializeFooter(footer: FauxquetMetadata): Unit = {
+    val footerIndex = out.pos
+    val metadata = convertFauxquetMetadata(footer)
+    //writeMetadata(metadata, out)
+    writeIntLittleEndian((out.pos - footerIndex).asInstanceOf[Int])
+    out.write(MAGIC)
+  }
+
+  def writeIntLittleEndian(v: Int): Unit = {
+    this.out.write((v >>> 0) & 0xFF)
+    this.out.write((v >>> 8) & 0xFF)
+    this.out.write((v >>> 16) & 0xFF)
+    this.out.write((v >>> 24) & 0xFF)
+  }
+
+  def convertFauxquetMetadata(metadata: FauxquetMetadata): FileMetadata = {
+    val blks = metadata.blocks
+    var rowGroups = List[RowGroup]()
+    var numRows: Long = 0L
+
+    for (block <- blks) {
+      numRows += block.rowCount
+      rowGroups ::= addRowGroup(block)
+    }
+
+    val fileMetadata = new FileMetadata(metadata.fileMetadata.schema) //TODO: May need to change how we're adding schema
+    fileMetadata.numRows = numRows
+    fileMetadata.rowGroups = rowGroups
+    fileMetadata.createdBy = "James Decker" //TODO
+    fileMetadata.keyValueMetadata = List[KeyValue]()
+
+    if (metadata.fileMetadata.keyValueMetadata != Nil) {
+      for (kv <- metadata.fileMetadata.keyValueMetadata) {
+        addKeyValue(fileMetadata, kv.key, kv.value)
+      }
+    }
+
+    fileMetadata
+  }
+
+  def addKeyValue(fileMetadata: FileMetadata, key: String, value: String): Unit = {
+    fileMetadata.keyValueMetadata ::= new KeyValue(key, value)
+  }
+
+  def addRowGroup(block: BlockMetadata): RowGroup = {
+    val columns = block.columns
+    var fauxquetColumns = List[ColumnChunk]()
+
+    for (column <- columns) {
+      val cc = new ColumnChunk()
+      cc.fileOffset = column.firstDataPageOffset
+      cc.filePath = block.path
+      cc.metadata = new ColumnMetadata(currentChunkType, column.encodings, column.path.toList, UNCOMPRESSED, column.valueCount, column.totalUncompressedSize, column.totalSize, column.firstDataPageOffset)
+      cc.metadata.dictionaryPageOffset = column.dictionaryPageOffset
+
+      fauxquetColumns ::= cc
+    }
+
+    val rowGroup = new RowGroup()
+    rowGroup.columns = fauxquetColumns
+    rowGroup.numRows = block.rowCount
+    rowGroup.totalByteSize = block.totalBytesSize
+
+    rowGroup
   }
 }

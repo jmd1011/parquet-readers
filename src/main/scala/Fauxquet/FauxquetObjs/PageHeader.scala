@@ -5,7 +5,7 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/30/16.
   */
-class PageHeader(var Type: PageType = _, var uncompressedPageSize: Int = 0, var compressedPageSize: Int = 0) extends Fauxquetable {
+class PageHeader(var Type: PageType = null, var uncompressedPageSize: Int = 0, var compressedPageSize: Int = 0) extends Fauxquetable {
 //  var uncompressedPageSize = -1
 //  var compressedPageSize = -1
   var crc = -1 //wtf is this?

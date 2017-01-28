@@ -5,10 +5,7 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/8/16.
   */
-class KeyValue extends Fauxquetable {
-  var key: String = _
-  var value: String = _
-
+class KeyValue(var key: String = null, var value: String = null) extends Fauxquetable {
   private val KEY_FIELD_DESC = TField("key", 11, 1)
   private val VALUE_FIELD_DESC = TField("value", 11, 2)
 
