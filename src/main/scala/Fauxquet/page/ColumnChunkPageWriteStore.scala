@@ -19,7 +19,7 @@ class ColumnChunkPageWriteStore(schema: MessageType) extends PageWriteStore {
 
   def flushToFileWriter(fauxquetFileWriter: FauxquetFileWriter): Unit = {
     for (path <- schema.columns()) {
-      writers(path).writeToFileWriter()
+      writers(path).writeToFileWriter(fauxquetFileWriter)
     }
   }
 }

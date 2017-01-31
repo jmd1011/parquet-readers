@@ -4,15 +4,24 @@ import java.io.{BufferedOutputStream, Closeable, FileOutputStream, PrintWriter}
 
 import main.scala.Fauxquet.FauxquetObjs._
 import main.scala.Fauxquet.FauxquetOutputStream
+import main.scala.Fauxquet.flare.api.WriteSupport
 
 /**
   * Created by james on 1/10/17.
   */
-class FauxquetWriter(path: String) extends Closeable {
+class FauxquetWriter(path: String, writeSupport: WriteSupport) extends Closeable {
   val DEFAULT_BLOCK_SIZE: Int = 128 * 1024 *10241
   val DEFAILT_PAGE_SIZE: Int = 1048576 //in a config file somewhere
 
-  val out = new FauxquetOutputStream(new BufferedOutputStream(new FileOutputStream(path)))
+  val schema = writeSupport.schema
+
+  val fauxquetFileWriter = new FauxquetFileWriter(new FauxquetOutputStream(new BufferedOutputStream(new FileOutputStream(path))), schema)
+
+  fauxquetFileWriter.start()
+
+  val writer = new InternalFauxquetRecordWriter(fauxquetFileWriter, writeSupport, schema, Map[String, String](), DEFAULT_BLOCK_SIZE)
+
+  //val out = new FauxquetOutputStream(new BufferedOutputStream(new FileOutputStream(path)))
 
   def writeToCSV(data: Map[String, Vector[Any]]) = {
     val out = new PrintWriter("./resources/customer_out.csv")
@@ -42,6 +51,10 @@ class FauxquetWriter(path: String) extends Closeable {
     }
 
     out.close()
+  }
+
+  def write(values: List[String]): Unit = {
+    writer.write(values)
   }
 
   def write(schema: Vector[SchemaElement], data: Map[String, Vector[Any]]) = {

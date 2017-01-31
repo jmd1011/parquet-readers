@@ -19,3 +19,12 @@ object OPTIONAL extends Repetition {
 object REPEATED extends Repetition {
   override def isMoreRestrictiveThan(other: Repetition): Boolean = false
 }
+
+object RepetitionManager {
+  def getRepetitionByName(name: String): Repetition = name match {
+    case "REQUIRED" => REQUIRED
+    case "OPTIONAL" => OPTIONAL
+    case "REPEATED" => REPEATED
+    case _ => throw new Error("Unable to match")
+  }
+}

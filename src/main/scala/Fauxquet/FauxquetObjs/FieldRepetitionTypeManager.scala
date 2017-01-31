@@ -31,3 +31,5 @@ object REPEATED extends FieldRepetitionType {
   override val id: Int = 2
   override val value: String = "REPEATED"
 }
+
+case class FieldRepetitionTypeMatch(id: Int, value: String)

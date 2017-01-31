@@ -191,6 +191,8 @@ object BinaryManager {
 
   }
 
+  def fromString(str: String): Binary = new FromStringBinary(str)
+
   def equals(array1: Array[Byte], offset1: Int, length1: Int, array2: Array[Byte], offset2: Int, length2: Int): Boolean = {
     if (array1 == null && array2 == null) return true
     else if (array1 == null || array2 == null) return false
