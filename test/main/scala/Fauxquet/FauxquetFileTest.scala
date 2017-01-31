@@ -17,7 +17,7 @@ class FauxquetFileTest extends FunSuite {
 
       val fauxquetFile = new FauxquetFile()
       fauxquetFile.read("resources/customer.parquet")
-      fauxquetFile.write("resources/customer_out.parquet")
+      fauxquetFile.write("resources/customer_out.parquet", fauxquetFile.mtSchema)
 
       val t1 = System.nanoTime()
 

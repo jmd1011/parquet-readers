@@ -9,12 +9,12 @@ import main.scala.Fauxquet._
 import main.scala.Fauxquet.bytes.BytesInput.BytesInput
 import main.scala.Fauxquet.column.ColumnDescriptor
 import main.scala.Fauxquet.page.DictionaryPage
-import main.scala.Fauxquet.schema.PrimitiveTypeName
+import main.scala.Fauxquet.schema.{MessageType, PrimitiveTypeName}
 
 /**
   * Created by james on 1/27/17.
   */
-class FauxquetFileWriter(out: FauxquetOutputStream, schema: Vector[SchemaElement], alignmentStrategy: AlignmentStrategy = NoAlignment) {
+class FauxquetFileWriter(out: FauxquetOutputStream, schema: MessageType, alignmentStrategy: AlignmentStrategy = NoAlignment) {
   //block data
   var blocks = List[BlockMetadata]()
   var currentBlock = new BlockMetadata()
@@ -23,6 +23,12 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: Vector[SchemaElement
   var uncompressedLength: Long = -1
   var compressedLength: Long   = -1
   //end block data
+
+  def getNextRowGroupSize: Long = alignmentStrategy.nextRowGroupSize(out)
+
+  def pos = out.pos
+
+  NoAlignment.init(128 * 1024 *10241) //TODO: Move this somewhere real
 
   //column data
 
@@ -173,7 +179,7 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: Vector[SchemaElement
       rowGroups ::= addRowGroup(block)
     }
 
-    val fileMetadata = new FileMetadata(metadata.fileMetadata.schema) //TODO: May need to change how we're adding schema
+    val fileMetadata = new FileMetadata(metadata.fileMetadata.schem) //TODO: May need to change how we're adding schema
     fileMetadata.numRows = numRows
     fileMetadata.rowGroups = rowGroups
     fileMetadata.createdBy = "James Decker" //TODO

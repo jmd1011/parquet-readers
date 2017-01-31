@@ -5,6 +5,7 @@ import main.scala.Fauxquet.Encoders.PlainEncoder
 import main.scala.Fauxquet.FauxquetObjs._
 import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, BytesInputManager, ConcatenatingByteArrayCollector}
 import main.scala.Fauxquet.column.ColumnDescriptor
+import main.scala.Fauxquet.flare.FauxquetFileWriter
 import main.scala.Fauxquet.page.DictionaryPage
 
 /**
@@ -44,14 +45,30 @@ class ColumnChunkPageWriter(path: ColumnDescriptor) extends PageWriter {
     buf.collect(BytesInputManager.concat(BytesInputManager.from(tempOutputStream), bytes))
   }
 
-  def writeToFileWriter(): Unit = {
+  def writeToFileWriter(fauxquetFileWriter: FauxquetFileWriter): Unit = {
+    fauxquetFileWriter.startColumn(path, totalValueCount)
 
+    if (dictionaryPage != null) {
+      fauxquetFileWriter.writeDictionaryPage(dictionaryPage)
+    }
+
+    fauxquetFileWriter.writeDataPages(buf, uncompressedLength, compressedLength, statistics, Set[Encoding](BIT_PACKED), Set[Encoding](RLE), Set[Encoding](PLAIN))
+    fauxquetFileWriter.endColumn()
+
+    pageCount = 0
   }
 
 
-  override def memSize: Long = ???
+  override def memSize: Long = buf.size_
 
-  override def allocatedSize: Long = ???
+  override def allocatedSize: Long = buf.size_
 
-  override def writeDictionaryPage(dictionaryPage: DictionaryPage): Unit = ???
+  override def writeDictionaryPage(dictionaryPage: DictionaryPage): Unit = {
+    if (this.dictionaryPage != null) {
+      throw new Error("Too many dictionary pages!")
+    }
+
+    val dictionaryBytes = dictionaryPage.bytes
+    this.dictionaryPage = new DictionaryPage(BytesInputManager.copy(dictionaryBytes), dictionaryPage.dictionarySize, dictionaryPage.encoding)
+  }
 }
