@@ -11,15 +11,15 @@ class ColumnWriteStoreImpl(val pageWriteStore: PageWriteStore) extends ColumnWri
   var columns = Map[ColumnDescriptor, ColumnWriterImpl]()
 
   override def getColumnWriter(path: ColumnDescriptor): ColumnWriter = {
-    val column = columns(path)
+    val column = columns.get(path)
 
-    if (column == null) {
-      val nCol = new ColumnWriterImpl(path, pageWriteStore.getPageWriter(path))
-      columns += (path -> nCol)
+    column match {
+      case Some(col) => col
+      case None => val nCol = new ColumnWriterImpl(path, pageWriteStore.getPageWriter(path))
+        columns += (path -> nCol)
 
-      nCol
-    } else {
-      column
+        nCol
+      case _ => throw new Error("This is literally impossible")
     }
   }
 

@@ -34,10 +34,12 @@ class FauxquetFile() {
   def fromParquetSchema(schema: List[SchemaElement]): MessageType = {
     var fields: List[BaseType] = List[BaseType]()
 
-    for (field <- schema) {
+    for (i <- 1 until schema.length) {
+      val field = schema(i)
+
       if (field.Type != null) {
         val pField = getType(field.Type)
-        fields ::= new PrimitiveType(RepetitionManager.getRepetitionByName(field.fieldRepetitionType.value.toUpperCase), pField, field.typeLength, field.name, getOriginalType(field.convertedType), new DecimalMetadata(field.precision, field.scale), new ID(field.fieldId))
+        fields ::= new PrimitiveType(RepetitionManager.getRepetitionByName(field.fieldRepetitionType.value.toUpperCase), pField, math.max(field.typeLength, 0), field.name, null /*getOriginalType(field.convertedType)*/, new DecimalMetadata(field.precision, field.scale), new ID(field.fieldId))
       } else {
                                                                                                                                        //TPCH won't have structured data
         fields ::= new GroupType(RepetitionManager.getRepetitionByName(field.fieldRepetitionType.value.toUpperCase), field.name, null, List[BaseType](), null)

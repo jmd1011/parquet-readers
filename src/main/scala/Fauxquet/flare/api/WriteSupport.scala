@@ -24,6 +24,8 @@ class WriteSupport(val schema: MessageType) {
       throw new Error("Schema mismatch")
     }
 
+    recordConsumer.startMessage()
+
     for (i <- values.indices) {
       val field = columns(i).path(0)
 
