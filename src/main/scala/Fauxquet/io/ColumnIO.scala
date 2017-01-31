@@ -1,6 +1,5 @@
 package main.scala.Fauxquet.io
 
-import main.scala.Fauxquet.Types.REPEATED
 import main.scala.Fauxquet.schema.{BaseType, REPEATED}
 
 /**

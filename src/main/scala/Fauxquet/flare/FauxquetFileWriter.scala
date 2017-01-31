@@ -1,13 +1,15 @@
-package main.scala.Fauxquet
+package main.scala.Fauxquet.flare
 
 import java.nio.charset.Charset
 
 import main.scala.Fauxquet.Encoders.PlainEncoder
 import main.scala.Fauxquet.FauxquetObjs.ColumnChunkMetadata.ColumnChunkMetadataManager
 import main.scala.Fauxquet.FauxquetObjs._
+import main.scala.Fauxquet._
 import main.scala.Fauxquet.bytes.BytesInput.BytesInput
 import main.scala.Fauxquet.column.ColumnDescriptor
 import main.scala.Fauxquet.page.DictionaryPage
+import main.scala.Fauxquet.schema.PrimitiveTypeName
 
 /**
   * Created by james on 1/27/17.
@@ -28,15 +30,13 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: Vector[SchemaElement
 //  private CompressionCodecName currentChunkCodec; // set in startColumn
 //  private ColumnPath currentChunkPath;            // set in startColumn
 //  private PrimitiveTypeName currentChunkType;     // set in startColumn
-  var currentChunkType: TType                = _
+  var currentChunkType: PrimitiveTypeName    = _
   var currentChunkValueCount: Long           = -1
   var currentChunkFirstDataPage: Long        = -1
   var currentChunkDictionaryPageOffset: Long = -1
   //end column data
 
   val MAGIC = "PAR1".getBytes(Charset.forName("ASCII"))
-  val DEFAULT_BLOCK_SIZE: Int = 128 * 1024 *1024
-  val DEFAILT_PAGE_SIZE: Int = 1048576 //in a config file somewhere
 
   var state: WriteState = NOT_STARTED
   var encodings: Set[Encoding] = Set[Encoding]()
@@ -57,7 +57,7 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: Vector[SchemaElement
   def startColumn(descriptor: ColumnDescriptor, valueCount: Long): Unit = {
     state = state.startColumn()
 
-    currentChunkType = descriptor.tType
+    currentChunkType = descriptor.primitive
     currentChunkValueCount = valueCount
     currentChunkFirstDataPage = out.pos
 
@@ -193,6 +193,18 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: Vector[SchemaElement
   }
 
   def addRowGroup(block: BlockMetadata): RowGroup = {
+    def getType(primitiveTypeName: PrimitiveTypeName): TType = primitiveTypeName match {
+      case main.scala.Fauxquet.schema.INT32 => INT32
+      case main.scala.Fauxquet.schema.INT64 => INT64
+      case main.scala.Fauxquet.schema.BOOLEAN => BOOLEAN
+      case main.scala.Fauxquet.schema.BINARY => BYTE_ARRAY
+      case main.scala.Fauxquet.schema.FLOAT => FLOAT
+      case main.scala.Fauxquet.schema.DOUBLE => DOUBLE
+      case main.scala.Fauxquet.schema.INT96 => INT96
+      case main.scala.Fauxquet.schema.FIXED_LEN_BYTE_ARRAY => FIXED_LEN_BYTE_ARRAY
+      case _ => throw new Error("Unknown type encountered")
+    }
+
     val columns = block.columns
     var fauxquetColumns = List[ColumnChunk]()
 
@@ -200,7 +212,7 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: Vector[SchemaElement
       val cc = new ColumnChunk()
       cc.fileOffset = column.firstDataPageOffset
       cc.filePath = block.path
-      cc.metadata = new ColumnMetadata(currentChunkType, column.encodings, column.path.toList, UNCOMPRESSED, column.valueCount, column.totalUncompressedSize, column.totalSize, column.firstDataPageOffset)
+      cc.metadata = new ColumnMetadata(getType(currentChunkType), column.encodings, column.path.toList, UNCOMPRESSED, column.valueCount, column.totalUncompressedSize, column.totalSize, column.firstDataPageOffset)
       cc.metadata.dictionaryPageOffset = column.dictionaryPageOffset
 
       fauxquetColumns ::= cc

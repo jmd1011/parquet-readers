@@ -1,7 +1,7 @@
 package main.scala.Fauxquet.io
 
 import main.scala.Fauxquet.column.ColumnDescriptor
-import main.scala.Fauxquet.schema.BaseType
+import main.scala.Fauxquet.schema.{BaseType, PrimitiveTypeName}
 
 /**
   * Created by james on 1/28/17.
@@ -13,14 +13,18 @@ class PrimitiveColumnIO(baseType: BaseType, parent: GroupColumnIO, index: Int, v
   override def setLevels(r: Int, d: Int, fieldPath: Array[String], indexFieldPath: Array[Int], repetition: List[ColumnIO], path: List[ColumnIO]): Unit = {
     super.setLevels(r, d, fieldPath, indexFieldPath, repetition, path)
 
-    throw new Error("You'll need to make a PrimitiveTypeName")
-    //val t = baseType.asP
+    val primitive = this.baseType.asPrimitiveType
+    this.columnDescriptor = new ColumnDescriptor(fieldPath, primitive.primitive, primitive.typeLength, repetitionLevel, definitionLevel)
+    this.path = path.toArray
   }
 
+  override def columnNames: List[Array[String]] = List[Array[String]](this.fieldPath)
 
-  override def columnNames: List[Array[String]] = ???
+  override def getLast: PrimitiveColumnIO = this
+  override def getFirst: PrimitiveColumnIO = this
 
-  override def getLast: PrimitiveColumnIO = ???
+  def getFirst(r: Int): PrimitiveColumnIO = getParent(r).getFirst
+  def isFirst(r: Int): Boolean = getFirst(r) == this
 
-  override def getFirst: PrimitiveColumnIO = ???
+  def primitive: PrimitiveTypeName = this.baseType.asPrimitiveType.primitive
 }

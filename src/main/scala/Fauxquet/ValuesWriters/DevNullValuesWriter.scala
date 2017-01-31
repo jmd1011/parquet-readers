@@ -1,6 +1,7 @@
 package main.scala.Fauxquet.ValuesWriters
 import main.scala.Fauxquet.FauxquetObjs.{BIT_PACKED, Encoding}
 import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, EmptyBytesInput}
+import main.scala.Fauxquet.io.api.Binary
 
 /**
   * Created by james on 1/26/17.
@@ -16,7 +17,7 @@ object DevNullValuesWriter extends ValuesWriter {
 
   override def writeByte(value: Int): Unit = {}
 
-  override def writeBytes(bytes: Array[Byte]): Unit = {}
+  override def writeBytes(bytes: Binary): Unit = {}
 
   override def encoding: Encoding = BIT_PACKED
 

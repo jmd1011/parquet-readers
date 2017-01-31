@@ -48,6 +48,7 @@ abstract class RecordConsumer {
   def addBool(boolean: Boolean): Unit
   def addFloat(float: Float): Unit
   def addDouble(double: Double): Unit
+  def addBinary(binary: Binary): Unit
 
   def flush(): Unit = { }
 }

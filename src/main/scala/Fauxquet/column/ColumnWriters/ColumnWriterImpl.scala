@@ -8,6 +8,7 @@ import main.scala.Fauxquet.ValuesWriters.{DevNullValuesWriter, ValuesWriter}
 import main.scala.Fauxquet.bytes.BytesInput.BytesInputManager
 import main.scala.Fauxquet.bytes.{CapacityByteArrayOutputStream, HeapByteBufferAllocator}
 import main.scala.Fauxquet.column.ColumnDescriptor
+import main.scala.Fauxquet.io.api.Binary
 
 /**
   * Created by james on 1/26/17.
@@ -47,6 +48,14 @@ class ColumnWriterImpl(path: ColumnDescriptor, pageWriter: PageWriter) extends C
           ).asInstanceOf[Int] / 2 + 1
       }
     }
+  }
+
+  override def bufferedSize: Long = {
+    repetitionLevelColumn.bufferedSize() + definitionLevelColumn.bufferedSize() + dataColumn.bufferedSize() + pageWriter.memSize
+  }
+
+  def allocatedSize: Long = {
+    repetitionLevelColumn.getAllocatedSize + definitionLevelColumn.getAllocatedSize + dataColumn.getAllocatedSize + pageWriter.allocatedSize
   }
 
   def writePage(): Unit = {
@@ -90,13 +99,13 @@ class ColumnWriterImpl(path: ColumnDescriptor, pageWriter: PageWriter) extends C
     accountForValueWritten()
   }
 
-  override def write(value: Array[Byte], repetitionLevel: Int, definitionLevel: Int): Unit = {
-    repetitionLevelColumn.writeInt(repetitionLevel)
-    definitionLevelColumn.writeInt(definitionLevel)
-    dataColumn.writeBytes(value)
-    //updateStatistics()
-    accountForValueWritten()
-  }
+//  override def write(value: Array[Byte], repetitionLevel: Int, definitionLevel: Int): Unit = {
+//    repetitionLevelColumn.writeInt(repetitionLevel)
+//    definitionLevelColumn.writeInt(definitionLevel)
+//    dataColumn.writeBytes(value)
+//    //updateStatistics()
+//    accountForValueWritten()
+//  }
 
   override def write(value: Float, repetitionLevel: Int, definitionLevel: Int): Unit = {
     repetitionLevelColumn.writeInt(repetitionLevel)
@@ -118,6 +127,27 @@ class ColumnWriterImpl(path: ColumnDescriptor, pageWriter: PageWriter) extends C
     repetitionLevelColumn.writeInt(repetitionLevel)
     definitionLevelColumn.writeInt(definitionLevel)
     //updateStatisticsNumNulls()
+    accountForValueWritten()
+  }
+
+  override def close(): Unit = {
+    flush()
+    repetitionLevelColumn.close()
+    definitionLevelColumn.close()
+    dataColumn.close()
+  }
+
+  override def flush(): Unit = {
+    if (valueCount > 0) {
+      writePage()
+    }
+  }
+
+  override def write(value: Binary, repetitionLevel: Int, definitionLevel: Int): Unit = {
+    repetitionLevelColumn.writeInt(repetitionLevel)
+    definitionLevelColumn.writeInt(definitionLevel)
+    dataColumn.writeBytes(value)
+    //updateStatistics(value)
     accountForValueWritten()
   }
 }

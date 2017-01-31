@@ -12,10 +12,9 @@ class ByteBitPackingValuesWriter(val bound: Int) extends ValuesWriter {
   val bitWidth = 32 - Integer.numberOfLeadingZeros(bound)
   var encoder = new ByteBasedBitPackingEncoder(bitWidth)
 
-  override def bufferedSize(): Long = ???
+  override def bufferedSize(): Long = encoder.bufferedSize
 
-  //bunch of other stuff in Parquet -- do we need it?
-  override def getAllocatedSize: Long = ???
+  override def getAllocatedSize: Long = encoder.allocatedSize
 
   override def encoding: Encoding = BIT_PACKED
 

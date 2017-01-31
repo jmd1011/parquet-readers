@@ -2,7 +2,7 @@ package main.scala.Fauxquet.io
 
 import main.scala.Fauxquet.column.ColumnWriteStore
 import main.scala.Fauxquet.column.ColumnWriters.ColumnWriter
-import main.scala.Fauxquet.io.api.RecordConsumer
+import main.scala.Fauxquet.io.api.{Binary, RecordConsumer}
 import main.scala.Fauxquet.schema.MessageType
 
 import scala.collection.immutable.BitSet.BitSet1
@@ -43,13 +43,15 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     val columnWriter = new Array[ColumnWriter](leaves.size) //TODO: I think this can be simplified to having just one ColumnWriter for us
 
     var groupToLeafWriter: Map[GroupColumnIO, List[ColumnWriter]] = Map[GroupColumnIO, List[ColumnWriter]]()
-    var groupNullCache: Map[GroupColumnIO, List[Int]] = Map[GroupColumnIO, List[Array[Int]]]()
+    var groupNullCache: Map[GroupColumnIO, List[Int]] = Map[GroupColumnIO, List[Int]]()
 
     def buildGroupToLeafWritersMap(primitiveColumnIO: PrimitiveColumnIO, writer: ColumnWriter): Unit = {
       var parent = primitiveColumnIO.parent
 
       do {
-        getLeafWriters(parent) ::= writer
+        var w = getLeafWriters(parent)
+        w ::= writer
+        //getLeafWriters(parent) ::= writer
         parent = parent.parent
       } while (parent != null)
     }
@@ -221,7 +223,7 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
       var nulls = groupNullCache(groupColumnIO)
 
       if (nulls == null) {
-        nulls = List[Array[Int]]()
+        nulls = List[Int]()
         groupNullCache += (groupColumnIO -> nulls)
       }
 
@@ -248,6 +250,15 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     }
 
     init()
+
+    def getColumnWriter: ColumnWriter = {
+      columnWriter(currentColumnIO.asInstanceOf[PrimitiveColumnIO].id)
+    }
+
+    override def addBinary(binary: Binary): Unit = {
+      emptyField = false
+      getColumnWriter.write(binary, r(currentLevel), currentColumnIO.definitionLevel)
+    }
   }
 
   def setLevels(): Unit = {

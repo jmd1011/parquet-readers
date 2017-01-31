@@ -1,5 +1,6 @@
 package main.scala.Fauxquet
 
+import main.scala.Fauxquet.flare.FauxquetFile
 import org.scalatest.FunSuite
 
 /**

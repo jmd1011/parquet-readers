@@ -2,12 +2,12 @@ package main.scala.Fauxquet.column
 
 import java.util
 
-import main.scala.Fauxquet.FauxquetObjs.TType
+import main.scala.Fauxquet.schema.PrimitiveTypeName
 
 /**
   * Created by james on 1/26/17.
   */
-class ColumnDescriptor(val path: Array[String], val tType: TType, val typeLength: Int = 0, val maxRep: Int, val maxDef: Int) extends Comparable[ColumnDescriptor] {
+class ColumnDescriptor(val path: Array[String], val primitive: PrimitiveTypeName, val typeLength: Int = 0, val maxRep: Int, val maxDef: Int) extends Comparable[ColumnDescriptor] {
   override def hashCode(): Int = util.Arrays.hashCode(path.asInstanceOf[Array[AnyRef]])
 
   override def equals(o: scala.Any): Boolean =

@@ -63,6 +63,6 @@ class ByteBasedBitPackingEncoder(bitWidth: Int) {
     BytesInputManager.concat(BytesInputManager.concat(slabs), BytesInputManager.from(packed, 0, packedByteLength))
   }
 
-  def bufferSize: Long = ((totalValues * bitWidth) + 7) / 8
+  def bufferedSize: Long = ((totalValues * bitWidth) + 7) / 8
   def allocatedSize: Long = (slabs.length * slabSize) + packed.length + input.length * 4
 }

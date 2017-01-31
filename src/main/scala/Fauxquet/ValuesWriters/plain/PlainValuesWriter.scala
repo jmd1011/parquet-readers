@@ -5,6 +5,7 @@ import main.scala.Fauxquet.FauxquetObjs.{Encoding, PLAIN}
 import main.scala.Fauxquet.ValuesWriters.ValuesWriter
 import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, BytesInputManager}
 import main.scala.Fauxquet.bytes.CapacityByteArrayOutputStream
+import main.scala.Fauxquet.io.api.Binary
 
 /**
   * Created by james on 1/25/17.
@@ -16,9 +17,9 @@ class PlainValuesWriter(capacityByteArrayOutputStream: CapacityByteArrayOutputSt
 
   override def writeByte(value: Int): Unit = throw new Error("PlainValuesWriter.writeByte not allowed (don't ask)")
 
-  override def writeBytes(bytes: Array[Byte]): Unit = {
+  override def writeBytes(bytes: Binary): Unit = {
     out.writeInt(bytes.length)
-    out.write(bytes)
+    bytes.writeTo(out)
   }
 
   override def writeBoolean(b: Boolean): Unit = out.writeBoolean(b)
