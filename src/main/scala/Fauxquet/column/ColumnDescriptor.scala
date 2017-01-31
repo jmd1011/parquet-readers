@@ -11,7 +11,7 @@ class ColumnDescriptor(val path: Array[String], val primitive: PrimitiveTypeName
   override def hashCode(): Int = util.Arrays.hashCode(path.asInstanceOf[Array[AnyRef]])
 
   override def equals(o: scala.Any): Boolean =
-    if (o == this) true
+    if (o == null) false
     else if (!o.isInstanceOf[ColumnDescriptor]) false
     else util.Arrays.equals(path.asInstanceOf[Array[AnyRef]], o.asInstanceOf[ColumnDescriptor].path.asInstanceOf[Array[AnyRef]])
 

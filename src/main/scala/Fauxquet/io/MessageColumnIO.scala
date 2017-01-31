@@ -5,14 +5,23 @@ import main.scala.Fauxquet.column.ColumnWriters.ColumnWriter
 import main.scala.Fauxquet.io.api.{Binary, RecordConsumer}
 import main.scala.Fauxquet.schema.MessageType
 
-import scala.collection.immutable.BitSet.BitSet1
-import scala.collection.mutable
-
 /**
   * Created by james on 1/28/17.
   */
 class MessageColumnIO(messageType: MessageType, val validating: Boolean, val createdBy: String) extends GroupColumnIO(messageType, null, 0) {
-  var leaves: List[PrimitiveColumnIO] = _
+  val leaves: List[PrimitiveColumnIO] = {
+    var l: List[PrimitiveColumnIO] = List[PrimitiveColumnIO]()
+
+    for (i <- messageType.fields.indices) {
+      val f = messageType.fields(i)
+
+      l ::= new PrimitiveColumnIO(f, null, i, i)
+    }
+
+    l
+  }
+
+  for (leaf <- leaves) leaf.setLevels(0, 0, Array[String](leaf.name), Array[Int](), List[ColumnIO](this), List[ColumnIO](this))
 
   /**
     *
@@ -46,7 +55,7 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     var groupNullCache: Map[GroupColumnIO, List[Int]] = Map[GroupColumnIO, List[Int]]()
 
     def buildGroupToLeafWritersMap(primitiveColumnIO: PrimitiveColumnIO, writer: ColumnWriter): Unit = {
-      var parent = primitiveColumnIO.parent
+      var parent = primitiveColumnIO.parent //TODO: Need parent to be "m"
 
       do {
         var w = getLeafWriters(parent)
@@ -57,14 +66,15 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     }
 
     def getLeafWriters(groupColumnIO: GroupColumnIO): List[ColumnWriter] = {
-      var writers = groupToLeafWriter(groupColumnIO)
+      val writers = groupToLeafWriter.get(groupColumnIO)
 
-      if (writers == null) {
-        writers = List[ColumnWriter]()
-        groupToLeafWriter += (groupColumnIO -> writers)
+      writers match {
+        case None =>
+          val x = List[ColumnWriter]()
+          groupToLeafWriter += (groupColumnIO -> x)
+          x
+        case Some(x) => x
       }
-
-      writers
     }
 
     def curColumnWriter = columnWriter(currentColumnIO.asInstanceOf[PrimitiveColumnIO].id)
