@@ -1,9 +1,10 @@
-package main.scala.Fauxquet
+package main.scala.Fauxquet.flare
 
 import java.nio.charset.Charset
 import java.nio.file.{Files, Paths}
 
 import main.scala.Fauxquet.FauxquetObjs._
+import main.scala.Fauxquet.{LittleEndianDecoder, SeekableArray}
 import main.scala.Fauxquet.ValuesReaders.bitpacking.ByteBitPackingValuesReader
 import main.scala.Fauxquet.ValuesReaders.rle.RunLengthBitPackingValuesReader
 

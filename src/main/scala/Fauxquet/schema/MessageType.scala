@@ -1,6 +1,5 @@
 package main.scala.Fauxquet.schema
 
-import main.scala.Fauxquet.FauxquetObjs.INT32
 import main.scala.Fauxquet.column.ColumnDescriptor
 
 /**
@@ -17,7 +16,22 @@ class MessageType(name: String, fields: List[BaseType]) extends GroupType(REPEAT
     val maxR = getMaxRepetitionLevel(path)
     val maxD = getMaxDefinitionLevel(path)
 
-    new ColumnDescriptor(path, INT32, 0, getMaxRepetitionLevel(path), getMaxDefinitionLevel(path))
+    val primitiveType = getType(path, 0).asPrimitiveType
+
+    new ColumnDescriptor(path, primitiveType.primitive, 0, getMaxRepetitionLevel(path), getMaxDefinitionLevel(path))
+  }
+
+  def columns(): List[ColumnDescriptor] = {
+    val paths = this.getPaths(0)
+    var cols = List[ColumnDescriptor]()
+
+    for (path <- paths) {
+      val primitiveType = getType(path, 0).asPrimitiveType
+
+      cols ::= new ColumnDescriptor(path, primitiveType.primitive, primitiveType.typeLength, getMaxRepetitionLevel(path), getMaxDefinitionLevel(path))
+    }
+
+    cols
   }
 
   override def accept(visitor: TypeVisitor): Unit = visitor.visit(this)

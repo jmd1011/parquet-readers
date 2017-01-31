@@ -1,5 +1,7 @@
 package main.scala.Fauxquet
 
+import main.scala.Fauxquet.flare.FauxquetFile
+
 /**
   * Created by james on 8/4/16.
   */

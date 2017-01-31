@@ -1,4 +1,4 @@
-package main.scala.Fauxquet
+package main.scala.Fauxquet.flare
 
 import main.scala.Fauxquet.FauxquetObjs.SchemaElement
 

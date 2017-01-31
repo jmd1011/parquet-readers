@@ -1,5 +1,7 @@
 package main.scala.Fauxquet.schema
 
+import main.scala.Fauxquet.schema.OriginalType.OriginalType
+
 /**
   * Created by james on 1/28/17.
   */
@@ -8,8 +10,8 @@ class GroupType(repetition: Repetition, name: String, originalType: OriginalType
 
   override def withId(id: ID): BaseType = new GroupType(this.repetition, this.name, this.originalType, this.fields, id)
 
-  def withNewFields(fields: List[BaseType]) = new GroupType(this.repetition, this.name, this.originalType, fields, this.id)
-  def withNewFields(fields: BaseType*) = withNewFields(fields.toList)
+  def withNewFields(fields: List[BaseType]): GroupType = new GroupType(this.repetition, this.name, this.originalType, fields, this.id)
+  def withNewFields(fields: BaseType*): GroupType = withNewFields(fields.toList)
 
   def getFieldName(i: Int): String = indexByName.filter(_._2 == i).head._1 //TODO: there's gotta be a better solution
   def getFieldIndex(name: String): Int = indexByName(name)

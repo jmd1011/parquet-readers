@@ -2,6 +2,7 @@ package main.scala.Fauxquet.ValuesWriters
 
 import main.scala.Fauxquet.FauxquetObjs.Encoding
 import main.scala.Fauxquet.bytes.BytesInput.BytesInput
+import main.scala.Fauxquet.io.api.Binary
 
 /**
   * Created by james on 1/25/17.
@@ -18,7 +19,7 @@ abstract class ValuesWriter {
   // end of other stuff
 
   def writeByte(value: Int): Unit = ???
-  def writeBytes(bytes: Array[Byte]): Unit = ???
+  def writeBytes(bytes: Binary): Unit = ???
   def writeBoolean(b: Boolean): Unit = ???
   def writeInt(i: Int): Unit = ???
   def writeLong(l: Long): Unit = ???

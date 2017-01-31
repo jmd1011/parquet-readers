@@ -1,6 +1,5 @@
 package main.scala.Fauxquet.io
 
-import main.scala.Fauxquet.Types.{REPEATED, REQUIRED}
 import main.scala.Fauxquet.schema.{GroupType, REPEATED, REQUIRED}
 
 /**
