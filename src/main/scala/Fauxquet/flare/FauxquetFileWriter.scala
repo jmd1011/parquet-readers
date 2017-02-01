@@ -8,6 +8,7 @@ import main.scala.Fauxquet.FauxquetObjs._
 import main.scala.Fauxquet._
 import main.scala.Fauxquet.bytes.BytesInput.BytesInput
 import main.scala.Fauxquet.column.ColumnDescriptor
+import main.scala.Fauxquet.flare.metadata.{ColumnPath, ColumnPathGetter}
 import main.scala.Fauxquet.page.DictionaryPage
 import main.scala.Fauxquet.schema.{MessageType, PrimitiveTypeName}
 
@@ -36,6 +37,7 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: MessageType, alignme
 //  private CompressionCodecName currentChunkCodec; // set in startColumn
 //  private ColumnPath currentChunkPath;            // set in startColumn
 //  private PrimitiveTypeName currentChunkType;     // set in startColumn
+  var currentChunkPath: ColumnPath           = _
   var currentChunkType: PrimitiveTypeName    = _
   var currentChunkValueCount: Long           = -1
   var currentChunkFirstDataPage: Long        = -1
@@ -63,6 +65,7 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: MessageType, alignme
   def startColumn(descriptor: ColumnDescriptor, valueCount: Long): Unit = {
     state = state.startColumn()
 
+    currentChunkPath = ColumnPathGetter.get(descriptor.path)
     currentChunkType = descriptor.primitive
     currentChunkValueCount = valueCount
     currentChunkFirstDataPage = out.pos
@@ -128,7 +131,7 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: MessageType, alignme
   def endColumn(): Unit = {
     state = state.endColumn()
 
-    currentBlock.addColumn(ColumnChunkMetadataManager.get(currentChunkFirstDataPage, currentChunkDictionaryPageOffset, currentChunkValueCount, compressedLength, uncompressedLength))
+    currentBlock.addColumn(ColumnChunkMetadataManager.get(currentChunkPath, currentChunkType, currentChunkFirstDataPage, currentChunkDictionaryPageOffset, currentChunkValueCount, compressedLength, uncompressedLength))
     currentBlock.totalBytesSize += uncompressedLength
     uncompressedLength = 0
     compressedLength = 0

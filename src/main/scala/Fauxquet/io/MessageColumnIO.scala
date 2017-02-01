@@ -15,7 +15,7 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     for (i <- messageType.fields.indices) {
       val f = messageType.fields(i)
 
-      l ::= new PrimitiveColumnIO(f, null, i, i)
+      l ::= new PrimitiveColumnIO(f, this, i, i)
     }
 
     l
@@ -49,7 +49,7 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     var currentLevel: Int = 0
     var emptyField: Boolean = true
 
-    val columnWriter = new Array[ColumnWriter](leaves.size) //TODO: I think this can be simplified to having just one ColumnWriter for us
+    val columnWriter = new Array[ColumnWriter](leaves.size)
 
     var groupToLeafWriter: Map[GroupColumnIO, List[ColumnWriter]] = Map[GroupColumnIO, List[ColumnWriter]]()
     var groupNullCache: Map[GroupColumnIO, List[Int]] = Map[GroupColumnIO, List[Int]]()

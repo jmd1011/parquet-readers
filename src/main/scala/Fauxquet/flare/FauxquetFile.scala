@@ -2,6 +2,7 @@ package main.scala.Fauxquet.flare
 
 import main.scala.Fauxquet.FauxquetObjs._
 import main.scala.Fauxquet.flare.api.WriteSupport
+import main.scala.Fauxquet.flare.metadata.{ColumnPath, ColumnPathGetter}
 import main.scala.Fauxquet.schema.OriginalType.OriginalType
 import main.scala.Fauxquet.schema.{BOOLEAN => _, DOUBLE => _, FIXED_LEN_BYTE_ARRAY => _, FLOAT => _, INT32 => _, INT64 => _, INT96 => _, _}
 
@@ -23,30 +24,96 @@ class FauxquetFile() {
   var schema = Vector[SchemaElement]()
   var mtSchema: MessageType =_
   var fields: Fields = _
+  var fauxquetMetadata: FauxquetMetadata = _
 
   def read(file: String) = {
     val fauxquetReader = new FauxquetReader(file)
     data = fauxquetReader.read()
     schema = fauxquetReader.fileMetaData.schema
-    mtSchema = fromParquetSchema(schema.toList)
+    fauxquetMetadata = fromFileMetadata(fauxquetReader.fileMetaData)
   }
 
-  def fromParquetSchema(schema: List[SchemaElement]): MessageType = {
-    var fields: List[BaseType] = List[BaseType]()
+  def fromFileMetadata(fileMetadata: FileMetadata): FauxquetMetadata = {
+    mtSchema = fromParquetSchema(schema.toList)
 
-    for (i <- 1 until schema.length) {
-      val field = schema(i)
+    var blocks = List[BlockMetadata]()
+    val rowGroups = fileMetadata.rowGroups
 
-      if (field.Type != null) {
-        val pField = getType(field.Type)
-        fields ::= new PrimitiveType(RepetitionManager.getRepetitionByName(field.fieldRepetitionType.value.toUpperCase), pField, math.max(field.typeLength, 0), field.name, null /*getOriginalType(field.convertedType)*/, new DecimalMetadata(field.precision, field.scale), new ID(field.fieldId))
-      } else {
-                                                                                                                                       //TPCH won't have structured data
-        fields ::= new GroupType(RepetitionManager.getRepetitionByName(field.fieldRepetitionType.value.toUpperCase), field.name, null, List[BaseType](), null)
+    if (rowGroups != null) {
+      for (rg <- rowGroups) {
+        val blockMetadata = new BlockMetadata
+        blockMetadata.rowCount = rg.numRows
+        blockMetadata.totalBytesSize = rg.totalByteSize
+
+        val cols = rg.columns
+        val filePath = cols.head.filePath
+
+        for (cc <- cols) {
+          if ((filePath == null && cc.filePath != null) || (filePath != null && cc.filePath == null)) throw new Error("Must be in the same file (for now)")
+
+          val metadata = cc.metadata
+          val path = getPath(metadata)
+          val column = ColumnChunkMetadata.ColumnChunkMetadataManager.get(path, mtSchema.getType(path.toArray).asPrimitiveType.primitive, metadata.dataPageOffset, metadata.dictionaryPageOffset, metadata.numValues, metadata.totalCompressedSize, metadata.totalUncompressedSize)
+          blockMetadata.addColumn(column)
+        }
+
+        blockMetadata.path = filePath
+        blocks ::= blockMetadata
       }
     }
 
-    new MessageType(schema.head.name, fields)
+    var keyValueMetadata = Map[String, String]()
+    val keyValueMeta = fileMetadata.keyValueMetadata
+
+    if (keyValueMeta != null) {
+      keyValueMeta.foreach(kv => keyValueMetadata += (kv.key -> kv.value))
+    }
+
+    new FauxquetMetadata(new FileMetadata(mtSchema, keyValueMetadata), blocks)
+  }
+
+  def getPath(columnMetadata: ColumnMetadata): ColumnPath = {
+    ColumnPathGetter.get(columnMetadata.pathInSchema.toArray)
+  }
+
+  def fromParquetSchema(schema: List[SchemaElement]): MessageType = {
+//    var fields: List[BaseType] = List[BaseType]()
+
+//    for (i <- schema.indices) {
+//      val field = schema(i)
+//
+//      if (field.Type != null) {
+//        val pField = getType(field.Type)
+//        fields ::= new PrimitiveType(RepetitionManager.getRepetitionByName(field.fieldRepetitionType.value.toUpperCase), pField, math.max(field.typeLength, 0), field.name, null /*getOriginalType(field.convertedType)*/, new DecimalMetadata(field.precision, field.scale), new ID(i))
+//      } else {
+//                                                                                                                                       //TPCH won't have structured data
+//        fields ::= new GroupType(RepetitionManager.getRepetitionByName(field.fieldRepetitionType.value.toUpperCase), field.name, null, List[BaseType](this), null)
+//      }
+//    }
+
+    new MessageType(schema.head.name, this.convertChildren(schema, schema.head.numChildren, 1))
+  }
+
+  def convertChildren(schema: List[SchemaElement], childrenCount: Int, offset: Int): List[BaseType] = {
+    val result = new Array[BaseType](childrenCount)
+
+    for (i <- result.indices) {
+      val field = schema(i + offset)
+
+      val repetition = RepetitionManager.getRepetitionByName(field.fieldRepetitionType.value.toUpperCase)
+      val name = field.name
+
+      result(i) = {
+        if (field.Type != null) {
+          val pField = getType(field.Type)
+          new PrimitiveType(repetition, pField, math.max(field.typeLength, 0), field.name, null, new DecimalMetadata(field.precision, field.scale), new ID(i))
+        } else {
+          new GroupType(repetition, name, null, this.convertChildren(schema, field.numChildren, i + 1), null)
+        }
+      }
+    }
+
+    result.toList
   }
 
   def getOriginalType(convertedType: ConvertedType): OriginalType = {

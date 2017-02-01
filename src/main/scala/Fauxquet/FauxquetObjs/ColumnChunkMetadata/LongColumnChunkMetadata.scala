@@ -1,5 +1,7 @@
 package main.scala.Fauxquet.FauxquetObjs.ColumnChunkMetadata
-import main.scala.Fauxquet.FauxquetObjs.{Encoding, TType}
+import main.scala.Fauxquet.FauxquetObjs.Encoding
+import main.scala.Fauxquet.flare.metadata.ColumnPath
+import main.scala.Fauxquet.schema.{INT64, PrimitiveTypeName}
 
 /**
   * Created by james on 1/27/17.
@@ -15,7 +17,7 @@ class LongColumnChunkMetadata extends ColumnChunkMetadata {
 
   override def totalUncompressedSize: Long = ???
 
-  override var Type: TType = _
+  override val Type: PrimitiveTypeName = INT64
   override var encodings: List[Encoding] = _
-  override var path: Vector[String] = _
+  override val path: ColumnPath = null
 }

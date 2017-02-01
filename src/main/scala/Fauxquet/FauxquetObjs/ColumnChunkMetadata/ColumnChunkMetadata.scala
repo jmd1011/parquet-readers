@@ -1,12 +1,15 @@
 package main.scala.Fauxquet.FauxquetObjs.ColumnChunkMetadata
 
-import main.scala.Fauxquet.FauxquetObjs.{Encoding, TType}
+import main.scala.Fauxquet.FauxquetObjs.Encoding
+import main.scala.Fauxquet.flare.metadata.ColumnPath
+import main.scala.Fauxquet.schema.PrimitiveTypeName
 
 /**
   * Created by james on 1/27/17.
   */
 abstract class ColumnChunkMetadata {
-  var Type: TType
+  val Type: PrimitiveTypeName
+  val path: ColumnPath
 
   def startingPos: Long = {
     val dpo = dictionaryPageOffset
@@ -16,8 +19,8 @@ abstract class ColumnChunkMetadata {
     else fdpo
   }
 
-  def get(firstDataPageOffset: Long, dictionaryPageOffset: Long, valueCount: Long, totalSize: Long, totalUncompressedSize: Long) =
-    new IntColumnChunkMetadata(firstDataPageOffset, dictionaryPageOffset, valueCount, totalSize, totalUncompressedSize) //for testing purposes
+  def get(path: ColumnPath, primitiveTypeName: PrimitiveTypeName, firstDataPageOffset: Long, dictionaryPageOffset: Long, valueCount: Long, totalSize: Long, totalUncompressedSize: Long) =
+    new IntColumnChunkMetadata(path, primitiveTypeName, firstDataPageOffset, math.max(dictionaryPageOffset, 0), valueCount, totalSize, totalUncompressedSize) //for testing purposes
 
   def dictionaryPageOffset: Long
   def firstDataPageOffset: Long
@@ -26,7 +29,7 @@ abstract class ColumnChunkMetadata {
   def totalUncompressedSize: Long
 
   var encodings: List[Encoding]
-  var path: Vector[String]
+  //var path: Vector[String]
 }
 
 /**
@@ -43,7 +46,7 @@ object ColumnChunkMetadataManager extends ColumnChunkMetadata {
 
   override def totalUncompressedSize: Long = ???
 
-  override var Type: TType = _
+  override val Type: PrimitiveTypeName = null
   override var encodings: List[Encoding] = Nil
-  override var path: Vector[String] = _
+  override val path: ColumnPath = null
 }
