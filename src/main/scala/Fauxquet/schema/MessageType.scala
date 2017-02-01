@@ -10,7 +10,8 @@ class MessageType(name: String, fields: List[BaseType]) extends GroupType(REPEAT
   def getMaxRepetitionLevel(path: Array[String]): Int = getMaxRepetitionLevel(path, 0) - 1
   def getMaxDefinitionLevel(path: Array[String]): Int = getMaxDefinitionLevel(path, 0) - 1
 
-  def getType(path: String*): BaseType = getType(path.toArray, 0)
+  def getType(path: String*): BaseType = getType(path.toArray)
+  def getType(path: Array[String]): BaseType = getType(path, 0)
 
   def getColumnDescription(path: Array[String]): ColumnDescriptor = {
     val maxR = getMaxRepetitionLevel(path)

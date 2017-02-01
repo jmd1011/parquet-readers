@@ -6,10 +6,9 @@ import main.scala.Fauxquet.schema.MessageType
 /**
   * Created by james on 8/5/16.
   */
-class FileMetadata(var schem: MessageType = null, val extraMetaData: Map[String, String] = null) extends Fauxquetable {
+class FileMetadata(var schem: MessageType = null, val extraMetaData: Map[String, String] = null, var createdBy: String = "Flare Team") extends Fauxquetable {
   var numRows: Long = _
   var version: Int = _
-  var createdBy: String = _
   var rowGroups: List[RowGroup] = Nil
 
   var schema: Vector[SchemaElement] = Vector[SchemaElement]() //TODO: Fix this
