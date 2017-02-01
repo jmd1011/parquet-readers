@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07c06c13-905b-4fe6-8180-eb9e3ab5709d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/flare/metadata/Canonicalizer.scala" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/flare/metadata/ColumnPath.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/org_apache_parquet_parquet_hadoop_1_8_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_parquet_parquet_hadoop_1_8_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/ColumnChunkMetadata/ColumnChunkMetadata.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/ColumnChunkMetadata/ColumnChunkMetadata.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/ColumnChunkMetadata/IntColumnChunkMetadata.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/ColumnChunkMetadata/IntColumnChunkMetadata.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/ColumnChunkMetadata/LongColumnChunkMetadata.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/ColumnChunkMetadata/LongColumnChunkMetadata.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/FileMetadata.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/FauxquetObjs/FileMetadata.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/flare/FauxquetFile.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/flare/FauxquetFile.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/flare/FauxquetFileWriter.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/flare/FauxquetFileWriter.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/io/MessageColumnIO.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/MessageType.scala" afterPath="$PROJECT_DIR$/src/main/scala/Fauxquet/schema/MessageType.scala" />
-    </list>
+    <list default="true" id="07c06c13-905b-4fe6-8180-eb9e3ab5709d" name="Default" comment="" />
     <ignored path="ParquetStuff.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -45,8 +32,8 @@
       <file leaf-file-name="FauxquetFile.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/flare/FauxquetFile.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="178" column="4" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="4" />
+            <state relative-caret-position="303">
+              <caret line="172" column="29" selection-start-line="172" selection-start-column="29" selection-end-line="172" selection-end-column="29" />
               <folding>
                 <element signature="e#35#76#0" expanded="true" />
                 <element signature="e#4661#5782#0" expanded="false" />
@@ -948,9 +935,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FauxquetFileTest_timingTest - 2017.01.31 at 19h 54m 21s.xml">
-      <configuration name="FauxquetFileTest.timingTest" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
     <history-entry file="FauxquetFileTest_timingTest - 2017.01.31 at 21h 02m 46s.xml">
       <configuration name="FauxquetFileTest.timingTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
@@ -976,6 +960,9 @@
       <configuration name="FauxquetFileTest.timingTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
     <history-entry file="FauxquetFileTest_timingTest - 2017.01.31 at 21h 29m 08s.xml">
+      <configuration name="FauxquetFileTest.timingTest" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="FauxquetFileTest_timingTest - 2017.01.31 at 21h 31m 22s.xml">
       <configuration name="FauxquetFileTest.timingTest" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
   </component>
@@ -1681,8 +1668,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Fauxquet/flare/FauxquetFile.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="178" column="4" selection-start-line="178" selection-start-column="4" selection-end-line="178" selection-end-column="4" />
+        <state relative-caret-position="303">
+          <caret line="172" column="29" selection-start-line="172" selection-start-column="29" selection-end-line="172" selection-end-column="29" />
           <folding>
             <element signature="e#35#76#0" expanded="true" />
             <element signature="e#4661#5782#0" expanded="false" />
