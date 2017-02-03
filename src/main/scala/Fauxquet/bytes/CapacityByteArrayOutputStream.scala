@@ -24,7 +24,7 @@ class CapacityByteArrayOutputStream(var initialSlabSize: Int, val maxCapacityHin
     val nextSlabSize = math.max(nextSlabSize1, minSize)
 
     this.currentSlab = byteBufferAllocator.allocate(nextSlabSize)
-    this.slabs ::= currentSlab
+    this.slabs :+= currentSlab
     this.bytesAllocated += nextSlabSize
     this.currentSlabIndex = 0
   }
@@ -91,6 +91,8 @@ class CapacityByteArrayOutputStream(var initialSlabSize: Int, val maxCapacityHin
       byteBufferAllocator.release(slab)
     }
 
+    currentSlabIndex = 0
+    currentSlab.position(0)
     slabs = List[ByteBuffer]()
     currentSlab = ByteBuffer.wrap(new Array[Byte](0))
     bytesUsed = 0

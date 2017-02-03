@@ -90,25 +90,25 @@ class PageHeader(var Type: PageType = null, var uncompressedPageSize: Int = 0, v
 
     def writeDataPageHeader(): Unit = {
       FauxquetEncoder writeFieldBegin DATA_PAGE_HEADER_FIELD_DESC
-      dataPageHeader write()
+      dataPageHeader write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 
     def writeIndexPageHeader(): Unit = {
       FauxquetEncoder writeFieldBegin INDEX_PAGE_HEADER_FIELD_DESC
-      indexPageHeader write()
+      indexPageHeader write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 
     def writeDictionaryPageHeader(): Unit = {
       FauxquetEncoder writeFieldBegin DICTIONARY_PAGE_HEADER_FIELD_DESC
-      dictionaryPageHeader write()
+      dictionaryPageHeader write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 
     def writeDataPageHeaderV2(): Unit = {
       FauxquetEncoder writeFieldBegin DATA_PAGE_HEADER_V2_FIELD_DESC
-      dataPageHeaderV2 write()
+      dataPageHeaderV2 write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 

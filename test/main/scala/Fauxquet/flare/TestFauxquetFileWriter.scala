@@ -16,12 +16,12 @@ class TestFauxquetFileWriter extends FunSuite {
     val BYTES3: Array[Byte] = Array[Byte](2, 3, 4, 5)
     val BYTES4: Array[Byte] = Array[Byte](3, 4, 5, 6)
 
-    val mt = new MessageType("m", {
+    val mt = new MessageType(null, "m", {
       var l = List[PrimitiveType]()
 
-      l ::= new PrimitiveType(REQUIRED, BINARY, 0, "name", null, null, null)
-      l ::= new PrimitiveType(REQUIRED, INT32, 0, "id", null, null, null)
-      l ::= new PrimitiveType(REQUIRED, DOUBLE, 0, "cash_money", null, null, null)
+      l :+= new PrimitiveType(REQUIRED, BINARY, 0, "name", null, null, null)
+      l :+= new PrimitiveType(REQUIRED, INT32, 0, "id", null, null, null)
+      l :+= new PrimitiveType(REQUIRED, DOUBLE, 0, "cash_money", null, null, null)
 
       l
     })

@@ -15,7 +15,7 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     for (i <- messageType.fields.indices) {
       val f = messageType.fields(i)
 
-      l ::= new PrimitiveColumnIO(f, this, i, i)
+      l :+= new PrimitiveColumnIO(f, this, i, i)
     }
 
     l
@@ -62,8 +62,8 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
 
       do {
         var w = getLeafWriters(parent)
-        w ::= writer
-        //getLeafWriters(parent) ::= writer
+        w :+= writer
+        //getLeafWriters(parent) :+= writer
         parent = parent.parent
       } while (parent != null)
     }
@@ -243,7 +243,7 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
         groupNullCache += (groupColumnIO -> nulls)
       }
 
-      nulls ::= r
+      nulls :+= r
     }
 
     def init() = {

@@ -128,7 +128,7 @@ class SchemaElement(parent: SchemaElement = null) extends Fauxquetable {
       writeName()
     }
 
-    if (this.numChildren != -1) {
+    if (this.numChildren != 0) {
       writeNumChildren()
     }
 

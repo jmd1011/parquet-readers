@@ -35,7 +35,7 @@ class ByteBasedBitPackingEncoder(bitWidth: Int) {
       //pack()
 
       if (packedPosition == slabSize) {
-        slabs ::= BytesInput.from(packed)
+        slabs :+= BytesInput.from(packed)
         initPacked()
       }
     }

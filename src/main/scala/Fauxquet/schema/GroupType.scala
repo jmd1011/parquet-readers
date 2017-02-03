@@ -52,7 +52,7 @@ class GroupType(repetition: Repetition, name: String, originalType: OriginalType
 
       for (path <- paths) {
         path(depth) = field.name
-        l ::= path
+        l :+= path
       }
     }
 
@@ -90,12 +90,12 @@ class GroupType(repetition: Repetition, name: String, originalType: OriginalType
         merged = field
       }
 
-      newFields ::= merged
+      newFields :+= merged
     }
 
     for (field <- toMerge.fields) {
       if (!this.containsField(field.name)) {
-        newFields ::= field
+        newFields :+= field
       }
     }
 

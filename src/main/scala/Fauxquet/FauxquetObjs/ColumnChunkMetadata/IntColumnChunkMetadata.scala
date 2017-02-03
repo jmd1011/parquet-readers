@@ -1,7 +1,7 @@
 package main.scala.Fauxquet.FauxquetObjs.ColumnChunkMetadata
-import main.scala.Fauxquet.FauxquetObjs.Encoding
+import main.scala.Fauxquet.FauxquetObjs.{BIT_PACKED, Encoding, PLAIN, RLE}
 import main.scala.Fauxquet.flare.metadata.ColumnPath
-import main.scala.Fauxquet.schema.{PrimitiveTypeName}
+import main.scala.Fauxquet.schema.PrimitiveTypeName
 
 /**
   * Created by james on 1/27/17.
@@ -23,7 +23,7 @@ class IntColumnChunkMetadata(p: ColumnPath, primName: PrimitiveTypeName, fdp: Lo
     else throw new Error("Doesn't fit!")
   }
 
-  def intToPositiveLong(i: Int): Long = i.asInstanceOf[Long] - Int.MinValue
+  def intToPositiveLong(i: Int): Long = i.asInstanceOf[Long] - 0//Int.MinValue
 
   override def valueCount: Long = intToPositiveLong(valCount)
 
@@ -32,7 +32,7 @@ class IntColumnChunkMetadata(p: ColumnPath, primName: PrimitiveTypeName, fdp: Lo
   override def totalUncompressedSize: Long = intToPositiveLong(totUncompressedSize)
 
   //override var Type: PrimitiveTypeName = INT32
-  override var encodings: List[Encoding] = _
+  override var encodings: List[Encoding] = List[Encoding](BIT_PACKED, RLE, PLAIN) //TODO: Just for TPCH
   override val path: ColumnPath = p
   override val Type: PrimitiveTypeName = primName
 }

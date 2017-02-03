@@ -46,7 +46,7 @@ class DataPageHeader(var numValues: Int = -1, var encoding: Encoding = null, var
 
   override def doWrite(): Unit = {
     def writeNumValues(): Unit = {
-      FauxquetEncoder writeFieldBegin ENCODING_FIELD_DESC
+      FauxquetEncoder writeFieldBegin NUM_VALUES_FIELD_DESC
       FauxquetEncoder writeI32 numValues
       FauxquetEncoder writeFieldEnd()
     }
@@ -71,7 +71,7 @@ class DataPageHeader(var numValues: Int = -1, var encoding: Encoding = null, var
 
     def writeStatistics(): Unit = {
       FauxquetEncoder writeFieldBegin STATISTICS_FIELD_DESC
-      this.statistics.write()
+      statistics write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 
@@ -89,8 +89,8 @@ class DataPageHeader(var numValues: Int = -1, var encoding: Encoding = null, var
       writeRepetitionLevelEncoding()
     }
 
-    if (this.statistics != null) {
-      writeStatistics()
-    }
+//    if (this.statistics != null) {
+//      writeStatistics()
+//    }
   }
 }

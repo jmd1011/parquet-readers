@@ -132,7 +132,7 @@ class ColumnMetadata(var Type: TType = null, var encodings: List[Encoding] = Nil
       FauxquetEncoder writeListBegin TList(12, keyValueMetadata size)
 
       for (kv <- keyValueMetadata) {
-        kv.write()
+        kv.write(FauxquetEncoder.encoder)
       }
 
       FauxquetEncoder writeListEnd()
@@ -155,7 +155,7 @@ class ColumnMetadata(var Type: TType = null, var encodings: List[Encoding] = Nil
     }
     def writeStatistics(): Unit = {
       FauxquetEncoder writeFieldBegin STATISTICS_FIELD_DESC
-      statistics.write()
+      statistics.write(FauxquetEncoder.encoder)
       FauxquetEncoder writeFieldEnd()
     }
     def writeEncodingStats(): Unit = {
@@ -163,7 +163,7 @@ class ColumnMetadata(var Type: TType = null, var encodings: List[Encoding] = Nil
       FauxquetEncoder writeListBegin TList(12, encodingStats size)
 
       for (pes <- encodingStats) {
-        pes.write()
+        pes.write(FauxquetEncoder.encoder)
       }
 
       FauxquetEncoder writeListEnd()
@@ -190,7 +190,7 @@ class ColumnMetadata(var Type: TType = null, var encodings: List[Encoding] = Nil
     writeUncompressedSize()
     writeCompressedSize()
 
-    if (this.keyValueMetadata != null) {
+    if (this.keyValueMetadata != null && this.keyValueMetadata != Nil) {
       writeKeyValueMetadata()
     }
 
@@ -200,17 +200,17 @@ class ColumnMetadata(var Type: TType = null, var encodings: List[Encoding] = Nil
       writeIndexPageOffset()
     }
 
-    if (dictionaryPageOffset > -1L) {
+    if (dictionaryPageOffset > 0) {
       writeDictionaryPageOffset()
     }
 
-    if (statistics != null) {
-      writeStatistics()
-    }
-
-    if (encodingStats != null) {
-      writeEncodingStats()
-    }
+//    if (statistics != null) {
+//      writeStatistics()
+//    }
+//
+//    if (encodingStats != null) {
+//      writeEncodingStats()
+//    }
   }
 
   override def validate(): Unit = {
