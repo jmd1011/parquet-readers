@@ -6,6 +6,19 @@ import main.scala.Fauxquet.io.api.RecordConsumer
 /**
   * Created by james on 1/28/17.
   */
+object PrimitiveTypeName {
+  def getPrimitiveTypeNameByString(string: String): PrimitiveTypeName = string match {
+    case "Int" | "INT32" => INT32
+    case "Long" | "INT64" => INT64
+    case "Boolean" | "BOOLEAN" => BOOLEAN
+    case "Float" | "FLOAT" => FLOAT
+    case "Double" | "DOUBLE" => DOUBLE
+    case "INT96" => INT96
+    case "FIXED_LEN_BYTE_ARRAY" => FIXED_LEN_BYTE_ARRAY
+    case "Binary" | "BINARY" => BINARY
+  }
+}
+
 trait PrimitiveTypeName {
   val name: String
   //type scalaType

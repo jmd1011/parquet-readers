@@ -1354,11 +1354,38 @@
       <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.17.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/parquet-jackson-1.8.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/snappy-java-1.1.1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/parquet-column-1.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/parquet-common-1.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/parquet-encoding-1.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/parquet-format-2.3.0-incubating.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hadoop-client-1.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hadoop-core-1.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xmlenc-0.52.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-math-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-configuration-1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang-2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-digester-1.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-1.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-beanutils-core-1.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-net-1.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/oro-2.0.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-el-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hsqldb-1.8.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-mapper-asl-1.9.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-core-asl-1.9.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/parquet-jackson-1.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/snappy-java-1.1.1.6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/" />
       <root url="jar://$USER_HOME$/.ideaLibSources/parquet-column-1.8.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/parquet-hadoop-1.8.1-sources.jar!/" />

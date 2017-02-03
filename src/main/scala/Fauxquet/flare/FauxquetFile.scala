@@ -33,6 +33,11 @@ class FauxquetFile() {
     mtSchema = FauxquetMetadataConverter.fromFauxquetSchema(schema.toList)
   }
 
+  def write(file: String, schema: MessageType)(value: Map[Long, Map[String, String]]): Unit = {
+    val fauxquetWriter = new FauxquetWriter(file, new WriteSupport(schema))
+
+  }
+
   def write(file: String, schema: MessageType) = {
     val fauxquetWriter = new FauxquetWriter(file, new WriteSupport(schema))
 
