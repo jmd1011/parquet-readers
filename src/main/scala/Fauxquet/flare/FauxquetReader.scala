@@ -37,8 +37,8 @@ class FauxquetReader(val path: String) {
     //      data(i) = new Array[Any](fileMetaData.numRows.toInt)
     //    }
 
-    var test = 0
-    var maxSkip = 0
+    //var test = 0
+    //var maxSkip = 0
 
     for (rg <- fileMetaData.rowGroups) {
       //var i = 1
@@ -66,11 +66,11 @@ class FauxquetReader(val path: String) {
           //for alignment
           val numToSkip = LittleEndianDecoder readInt array
           array.pos = array.pos + numToSkip
-          maxSkip = math.max(maxSkip, numToSkip)
+          //maxSkip = math.max(maxSkip, numToSkip)
 
           var j = 0
           while (j < pageHeader.dataPageHeader.numValues) {
-            test += 1
+            //test += 1
 
             val r = repetitionReader.readInt()
             val d = definitionReader.readInt()
@@ -99,8 +99,8 @@ class FauxquetReader(val path: String) {
       }
     }
 
-    println(s"read in $test values")
-    println(s"maxSkip = $maxSkip")
+   // println(s"read in $test values")
+   // println(s"maxSkip = $maxSkip")
 
     data.toMap
   }

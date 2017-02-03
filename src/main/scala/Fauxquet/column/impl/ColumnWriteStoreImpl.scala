@@ -23,14 +23,14 @@ class ColumnWriteStoreImpl(val pageWriteStore: PageWriteStore) extends ColumnWri
   }
 
   override def flush(): Unit = {
-    //columns.values.foreach(_.flush())
+    columns.values.foreach(_.flush())
 
-    val ks = columns.keySet.toList
-
-    columns(ks(3)).flush()
-    columns(ks(1)).flush()
-    columns(ks(0)).flush()
-    columns(ks(2)).flush()
+//    val ks = columns.keySet.toList
+//
+//    columns(ks(3)).flush()
+//    columns(ks(1)).flush()
+//    columns(ks(0)).flush()
+//    columns(ks(2)).flush()
   }
 
   override def endRecord(): Unit = { } //intentionally left blank

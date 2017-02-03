@@ -34,8 +34,12 @@ trait Fauxquetable {
     }
   }
 
-  def write(encoder: Encoder = null) = {
+  def write(encoder: Encoder = null, reset: Boolean = false) = {
     if (encoder != null) FauxquetEncoder.encoder = encoder
+    if (reset) {
+      FauxquetEncoder.lastFieldId = 0
+      FauxquetEncoder.lastField.clear()
+    }
 
     validate()
     FauxquetEncoder writeStructBegin()
@@ -43,7 +47,7 @@ trait Fauxquetable {
     doWrite()
 
     FauxquetEncoder writeFieldStop()
-    FauxquetEncoder writeStructEnd 0 //TODO: Figure out what this value should be
+    FauxquetEncoder writeStructEnd() //TODO: Figure out what this value should be
   }
 
   def doWrite()

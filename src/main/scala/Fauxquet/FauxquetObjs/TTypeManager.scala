@@ -17,19 +17,6 @@ object TTypeManager {
       case _ => null
     }
   }
-
-  def trySomethingCool(tType: TType, x: Any, f: (Any, Int, Int) => Unit): Unit = {
-    tType match {
-      case BOOLEAN => f(x.asInstanceOf[Boolean], 0, 1)
-      case INT32 => f(x.asInstanceOf[Int], 0, 1)
-      case INT64 => f(x.asInstanceOf[Long], 0, 1)
-      case INT96 => throw new Error("Int96 unsupported") /*f(x.asInstanceOf[INT96], 0, 1)*/
-      case FLOAT => f(x.asInstanceOf[Float], 0, 1)
-      case DOUBLE => f(x.asInstanceOf[Double], 0, 1)
-      case BYTE_ARRAY => f(x.asInstanceOf[Array[Byte]], 0, 1)
-      case FIXED_LEN_BYTE_ARRAY => f(x.asInstanceOf[Array[Byte]], 0, 1)
-    }
-  }
 }
 
 trait TType {
