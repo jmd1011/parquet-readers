@@ -105,7 +105,7 @@ class FauxquetFileWriter(path: String, schema: MessageType, alignmentStrategy: A
 
     val pageHeader = new PageHeader(DATA_PAGE, uncompressedPageSize, compressedPageSize.asInstanceOf[Int])
     pageHeader.dataPageHeader = new DataPageHeader(valueCount, valuesEncoding, dlEncoding, rlEncoding, statistics)
-    pageHeader.write(new PlainEncoder(out))
+    pageHeader.write(new PlainEncoder(out), reset = true)
 
     val headerSize = out.pos - beforeHeader
     this.uncompressedLength += uncompressedPageSize + headerSize
@@ -164,7 +164,7 @@ class FauxquetFileWriter(path: String, schema: MessageType, alignmentStrategy: A
   }
 
   def writeMetadata(metadata: FileMetadata): Unit = {
-    metadata.write(new PlainEncoder(out))
+    metadata.write(new PlainEncoder(out), reset = true)
   }
 
   def writeIntLittleEndian(v: Int): Unit = {

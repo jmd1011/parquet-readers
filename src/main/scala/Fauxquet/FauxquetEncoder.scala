@@ -3,31 +3,40 @@ package main.scala.Fauxquet
 import Encoders.Encoder
 import main.scala.Fauxquet.FauxquetObjs.{TField, TList, TMap, TSet}
 
+import scala.collection.mutable
+
 /**
   * Created by james on 8/5/16.
   */
 object FauxquetEncoder {
-  var id: Int = 0
+  //var id: Int = 0
   //var boolValue: Boolean = _
   var boolField: TField = _
 
   var encoder: Encoder = _
 
-  def writeStructBegin() = this.id = 0
-  def writeStructEnd(id: Int) = this.id = id
+  var lastFieldId: Short = 0
+  var lastField = mutable.Stack[Short]()
+
+  def writeStructBegin() = {
+    this.lastField.push(this.lastFieldId)
+    this.lastFieldId = 0
+  }
+
+  def writeStructEnd() = this.lastFieldId = this.lastField.pop()
 
   def writeFieldBegin(field: TField) = {
     def writeFieldBegin(field: TField, typeOverride: Byte) = {
       val typeToWrite = if (typeOverride == -1) this.getCompactType(field.Type) else typeOverride
 
-      if (field.id > this.id && field.id - this.id <= 15) {
-        this.writeByteDirect(field.id - this.id << 4 | typeToWrite)
+      if (field.id > this.lastFieldId && field.id - this.lastFieldId <= 15) {
+        this.writeByteDirect(field.id - this.lastFieldId << 4 | typeToWrite)
       } else {
         this.writeByteDirect(typeToWrite)
         this.writeI16(field.id)
       }
 
-      id = field.id
+      lastFieldId = field.id
     }
 
     if (field.Type == 2) {
@@ -68,7 +77,7 @@ object FauxquetEncoder {
 
   def writeVarint64(l: Long) = {
     var i = 0
-    var buf = new Array[Byte](10)
+    val buf = new Array[Byte](10)
     var n = l
 
     while ((n & -128L) != 0L) {
