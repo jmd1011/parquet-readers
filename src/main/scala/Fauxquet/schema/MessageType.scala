@@ -6,7 +6,7 @@ import main.scala.Fauxquet.column.ColumnDescriptor
   * Created by james on 1/28/17.
   * Used for Schema (for now)
   */
-class MessageType(name: String, fields: List[BaseType]) extends GroupType(REPEATED, name, null, fields, null) {
+class MessageType(rep: Repetition = REPEATED, name: String, fields: List[BaseType]) extends GroupType(rep, name, null, fields, null) {
   def getMaxRepetitionLevel(path: Array[String]): Int = getMaxRepetitionLevel(path, 0) - 1
   def getMaxDefinitionLevel(path: Array[String]): Int = getMaxDefinitionLevel(path, 0) - 1
 
@@ -29,7 +29,7 @@ class MessageType(name: String, fields: List[BaseType]) extends GroupType(REPEAT
     for (path <- paths) {
       val primitiveType = getType(path, 0).asPrimitiveType
 
-      cols ::= new ColumnDescriptor(path, primitiveType.primitive, primitiveType.typeLength, getMaxRepetitionLevel(path), getMaxDefinitionLevel(path))
+      cols :+= new ColumnDescriptor(path, primitiveType.primitive, primitiveType.typeLength, getMaxRepetitionLevel(path), getMaxDefinitionLevel(path))
     }
 
     cols

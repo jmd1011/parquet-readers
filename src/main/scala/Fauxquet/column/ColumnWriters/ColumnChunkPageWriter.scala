@@ -5,6 +5,7 @@ import main.scala.Fauxquet.Encoders.PlainEncoder
 import main.scala.Fauxquet.FauxquetObjs._
 import main.scala.Fauxquet.FauxquetObjs.statistics.Statistics
 import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, ConcatenatingByteArrayCollector}
+import main.scala.Fauxquet.bytes.CapacityByteArrayOutputStream
 import main.scala.Fauxquet.column.ColumnDescriptor
 import main.scala.Fauxquet.flare.FauxquetFileWriter
 import main.scala.Fauxquet.page.DictionaryPage
@@ -12,9 +13,9 @@ import main.scala.Fauxquet.page.DictionaryPage
 /**
   * Created by james on 1/27/17.
   */
-class ColumnChunkPageWriter(path: ColumnDescriptor) extends PageWriter {
+class ColumnChunkPageWriter(val path: ColumnDescriptor, initialSlabSize: Int) extends PageWriter {
   val tempOutputStream = new ByteArrayOutputStream()
-  val buf = new ConcatenatingByteArrayCollector()
+  val buf = new ConcatenatingByteArrayCollector() //new CapacityByteArrayOutputStream(initialSlabSize)
   var dictionaryPage: DictionaryPage = _
 
   var uncompressedLength: Long = 0L
@@ -34,7 +35,7 @@ class ColumnChunkPageWriter(path: ColumnDescriptor) extends PageWriter {
 
     tempOutputStream.reset()
 
-    val pageHeader = new PageHeader(DATA_PAGE, uncompressedLength.asInstanceOf[Int], compressedLength.asInstanceOf[Int])
+    val pageHeader = new PageHeader(DATA_PAGE, uncompressedSize.asInstanceOf[Int], uncompressedSize.asInstanceOf[Int])
     pageHeader.dataPageHeader = new DataPageHeader(valueCount, valuesEncoding, dlEncoding, rlEncoding, statistics)
     pageHeader.write(new PlainEncoder(tempOutputStream)) //This will be handled by FauxquetEncoder -- just need to provide another encoder to wrap the stream
 
@@ -42,6 +43,8 @@ class ColumnChunkPageWriter(path: ColumnDescriptor) extends PageWriter {
     this.compressedLength += bytes.size //compressed and uncompressed are the same for IHCP
     this.totalValueCount += valueCount
     this.pageCount += 1
+
+    //bytes.writeAllTo(buf)
 
     //merge statistics
     buf.collect(BytesInput.concat(BytesInput.from(tempOutputStream), bytes))
@@ -60,9 +63,9 @@ class ColumnChunkPageWriter(path: ColumnDescriptor) extends PageWriter {
     pageCount = 0
   }
 
-  override def memSize: Long = buf.size_
+  override def memSize: Long = buf.size
 
-  override def allocatedSize: Long = buf.size_
+  override def allocatedSize: Long = buf.size
 
   override def writeDictionaryPage(dictionaryPage: DictionaryPage): Unit = {
     if (this.dictionaryPage != null) {

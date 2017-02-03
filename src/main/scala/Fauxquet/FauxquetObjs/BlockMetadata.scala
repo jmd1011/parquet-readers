@@ -12,7 +12,7 @@ class BlockMetadata() {
 
   var columns: List[ColumnChunkMetadata] = List[ColumnChunkMetadata]()
 
-  def addColumn(column: ColumnChunkMetadata) = columns ::= column
+  def addColumn(column: ColumnChunkMetadata) = columns :+= column
 
   def startingPos: Long = columns.head.startingPos
 

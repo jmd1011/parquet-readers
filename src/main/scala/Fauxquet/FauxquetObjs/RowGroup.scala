@@ -49,7 +49,7 @@ class RowGroup extends Fauxquetable {
       FauxquetEncoder writeListBegin TList(12, columns size)
 
       for (cc <- columns) {
-        cc write()
+        cc write FauxquetEncoder.encoder
       }
 
       FauxquetEncoder writeListEnd()
@@ -73,7 +73,7 @@ class RowGroup extends Fauxquetable {
       FauxquetEncoder writeListBegin TList(12, sortingColumns size)
 
       for (sc <- sortingColumns) {
-        sc write()
+        sc write FauxquetEncoder.encoder
       }
 
       FauxquetEncoder writeListEnd()
@@ -87,9 +87,9 @@ class RowGroup extends Fauxquetable {
     writeTotalByteSize()
     writeNumRows()
 
-    if (this.sortingColumns != null) {
-      writeSortingColumns()
-    }
+//    if (this.sortingColumns != null && this.sortingColumns != Nil) {
+//      writeSortingColumns()
+//    }
   }
 
   override def validate(): Unit = {

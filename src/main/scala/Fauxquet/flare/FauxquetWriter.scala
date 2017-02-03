@@ -10,8 +10,8 @@ import main.scala.Fauxquet.flare.api.WriteSupport
   * Created by james on 1/10/17.
   */
 class FauxquetWriter(path: String, writeSupport: WriteSupport) extends Closeable {
-  val DEFAULT_BLOCK_SIZE: Int = 128 * 1024 *10241
-  val DEFAILT_PAGE_SIZE: Int = 1048576 //in a config file somewhere
+  val DEFAULT_BLOCK_SIZE: Int = 128 * 1024 * 1024
+  val DEFAULT_PAGE_SIZE: Int = 1024 * 1024 //in a config file somewhere
 
   val schema = writeSupport.schema
 
@@ -19,7 +19,7 @@ class FauxquetWriter(path: String, writeSupport: WriteSupport) extends Closeable
 
   fauxquetFileWriter.start()
 
-  val writer = new InternalFauxquetRecordWriter(fauxquetFileWriter, writeSupport, schema, Map[String, String](), DEFAULT_BLOCK_SIZE)
+  val writer = new InternalFauxquetRecordWriter(fauxquetFileWriter, writeSupport, schema, Map[String, String](), DEFAULT_BLOCK_SIZE, DEFAULT_PAGE_SIZE)
 
   //val out = new FauxquetOutputStream(new BufferedOutputStream(new FileOutputStream(path)))
 

@@ -12,7 +12,7 @@ class GroupColumnIO(groupType: GroupType, parent: GroupColumnIO, index: Int) ext
 
   def add(columnIO: ColumnIO): Unit = {
     childrenByName += (columnIO.name -> columnIO)
-    children ::= columnIO
+    children :+= columnIO
     childrenSize += 1
   }
 

@@ -8,11 +8,11 @@ import main.scala.Fauxquet.schema.MessageType
 /**
   * Created by james on 1/26/17.
   */
-class ColumnChunkPageWriteStore(schema: MessageType) extends PageWriteStore {
+class ColumnChunkPageWriteStore(val schema: MessageType, initialSize: Int) extends PageWriteStore {
   var writers = Map[ColumnDescriptor, ColumnChunkPageWriter]()
 
   for (path <- schema.columns()) {
-    writers += (path -> new ColumnChunkPageWriter(path))
+    writers += (path -> new ColumnChunkPageWriter(path, initialSize))
   }
 
   override def getPageWriter(path: ColumnDescriptor): PageWriter = writers(path)

@@ -11,7 +11,7 @@ import main.scala.Fauxquet.schema.MessageType
 /**
   * Created by james on 1/27/17.
   */
-class InternalFauxquetRecordWriter(val fauxquetFileWriter: FauxquetFileWriter, val writeSupport: WriteSupport, val schema: MessageType, val extraMetadata: Map[String, String], val rowGroupSize: Long) {
+class InternalFauxquetRecordWriter(val fauxquetFileWriter: FauxquetFileWriter, val writeSupport: WriteSupport, val schema: MessageType, val extraMetadata: Map[String, String], val blockSize: Int, val rowGroupSize: Long) {
   var pageStore: ColumnChunkPageWriteStore = _
   var columnStore: ColumnWriteStore = _
   var recordConsumer: RecordConsumer = _
@@ -26,7 +26,7 @@ class InternalFauxquetRecordWriter(val fauxquetFileWriter: FauxquetFileWriter, v
   var nextRowGroupSize = rowGroupSize
 
   def init(): Unit = {
-    pageStore = new ColumnChunkPageWriteStore(schema)
+    pageStore = new ColumnChunkPageWriteStore(schema, Math.max(65536, this.blockSize / this.schema.columns().size / 5))
     columnStore = new ColumnWriteStoreImpl(pageStore)
     recordConsumer = new MessageColumnIO(schema, false, "Flare Team").getRecordWriter(columnStore)
     writeSupport.prepareForWrite(recordConsumer)
@@ -87,7 +87,7 @@ class InternalFauxquetRecordWriter(val fauxquetFileWriter: FauxquetFileWriter, v
     if (!closed) {
       flushRowGroupToStore()
       val finalMetadata = extraMetadata + ("writer.model.name" -> writeSupport.name)
-      fauxquetFileWriter.end(finalMetadata)
+      fauxquetFileWriter.end(extraMetadata)
       closed = true
     }
   }

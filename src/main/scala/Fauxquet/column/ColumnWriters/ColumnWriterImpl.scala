@@ -14,9 +14,10 @@ import main.scala.Fauxquet.io.api.Binary
   * Created by james on 1/26/17.
   * This only handles Parquet V1 due to copying all reading code from parquet-compat...can change to V2 if needed
   */
-class ColumnWriterImpl(path: ColumnDescriptor, pageWriter: PageWriter) extends ColumnWriter {
+class ColumnWriterImpl(val path: ColumnDescriptor, pageWriter: PageWriter) extends ColumnWriter {
   val MIN_SLAB_SIZE = 64
   val PAGE_SIZE = 1024 * 1024 //need to change this (maybe not -- this is what it is in parquet-compat)
+  val initSize = 256 * 256 //no idea why
 
   val repetitionLevelColumn: ValuesWriter = DevNullValuesWriter //for TPCH, will change later
   val definitionLevelColumn: ValuesWriter = new RunLengthBitPackingValuesWriter(
@@ -30,6 +31,11 @@ class ColumnWriterImpl(path: ColumnDescriptor, pageWriter: PageWriter) extends C
   var valueCountForNextSizeCheck = 100 //MAGIC! it's pulled from ParquetProperties
   val statistics = new Statistics()
   //val writer = new ColumnChunkPageWriter(path)
+
+  val path1: String = this.pageWriter match {
+    case writer: ColumnChunkPageWriter => writer.path.path(0)
+    case _ => "Unable to display"
+  }
 
   def accountForValueWritten(): Unit = {
     valueCount += 1

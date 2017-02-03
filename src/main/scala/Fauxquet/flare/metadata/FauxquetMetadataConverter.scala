@@ -60,7 +60,7 @@ object FauxquetMetadataConverter {
   }
 
   def fromFauxquetSchema(schema: List[SchemaElement]): MessageType = {
-    new MessageType(schema.head.name, this.convertChildren(schema, schema.head.numChildren, 1))
+    new MessageType(null, schema.head.name, this.convertChildren(schema, schema.head.numChildren, 1))
   }
 
   def convertChildren(schema: List[SchemaElement], childrenCount: Int, offset: Int): List[BaseType] = {
@@ -83,6 +83,95 @@ object FauxquetMetadataConverter {
     }
 
     result.toList
+  }
+
+  def fromFauxquetMetadata(metadata: FauxquetMetadata, schema: MessageType): FileMetadata = {
+    val blks = metadata.blocks
+    var rowGroups = List[RowGroup]()
+    var numRows: Long = 0L
+
+    for (block <- blks) {
+      numRows += block.rowCount
+      rowGroups :+= addRowGroup(block)
+    }
+
+    val fileMetadata = new FileMetadata(metadata.fileMetadata.schem) //TODO: May need to change how we're adding schema
+    fileMetadata.schema = {
+      var x = Vector[SchemaElement]()
+
+      val root = fileMetadata.schem
+
+      val rootSE = new SchemaElement(null)
+      rootSE.numChildren = root.columns().size
+      //rootSE.fieldRepetitionType = FieldRepetitionTypeManager.getFieldRepetitionTypeByName(root.repetition.name)
+      rootSE.Type = null //Because "m" is GroupType
+      rootSE.name = schema.name
+
+      x :+= rootSE
+
+      for (col <- fileMetadata.schem.columns()) {
+        val se = new SchemaElement(rootSE)
+        se.numChildren = 0 //for TPCH
+        se.Type = getType(col.primitive)
+        se.fieldRepetitionType = OPTIONAL //TODO: Need to get this dynamically (maybe)
+        se.name = col.path(0)
+
+        x :+= se
+      }
+
+      x
+    }
+
+    fileMetadata.numRows = numRows
+    fileMetadata.rowGroups = rowGroups
+    fileMetadata.createdBy = "Flare Team" //TODO
+    fileMetadata.keyValueMetadata = List[KeyValue]()
+
+    if (metadata.fileMetadata.keyValueMetadata != Nil) {
+      for (kv <- metadata.fileMetadata.keyValueMetadata) {
+        addKeyValue(fileMetadata, kv.key, kv.value)
+      }
+    }
+
+    fileMetadata
+  }
+
+  def addKeyValue(fileMetadata: FileMetadata, key: String, value: String): Unit = {
+    fileMetadata.keyValueMetadata :+= new KeyValue(key, value)
+  }
+
+  def addRowGroup(block: BlockMetadata): RowGroup = {
+    def getType(primitiveTypeName: PrimitiveTypeName): TType = primitiveTypeName match {
+      case main.scala.Fauxquet.schema.INT32 => INT32
+      case main.scala.Fauxquet.schema.INT64 => INT64
+      case main.scala.Fauxquet.schema.BOOLEAN => BOOLEAN
+      case main.scala.Fauxquet.schema.BINARY => BYTE_ARRAY
+      case main.scala.Fauxquet.schema.FLOAT => FLOAT
+      case main.scala.Fauxquet.schema.DOUBLE => DOUBLE
+      case main.scala.Fauxquet.schema.INT96 => INT96
+      case main.scala.Fauxquet.schema.FIXED_LEN_BYTE_ARRAY => FIXED_LEN_BYTE_ARRAY
+      case _ => throw new Error("Unknown type encountered")
+    }
+
+    val columns = block.columns
+    var fauxquetColumns = List[ColumnChunk]()
+
+    for (column <- columns) {
+      val cc = new ColumnChunk()
+      cc.fileOffset = column.firstDataPageOffset
+      cc.filePath = block.path
+      cc.metadata = new ColumnMetadata(getType(column.Type), column.encodings, column.path.toList, UNCOMPRESSED, column.valueCount, column.totalUncompressedSize, column.totalSize, column.firstDataPageOffset)
+      cc.metadata.dictionaryPageOffset = column.dictionaryPageOffset
+
+      fauxquetColumns :+= cc
+    }
+
+    val rowGroup = new RowGroup()
+    rowGroup.columns = fauxquetColumns
+    rowGroup.numRows = block.rowCount
+    rowGroup.totalByteSize = block.totalBytesSize
+
+    rowGroup
   }
 
   def fromFileMetadata(fileMetadata: FileMetadata, schema: List[SchemaElement]): FauxquetMetadata = {
@@ -110,7 +199,7 @@ object FauxquetMetadataConverter {
         }
 
         blockMetadata.path = filePath
-        blocks ::= blockMetadata
+        blocks :+= blockMetadata
       }
     }
 

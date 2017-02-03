@@ -29,6 +29,6 @@ object RepetitionManager {
     case "REQUIRED" => REQUIRED
     case "OPTIONAL" => OPTIONAL
     case "REPEATED" => REPEATED
-    case _ => throw new Error("Unable to match")
+    case _ => null
   }
 }
