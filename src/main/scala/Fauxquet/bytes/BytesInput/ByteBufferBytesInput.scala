@@ -7,17 +7,7 @@ import java.nio.channels.{Channels, WritableByteChannel}
 /**
   * Created by james on 1/26/17.
   */
-object ByteBufferBytesInput extends BytesInput {
-  var byteBuf: ByteBuffer = _
-  var offset: Int = 0
-  var length: Int = 0
-
-  def apply(byteBuf: ByteBuffer, offset: Int, length: Int) = {
-    this.byteBuf = byteBuf
-    this.offset = offset
-    this.length = length
-  }
-
+class ByteBufferBytesInput(val byteBuf: ByteBuffer, val offset: Int, val length: Int) extends BytesInput {
   override def writeAllTo(out: OutputStream): Unit = {
     val outputChannel: WritableByteChannel = Channels.newChannel(out)
     byteBuf.position(offset)

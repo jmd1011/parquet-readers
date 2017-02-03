@@ -1,11 +1,11 @@
 package main.scala.Fauxquet.column.ColumnWriters
 
 import main.scala.Fauxquet.Encoders.RunLengthBitPackingHybridEncoder
-import main.scala.Fauxquet.FauxquetObjs.Statistics
+import main.scala.Fauxquet.FauxquetObjs.statistics.Statistics
 import main.scala.Fauxquet.ValuesReaders.rle.RunLengthBitPackingValuesWriter
 import main.scala.Fauxquet.ValuesWriters.plain.PlainValuesWriter
 import main.scala.Fauxquet.ValuesWriters.{DevNullValuesWriter, ValuesWriter}
-import main.scala.Fauxquet.bytes.BytesInput.BytesInputManager
+import main.scala.Fauxquet.bytes.BytesInput.BytesInput
 import main.scala.Fauxquet.bytes.{CapacityByteArrayOutputStream, HeapByteBufferAllocator}
 import main.scala.Fauxquet.column.ColumnDescriptor
 import main.scala.Fauxquet.io.api.Binary
@@ -60,7 +60,7 @@ class ColumnWriterImpl(path: ColumnDescriptor, pageWriter: PageWriter) extends C
 
   def writePage(): Unit = {
     pageWriter.writePage(
-      BytesInputManager.concat(repetitionLevelColumn.toBytes, definitionLevelColumn.toBytes, dataColumn.toBytes),
+      BytesInput.concat(repetitionLevelColumn.toBytes, definitionLevelColumn.toBytes, dataColumn.toBytes),
       valueCount,
       statistics,
       repetitionLevelColumn.encoding,

@@ -21,7 +21,10 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     l
   }
 
-  for (leaf <- leaves) leaf.setLevels(0, 0, Array[String](leaf.name), Array[Int](), List[ColumnIO](this), List[ColumnIO](this))
+  for (leaf <- leaves) {
+    leaf.setLevels(0, 1, Array[String](leaf.name), Array[Int](), List[ColumnIO](this), List[ColumnIO](this))
+    this.add(leaf)
+  }
 
   /**
     *
@@ -183,19 +186,22 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     }
 
     def writeNullToLeaves(groupColumnIO: GroupColumnIO): Unit = {
-      var nulls = groupNullCache(groupColumnIO)
+      val nulls = groupNullCache.get(groupColumnIO)
 
-      if (nulls == null || nulls.isEmpty) return
+      nulls match {
+        case None =>
+        case Some(x) => if (x.isEmpty) return
+          val parentDLevel = groupColumnIO.parent.definitionLevel
 
-      val parentDLevel = groupColumnIO.parent.definitionLevel
+          for (leafWriter <- groupToLeafWriter(groupColumnIO)) {
+            for (int <- x) {
+              leafWriter.writeNull(int, parentDLevel)
+            }
+          }
 
-      for (leafWriter <- groupToLeafWriter(groupColumnIO)) {
-        for (int <- nulls) {
-          leafWriter.writeNull(int, parentDLevel)
-        }
+          var z = groupNullCache(groupColumnIO)
+          z = List[Int]()
       }
-
-      nulls = List[Int]()
     }
 
     override def endGroup(): Unit = {
@@ -268,6 +274,7 @@ class MessageColumnIO(messageType: MessageType, val validating: Boolean, val cre
     override def addBinary(binary: Binary): Unit = {
       emptyField = false
       getColumnWriter.write(binary, r(currentLevel), currentColumnIO.definitionLevel)
+      this.setRepetitionLevels()
     }
   }
 

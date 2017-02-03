@@ -4,11 +4,7 @@ import java.io.OutputStream
 /**
   * Created by james on 1/26/17.
   */
-object UnsignedVarLongBytesInput extends BytesInput {
-  var value: Long = 0L
-
-  def apply(value: Long) = this.value = value
-
+class UnsignedVarLongBytesInput(val value: Long) extends BytesInput {
   override def writeAllTo(out: OutputStream): Unit = {
     var v1 = value
 

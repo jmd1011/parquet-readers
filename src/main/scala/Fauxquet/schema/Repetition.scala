@@ -5,18 +5,22 @@ package main.scala.Fauxquet.schema
   * not sure why we need this AND FieldRepetitionType
   */
 trait Repetition {
+  val name: String
   def isMoreRestrictiveThan(other: Repetition): Boolean
 }
 
 object REQUIRED extends Repetition {
+  override val name: String = "REQUIRED"
   override def isMoreRestrictiveThan(other: Repetition): Boolean = other != REQUIRED
 }
 
 object OPTIONAL extends Repetition {
+  override val name: String = "OPTIONAL"
   override def isMoreRestrictiveThan(other: Repetition): Boolean = other == REQUIRED
 }
 
 object REPEATED extends Repetition {
+  override val name: String = "REPEATED"
   override def isMoreRestrictiveThan(other: Repetition): Boolean = false
 }
 

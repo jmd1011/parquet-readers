@@ -19,22 +19,26 @@ class WriteSupport(val schema: MessageType) {
   def init(): WriteContext = new WriteContext(schema, Map[String, String]())
 
   def prepareForWrite(recordConsumer: RecordConsumer): Unit = this.recordConsumer = recordConsumer
-  def write(values: List[String]): Unit = {
-    if (values.size != columns.size) {
-      throw new Error("Schema mismatch")
-    }
+  def write(values: Map[String, String]): Unit = {
+//    if (values.size != columns.size) {
+//      throw new Error("Schema mismatch")
+//    }
 
     recordConsumer.startMessage()
 
-    for (i <- values.indices) {
-      val field = columns(i).path(0)
+    if (values.keySet.size != columns.size) {
+      throw new Error("Incompatible schema")
+    }
 
-      recordConsumer.startField(field, i)
+    for (j <- columns.indices) {
+      val col = columns(j)
+      val field = col.path.head
+      val v = values(field)
 
-      val v = values(i)
+      recordConsumer.startField(field, j)
 
       if (v.length > 0) {
-        columns(i).primitive match {
+        col.primitive match {
           case BOOLEAN => recordConsumer.addBool(v.toBoolean)
           case INT32 => recordConsumer.addInteger(v.toInt)
           case INT64 => recordConsumer.addLong(v.toLong)
@@ -43,12 +47,67 @@ class WriteSupport(val schema: MessageType) {
           case DOUBLE => recordConsumer.addDouble(v.toDouble)
           case _ => throw new Error("Unsupported column type")
         }
-      }
 
-      recordConsumer.endField(field, i)
+        recordConsumer.endField(field, j)
+      }
     }
 
     recordConsumer.endMessage()
+
+    /* old
+//    recordConsumer.startMessage()
+//    for (i <- 0 until values.keySet.size) {
+//      for (j <- columns.indices) {
+//        val col = columns(j)
+//        val v1 = values(i)
+//        val v = v1(col.path(0))
+//
+//        //for ((k, v) <- v1) {
+//        recordConsumer.startField(col.path(0), j)
+//
+////        if (v.length > 0) {
+////          col.primitive match {
+////            case BOOLEAN => recordConsumer.addBool(v.toBoolean)
+////            case INT32 => recordConsumer.addInteger(v.toInt)
+////            case INT64 => recordConsumer.addLong(v.toLong)
+////            case BINARY => recordConsumer.addBinary(BinaryManager.fromString(v))
+////            case FLOAT => recordConsumer.addFloat(v.toFloat)
+////            case DOUBLE => recordConsumer.addDouble(v.toDouble)
+////            case _ => throw new Error("Unsupported column type")
+////          }
+////        }
+//
+//        recordConsumer.endField(col.path(0), i)
+//      }
+//    }
+
+//    for (i <- 0 until values.keySet.size) {
+//      val col = columns(i)
+//
+//      val v1 = values(i)
+//      val v = v1(col.path(0))
+//
+//      //for ((k, v) <- v1) {
+//        recordConsumer.startField(col.path(0), i)
+//
+//        if (v.length > 0) {
+//          col.primitive match {
+//            case BOOLEAN => recordConsumer.addBool(v.toBoolean)
+//            case INT32 => recordConsumer.addInteger(v.toInt)
+//            case INT64 => recordConsumer.addLong(v.toLong)
+//            case BINARY => recordConsumer.addBinary(BinaryManager.fromString(v))
+//            case FLOAT => recordConsumer.addFloat(v.toFloat)
+//            case DOUBLE => recordConsumer.addDouble(v.toDouble)
+//            case _ => throw new Error("Unsupported column type")
+//          }
+//        }
+//
+//        recordConsumer.endField(col.path(0), i)
+//      //}
+//    }
+//
+//    recordConsumer.endMessage()
+*/
   }
 
   val name = "Flare Project"

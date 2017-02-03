@@ -31,6 +31,8 @@ object BLOCK extends WriteState {
 object COLUMN extends WriteState {
   override def endColumn(): WriteState = BLOCK
   override def end(): WriteState = COLUMN
+
+  override def write(): WriteState = this
 }
 
 object ENDED extends WriteState { }

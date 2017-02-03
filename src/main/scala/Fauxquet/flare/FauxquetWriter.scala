@@ -15,7 +15,7 @@ class FauxquetWriter(path: String, writeSupport: WriteSupport) extends Closeable
 
   val schema = writeSupport.schema
 
-  val fauxquetFileWriter = new FauxquetFileWriter(new FauxquetOutputStream(new BufferedOutputStream(new FileOutputStream(path))), schema)
+  val fauxquetFileWriter = new FauxquetFileWriter(path, schema)
 
   fauxquetFileWriter.start()
 
@@ -53,7 +53,7 @@ class FauxquetWriter(path: String, writeSupport: WriteSupport) extends Closeable
     out.close()
   }
 
-  def write(values: List[String]): Unit = {
+  def write(values: Map[Long, Map[String, String]]): Unit = {
     writer.write(values)
   }
 
@@ -80,6 +80,6 @@ class FauxquetWriter(path: String, writeSupport: WriteSupport) extends Closeable
   }
 
   override def close(): Unit = {
-
+    this.writer.close()
   }
 }

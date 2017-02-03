@@ -10,6 +10,13 @@ object FieldRepetitionTypeManager {
     case 2 => REPEATED
     case _ => null
   }
+
+  def getFieldRepetitionTypeByName(value: String): FieldRepetitionType = value match {
+    case "REQUIRED" => REQUIRED
+    case "OPTIONAL" => OPTIONAL
+    case "REPEATED" => REPEATED
+    case _ => null
+  }
 }
 
 trait FieldRepetitionType {

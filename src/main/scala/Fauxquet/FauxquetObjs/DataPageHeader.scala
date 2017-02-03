@@ -1,5 +1,6 @@
 package main.scala.Fauxquet.FauxquetObjs
 
+import main.scala.Fauxquet.FauxquetObjs.statistics.Statistics
 import main.scala.Fauxquet._
 
 /**

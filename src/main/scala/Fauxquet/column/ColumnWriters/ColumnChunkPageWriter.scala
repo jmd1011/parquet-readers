@@ -3,7 +3,8 @@ import java.io.ByteArrayOutputStream
 
 import main.scala.Fauxquet.Encoders.PlainEncoder
 import main.scala.Fauxquet.FauxquetObjs._
-import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, BytesInputManager, ConcatenatingByteArrayCollector}
+import main.scala.Fauxquet.FauxquetObjs.statistics.Statistics
+import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, ConcatenatingByteArrayCollector}
 import main.scala.Fauxquet.column.ColumnDescriptor
 import main.scala.Fauxquet.flare.FauxquetFileWriter
 import main.scala.Fauxquet.page.DictionaryPage
@@ -41,8 +42,9 @@ class ColumnChunkPageWriter(path: ColumnDescriptor) extends PageWriter {
     this.compressedLength += bytes.size //compressed and uncompressed are the same for IHCP
     this.totalValueCount += valueCount
     this.pageCount += 1
+
     //merge statistics
-    buf.collect(BytesInputManager.concat(BytesInputManager.from(tempOutputStream), bytes))
+    buf.collect(BytesInput.concat(BytesInput.from(tempOutputStream), bytes))
   }
 
   def writeToFileWriter(fauxquetFileWriter: FauxquetFileWriter): Unit = {
@@ -58,7 +60,6 @@ class ColumnChunkPageWriter(path: ColumnDescriptor) extends PageWriter {
     pageCount = 0
   }
 
-
   override def memSize: Long = buf.size_
 
   override def allocatedSize: Long = buf.size_
@@ -69,6 +70,6 @@ class ColumnChunkPageWriter(path: ColumnDescriptor) extends PageWriter {
     }
 
     val dictionaryBytes = dictionaryPage.bytes
-    this.dictionaryPage = new DictionaryPage(BytesInputManager.copy(dictionaryBytes), dictionaryPage.dictionarySize, dictionaryPage.encoding)
+    this.dictionaryPage = new DictionaryPage(BytesInput.copy(dictionaryBytes), dictionaryPage.dictionarySize, dictionaryPage.encoding)
   }
 }

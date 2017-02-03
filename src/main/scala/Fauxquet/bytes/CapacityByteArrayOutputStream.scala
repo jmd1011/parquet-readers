@@ -6,7 +6,7 @@ import java.nio.ByteBuffer
 /**
   * Created by james on 1/25/17.
   */
-class CapacityByteArrayOutputStream(var initialSlabSize: Int, val maxCapacityHint: Int, val byteBufferAllocator: ByteBufferAllocator) extends OutputStream {
+class CapacityByteArrayOutputStream(var initialSlabSize: Int, val maxCapacityHint: Int = 1024 * 1024, val byteBufferAllocator: ByteBufferAllocator = HeapByteBufferAllocator) extends OutputStream {
   var bytesUsed: Int = 0
   var bytesAllocated: Int = 0
   var currentSlabIndex: Int = 0

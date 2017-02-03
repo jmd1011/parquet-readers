@@ -1,7 +1,7 @@
 package main.scala.Fauxquet.Encoders
 
 import main.scala.Fauxquet.ValuesReaders.bitpacking.BytePacker_LE_1
-import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, BytesInputManager}
+import main.scala.Fauxquet.bytes.BytesInput.{BytesInput}
 
 /**
   * Created by james on 1/26/17.
@@ -35,7 +35,7 @@ class ByteBasedBitPackingEncoder(bitWidth: Int) {
       //pack()
 
       if (packedPosition == slabSize) {
-        slabs ::= BytesInputManager.from(packed)
+        slabs ::= BytesInput.from(packed)
         initPacked()
       }
     }
@@ -60,7 +60,7 @@ class ByteBasedBitPackingEncoder(bitWidth: Int) {
       pack()
     }
 
-    BytesInputManager.concat(BytesInputManager.concat(slabs), BytesInputManager.from(packed, 0, packedByteLength))
+    BytesInput.concat(BytesInput.concat(slabs), BytesInput.from(packed, 0, packedByteLength))
   }
 
   def bufferedSize: Long = ((totalValues * bitWidth) + 7) / 8

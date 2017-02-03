@@ -32,10 +32,21 @@ class InternalFauxquetRecordWriter(val fauxquetFileWriter: FauxquetFileWriter, v
     writeSupport.prepareForWrite(recordConsumer)
   }
 
-  def write(values: List[String]): Unit = {
-    writeSupport.write(values)
-    recordCount += 1
-    checkBlockSizeReached()
+  def write(values: Map[Long, Map[String, String]]): Unit = {
+    for (i <- 0 until values.size) {
+      val v = values(i)
+      writeSupport.write(v)
+      recordCount += 1
+      checkBlockSizeReached()
+    }
+
+//    for ((k, v) <- values) {
+//      writeSupport.write(v)
+//      recordCount += 1
+//      checkBlockSizeReached()
+//    }
+
+    //writeSupport.write(values)
   }
 
   def checkBlockSizeReached(): Unit = {
@@ -56,7 +67,7 @@ class InternalFauxquetRecordWriter(val fauxquetFileWriter: FauxquetFileWriter, v
   }
 
   def flushRowGroupToStore(): Unit = {
-    recordConsumer.flush()
+    recordConsumer.flush() //handles nulls
 
     if (recordCount > 0) {
       fauxquetFileWriter.startBlock(recordCount)

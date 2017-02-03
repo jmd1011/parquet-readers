@@ -1,10 +1,12 @@
 package main.scala.Fauxquet.flare
 
+import java.io.{BufferedOutputStream, FileOutputStream}
 import java.nio.charset.Charset
 
 import main.scala.Fauxquet.Encoders.PlainEncoder
 import main.scala.Fauxquet.FauxquetObjs.ColumnChunkMetadata.ColumnChunkMetadataManager
 import main.scala.Fauxquet.FauxquetObjs._
+import main.scala.Fauxquet.FauxquetObjs.statistics.Statistics
 import main.scala.Fauxquet._
 import main.scala.Fauxquet.bytes.BytesInput.BytesInput
 import main.scala.Fauxquet.column.ColumnDescriptor
@@ -15,7 +17,7 @@ import main.scala.Fauxquet.schema.{MessageType, PrimitiveTypeName}
 /**
   * Created by james on 1/27/17.
   */
-class FauxquetFileWriter(out: FauxquetOutputStream, schema: MessageType, alignmentStrategy: AlignmentStrategy = NoAlignment) {
+class FauxquetFileWriter(path: String, schema: MessageType, alignmentStrategy: AlignmentStrategy = NoAlignment) {
   //block data
   var blocks = List[BlockMetadata]()
   var currentBlock = new BlockMetadata()
@@ -25,11 +27,11 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: MessageType, alignme
   var compressedLength: Long   = -1
   //end block data
 
+  val out = new FauxquetOutputStream(new BufferedOutputStream(new FileOutputStream(path), 4096))
+
   def getNextRowGroupSize: Long = alignmentStrategy.nextRowGroupSize(out)
 
   def pos = out.pos
-
-  NoAlignment.init(128 * 1024 *10241) //TODO: Move this somewhere real
 
   //column data
 
@@ -101,7 +103,7 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: MessageType, alignme
     val beforeHeader = out.pos
     val compressedPageSize = bytes.size
 
-    val pageHeader = new PageHeader(DATA_PAGE, uncompressedLength.asInstanceOf[Int], compressedLength.asInstanceOf[Int])
+    val pageHeader = new PageHeader(DATA_PAGE, uncompressedPageSize, compressedPageSize.asInstanceOf[Int])
     pageHeader.dataPageHeader = new DataPageHeader(valueCount, valuesEncoding, dlEncoding, rlEncoding, statistics)
     pageHeader.write(new PlainEncoder(out))
 
@@ -172,6 +174,18 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: MessageType, alignme
     this.out.write((v >>> 24) & 0xFF)
   }
 
+  def getType(primitiveTypeName: PrimitiveTypeName): TType = primitiveTypeName match {
+    case main.scala.Fauxquet.schema.INT32 => INT32
+    case main.scala.Fauxquet.schema.INT64 => INT64
+    case main.scala.Fauxquet.schema.BOOLEAN => BOOLEAN
+    case main.scala.Fauxquet.schema.BINARY => BYTE_ARRAY
+    case main.scala.Fauxquet.schema.FLOAT => FLOAT
+    case main.scala.Fauxquet.schema.DOUBLE => DOUBLE
+    case main.scala.Fauxquet.schema.INT96 => INT96
+    case main.scala.Fauxquet.schema.FIXED_LEN_BYTE_ARRAY => FIXED_LEN_BYTE_ARRAY
+    case _ => throw new Error("Unknown type encountered")
+  }
+
   def convertFauxquetMetadata(metadata: FauxquetMetadata): FileMetadata = {
     val blks = metadata.blocks
     var rowGroups = List[RowGroup]()
@@ -183,6 +197,30 @@ class FauxquetFileWriter(out: FauxquetOutputStream, schema: MessageType, alignme
     }
 
     val fileMetadata = new FileMetadata(metadata.fileMetadata.schem) //TODO: May need to change how we're adding schema
+    fileMetadata.schema = {
+      var x = Vector[SchemaElement]()
+
+      val root = fileMetadata.schem
+
+      val rootSE = new SchemaElement(null)
+      rootSE.numChildren = root.columns().size
+      rootSE.fieldRepetitionType = FieldRepetitionTypeManager.getFieldRepetitionTypeByName(root.repetition.name)
+      rootSE.Type = null //Because "m" is GroupType
+      rootSE.name = schema.name
+
+      for (col <- fileMetadata.schem.columns()) {
+        val se = new SchemaElement(rootSE)
+        se.numChildren = 0 //for TPCH
+        se.Type = getType(col.primitive)
+        se.fieldRepetitionType = OPTIONAL //TODO: Need to get this dynamically (maybe)
+        se.name = col.path(0)
+
+        x :+= se
+      }
+
+      x
+    }
+
     fileMetadata.numRows = numRows
     fileMetadata.rowGroups = rowGroups
     fileMetadata.createdBy = "James Decker" //TODO
