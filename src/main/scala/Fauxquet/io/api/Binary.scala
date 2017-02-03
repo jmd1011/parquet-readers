@@ -191,7 +191,9 @@ object BinaryManager {
 
   }
 
-  def fromString(str: String): Binary = new FromStringBinary(str)
+  def fromString(str: String): Binary = {
+    new FromStringBinary(str) //TODO: I think this might be the line breaking everything -- only difference right now (thought it's what's in Parquet)
+  }
 
   def equals(array1: Array[Byte], offset1: Int, length1: Int, array2: Array[Byte], offset2: Int, length2: Int): Boolean = {
     if (array1 == null && array2 == null) return true

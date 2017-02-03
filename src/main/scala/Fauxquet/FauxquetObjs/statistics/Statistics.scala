@@ -1,7 +1,8 @@
-package main.scala.Fauxquet.FauxquetObjs
+package main.scala.Fauxquet.FauxquetObjs.statistics
 
 import java.nio.ByteBuffer
 
+import main.scala.Fauxquet.FauxquetObjs.{Fauxquetable, TField}
 import main.scala.Fauxquet._
 
 /**

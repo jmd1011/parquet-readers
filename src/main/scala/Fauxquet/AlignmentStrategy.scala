@@ -11,7 +11,7 @@ trait AlignmentStrategy {
 }
 
 object NoAlignment extends AlignmentStrategy {
-  private var rowGroupSize = 0L
+  private var rowGroupSize: Long = 128 * 1024 *10241
 
   def init(rowGroupSize: Long) = {
     this.rowGroupSize = rowGroupSize
@@ -21,7 +21,7 @@ object NoAlignment extends AlignmentStrategy {
   override def alignForRowGroup(fauxquetOutputStream: FauxquetOutputStream): Unit = { }
 
   override def nextRowGroupSize(fauxquetOutputStream: FauxquetOutputStream): Long = {
-    if (!initialized) throw new Error("Need to initialize NoAlignment!")
+    //if (!initialized) throw new Error("Need to initialize NoAlignment!")
 
     this.rowGroupSize
   }

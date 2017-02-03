@@ -7,11 +7,7 @@ import main.scala.Fauxquet.bytes.CapacityByteArrayOutputStream
 /**
   * Created by james on 1/26/17.
   */
-object CapacityBaosBytesInput extends BytesInput {
-  var arrayOut: CapacityByteArrayOutputStream = _
-
-  def apply(arrayOut: CapacityByteArrayOutputStream) = this.arrayOut = arrayOut
-
+class CapacityBaosBytesInput(val arrayOut: CapacityByteArrayOutputStream) extends BytesInput {
   override def writeAllTo(out: OutputStream): Unit = arrayOut.writeTo(out)
   override def size: Long = arrayOut.size
 }

@@ -3,7 +3,7 @@ package main.scala.Fauxquet.ValuesReaders.rle
 import main.scala.Fauxquet.Encoders.RunLengthBitPackingHybridEncoder
 import main.scala.Fauxquet.FauxquetObjs.{Encoding, RLE}
 import main.scala.Fauxquet.ValuesWriters.ValuesWriter
-import main.scala.Fauxquet.bytes.BytesInput.{BytesInput, BytesInputManager}
+import main.scala.Fauxquet.bytes.BytesInput.{BytesInput}
 
 /**
   * Created by james on 1/26/17.
@@ -25,6 +25,6 @@ class RunLengthBitPackingValuesWriter(encoder: RunLengthBitPackingHybridEncoder)
 
   override def toBytes: BytesInput = {
     val rle = this.encoder.toBytes
-    BytesInputManager.concat(BytesInputManager.fromInt(rle.size.asInstanceOf[Int]), rle)
+    BytesInput.concat(BytesInput.fromInt(rle.size.asInstanceOf[Int]), rle)
   }
 }

@@ -7,13 +7,7 @@ import main.scala.Fauxquet.Encoders.LittleEndianEncoder
 /**
   * Created by james on 1/26/17.
   */
-object IntBytesInput extends BytesInput {
-  var value: Int = 0
-
-  def apply(value: Int): Unit = {
-    this.value = value
-  }
-
+class IntBytesInput(val value: Int) extends BytesInput {
   override def writeAllTo(out: OutputStream): Unit = new LittleEndianEncoder(out).writeInt(this.value)
   override def size: Long = 4
 

@@ -46,6 +46,7 @@ class SchemaElement(parent: SchemaElement = null) extends Fauxquetable {
           case REPEATED =>
             repetition = if (parent != null) parent.repetition + 1 else 1
             definition = if (parent != null) parent.definition + 1 else 1
+          case _ =>
         }
       case 5 => numChildren = FauxquetDecoder readI32 arr
       case 6 => convertedType = ConvertedTypeManager getConvertedTypeById(FauxquetDecoder readI32 arr)
@@ -67,6 +68,12 @@ class SchemaElement(parent: SchemaElement = null) extends Fauxquetable {
     def writeTypeLength(): Unit = {
       FauxquetEncoder writeFieldBegin TYPE_LENGTH_FIELD_DESC
       FauxquetEncoder writeI32 typeLength
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeName(): Unit = {
+      FauxquetEncoder writeFieldBegin NAME_FIELD_DESC
+      FauxquetEncoder writeString name
       FauxquetEncoder writeFieldEnd()
     }
 
@@ -117,6 +124,10 @@ class SchemaElement(parent: SchemaElement = null) extends Fauxquetable {
       writeFieldRepetitionType()
     }
 
+    if (this.name != null) {
+      writeName()
+    }
+
     if (this.numChildren != -1) {
       writeNumChildren()
     }
@@ -139,7 +150,7 @@ class SchemaElement(parent: SchemaElement = null) extends Fauxquetable {
   }
 
   override def validate(): Unit = {
-    if (className == null) throw new Error("SchemaElement className was not found in file.")
+    if (name == null) throw new Error("SchemaElement className was not found in file.")
   }
 
   override def className: String = "SchemaElement"

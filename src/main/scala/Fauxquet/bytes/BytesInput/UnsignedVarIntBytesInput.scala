@@ -5,13 +5,7 @@ import java.nio.ByteBuffer
 /**
   * Created by james on 1/26/17.
   */
-object UnsignedVarIntBytesInput extends BytesInput {
-  var value: Int = 0
-
-  def apply(value: Int) = {
-    this.value = value
-  }
-
+class UnsignedVarIntBytesInput(val value: Int) extends BytesInput {
   override def writeAllTo(out: OutputStream): Unit = {
     var v1 = value
 

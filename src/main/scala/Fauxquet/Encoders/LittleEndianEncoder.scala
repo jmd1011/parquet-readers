@@ -5,7 +5,7 @@ import java.io.OutputStream
 /**
   * Created by james on 10/4/16.
   */
-class LittleEndianEncoder(out: OutputStream) extends Encoder(out) {
+class LittleEndianEncoder(zout: OutputStream) extends Encoder(zout) {
   //override def write(b: Int): Unit = this.out.write(b)
   //override def write(b: Array[Byte], offset: Int, length: Int): Unit = this.out.write(b, offset, length)
 

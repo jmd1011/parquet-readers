@@ -5,7 +5,7 @@ import java.io.OutputStream
 /**
   * Created by james on 10/4/16.
   */
-abstract class Encoder(out: OutputStream) extends OutputStream {
+abstract class Encoder(val out: OutputStream) extends OutputStream {
   def write(b: Int): Unit = this.out.write(b)
   override def write(b: Array[Byte]): Unit = this.write(b, 0, b.length)
   override def write(b: Array[Byte], offset: Int, length: Int): Unit = this.out.write(b, offset, length)

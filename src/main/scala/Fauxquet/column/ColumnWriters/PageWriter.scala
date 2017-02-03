@@ -1,6 +1,7 @@
 package main.scala.Fauxquet.column.ColumnWriters
 
-import main.scala.Fauxquet.FauxquetObjs.{Encoding, Statistics}
+import main.scala.Fauxquet.FauxquetObjs.Encoding
+import main.scala.Fauxquet.FauxquetObjs.statistics.Statistics
 import main.scala.Fauxquet.bytes.BytesInput.BytesInput
 import main.scala.Fauxquet.page.DictionaryPage
 
