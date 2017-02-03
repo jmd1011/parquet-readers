@@ -5,12 +5,35 @@ package main.scala.Fauxquet.FauxquetObjs
   */
 object PageTypeManager {
   def getPageTypeById(id: Int): PageType = id match {
-    case 0 => PageType(0, "DATA_PAGE")
-    case 1 => PageType(1, "INDEX_PAGE")
-    case 2 => PageType(2, "DICTIONARy_PAGE")
-    case 3 => PageType(3, "DATA_PAGE_V2")
+    case 0 => DATA_PAGE
+    case 1 => INDEX_PAGE
+    case 2 => DICTIONARY_PAGE
+    case 3 => DATA_PAGE_V2
     case _ => null
   }
 }
 
-case class PageType(id: Int, value: String)
+trait PageType {
+  val id: Int
+  val value: String
+}
+
+object DATA_PAGE extends PageType {
+  override val id: Int = 0
+  override val value: String = "DATA_PAGE"
+}
+
+object INDEX_PAGE extends PageType {
+  override val id: Int = 1
+  override val value: String = "INDEX_PAGE"
+}
+
+object DICTIONARY_PAGE extends PageType {
+  override val id: Int = 2
+  override val value: String = "DICTIONARY_PAGE"
+}
+
+object DATA_PAGE_V2 extends PageType {
+  override val id: Int = 3
+  override val value: String = "DATA_PAGE_V2"
+}

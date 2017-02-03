@@ -5,9 +5,9 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/30/16.
   */
-class PageHeader extends Fauxquetable {
-  var uncompressedPageSize = -1
-  var compressedPageSize = -1
+class PageHeader(var Type: PageType = null, var uncompressedPageSize: Int = 0, var compressedPageSize: Int = 0) extends Fauxquetable {
+//  var uncompressedPageSize = -1
+//  var compressedPageSize = -1
   var crc = -1 //wtf is this?
 
   var dataPageHeader: DataPageHeader = _
@@ -15,7 +15,7 @@ class PageHeader extends Fauxquetable {
   var dictionaryPageHeader: DictionaryPageHeader = _
   var dataPageHeaderV2: DataPageHeaderV2 = _
 
-  var Type: PageType = _
+  //var Type: PageType = _
 
   private val TYPE_FIELD_DESC = TField("type", 8, 1)
   private val UNCOMPRESSED_PAGE_SIZE_FIELD_DESC = TField("uncompressed_page_size", 8, 2)
@@ -90,25 +90,25 @@ class PageHeader extends Fauxquetable {
 
     def writeDataPageHeader(): Unit = {
       FauxquetEncoder writeFieldBegin DATA_PAGE_HEADER_FIELD_DESC
-      dataPageHeader write()
+      dataPageHeader write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 
     def writeIndexPageHeader(): Unit = {
       FauxquetEncoder writeFieldBegin INDEX_PAGE_HEADER_FIELD_DESC
-      indexPageHeader write()
+      indexPageHeader write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 
     def writeDictionaryPageHeader(): Unit = {
       FauxquetEncoder writeFieldBegin DICTIONARY_PAGE_HEADER_FIELD_DESC
-      dictionaryPageHeader write()
+      dictionaryPageHeader write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 
     def writeDataPageHeaderV2(): Unit = {
       FauxquetEncoder writeFieldBegin DATA_PAGE_HEADER_V2_FIELD_DESC
-      dataPageHeaderV2 write()
+      dataPageHeaderV2 write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 

@@ -1,27 +1,20 @@
 package main.scala.Fauxquet.FauxquetObjs
 
+import main.scala.Fauxquet.FauxquetObjs.statistics.Statistics
 import main.scala.Fauxquet._
 
 /**
   * Created by james on 8/9/16.
   */
-class ColumnMetadata extends Fauxquetable {
-  var numValues: Long = -1L
+class ColumnMetadata(var Type: TType = null, var encodings: List[Encoding] = Nil, var pathInSchema: List[String] = Nil, var codec: CompressionCodec = UNCOMPRESSED,
+                     var numValues: Long = -1L, var totalUncompressedSize: Long = -1, var totalCompressedSize: Long = -1L, var dataPageOffset: Long = -1L
+                    ) extends Fauxquetable {
 
-  var totalUncompressedSize: Long = -1L
-  var totalCompressedSize: Long = -1L
-
-  var dataPageOffset: Long = -1L
   var indexPageOffset: Long = -1L
   var dictionaryPageOffset: Long = -1L
 
-  var Type: TType = _
-
-  var encodings: List[Encoding] = Nil
-  var pathInSchema: List[String] = Nil
   var encodingStats: List[PageEncodingStats] = Nil
 
-  var codec: CompressionCodec = _
   var statistics: Statistics = _
 
   private val TYPE_FIELD_DESC = TField("type", 8, 1)
@@ -139,7 +132,7 @@ class ColumnMetadata extends Fauxquetable {
       FauxquetEncoder writeListBegin TList(12, keyValueMetadata size)
 
       for (kv <- keyValueMetadata) {
-        kv.write()
+        kv.write(FauxquetEncoder.encoder)
       }
 
       FauxquetEncoder writeListEnd()
@@ -162,7 +155,7 @@ class ColumnMetadata extends Fauxquetable {
     }
     def writeStatistics(): Unit = {
       FauxquetEncoder writeFieldBegin STATISTICS_FIELD_DESC
-      statistics.write()
+      statistics.write(FauxquetEncoder.encoder)
       FauxquetEncoder writeFieldEnd()
     }
     def writeEncodingStats(): Unit = {
@@ -170,7 +163,7 @@ class ColumnMetadata extends Fauxquetable {
       FauxquetEncoder writeListBegin TList(12, encodingStats size)
 
       for (pes <- encodingStats) {
-        pes.write()
+        pes.write(FauxquetEncoder.encoder)
       }
 
       FauxquetEncoder writeListEnd()
@@ -197,7 +190,7 @@ class ColumnMetadata extends Fauxquetable {
     writeUncompressedSize()
     writeCompressedSize()
 
-    if (this.keyValueMetadata != null) {
+    if (this.keyValueMetadata != null && this.keyValueMetadata != Nil) {
       writeKeyValueMetadata()
     }
 
@@ -207,17 +200,17 @@ class ColumnMetadata extends Fauxquetable {
       writeIndexPageOffset()
     }
 
-    if (dictionaryPageOffset > -1L) {
+    if (dictionaryPageOffset > 0) {
       writeDictionaryPageOffset()
     }
 
-    if (statistics != null) {
-      writeStatistics()
-    }
-
-    if (encodingStats != null) {
-      writeEncodingStats()
-    }
+//    if (statistics != null) {
+//      writeStatistics()
+//    }
+//
+//    if (encodingStats != null) {
+//      writeEncodingStats()
+//    }
   }
 
   override def validate(): Unit = {

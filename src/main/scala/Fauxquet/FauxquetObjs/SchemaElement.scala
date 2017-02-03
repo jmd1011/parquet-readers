@@ -5,12 +5,16 @@ import main.scala.Fauxquet._
 /**
   * Created by james on 8/9/16.
   */
-class SchemaElement extends Fauxquetable {
+class SchemaElement(parent: SchemaElement = null) extends Fauxquetable {
   var name: String = _
   var numChildren: Int = -1
   var scale: Int = -1
   var precision: Int = -1
   var fieldId: Int = -1
+  var definition: Int = 0
+  var repetition: Int = 0
+
+  var children: Vector[SchemaElement] = Vector[SchemaElement]()
 
   var Type: TType = _
   var typeLength: Int = -1
@@ -28,11 +32,22 @@ class SchemaElement extends Fauxquetable {
   private val PRECISION_FIELD_DESC = TField("precision", 8, 8)
   private val FIELD_ID_FIELD_DESC = TField("field_id", 8, 9)
 
+  if (parent != null) { repetition = parent.repetition; definition = parent.definition }
+
   override def doMatch(field: TField, arr: SeekableArray[Byte]): Unit = field match {
     case TField(_, 8, x) => x match {
       case 1 => Type = TTypeManager getType(FauxquetDecoder readI32 arr)
       case 2 => typeLength = FauxquetDecoder readI32 arr
-      case 3 => fieldRepetitionType = FieldRepetitionTypeManager getFieldRepetitionTypeById(FauxquetDecoder readI32 arr)
+      case 3 =>
+        fieldRepetitionType = FieldRepetitionTypeManager getFieldRepetitionTypeById(FauxquetDecoder readI32 arr)
+
+        fieldRepetitionType match {
+          case OPTIONAL => definition = if (parent != null) parent.definition + 1 else 1
+          case REPEATED =>
+            repetition = if (parent != null) parent.repetition + 1 else 1
+            definition = if (parent != null) parent.definition + 1 else 1
+          case _ =>
+        }
       case 5 => numChildren = FauxquetDecoder readI32 arr
       case 6 => convertedType = ConvertedTypeManager getConvertedTypeById(FauxquetDecoder readI32 arr)
       case 7 => scale = FauxquetDecoder readI32 arr
@@ -53,6 +68,12 @@ class SchemaElement extends Fauxquetable {
     def writeTypeLength(): Unit = {
       FauxquetEncoder writeFieldBegin TYPE_LENGTH_FIELD_DESC
       FauxquetEncoder writeI32 typeLength
+      FauxquetEncoder writeFieldEnd()
+    }
+
+    def writeName(): Unit = {
+      FauxquetEncoder writeFieldBegin NAME_FIELD_DESC
+      FauxquetEncoder writeString name
       FauxquetEncoder writeFieldEnd()
     }
 
@@ -103,7 +124,11 @@ class SchemaElement extends Fauxquetable {
       writeFieldRepetitionType()
     }
 
-    if (this.numChildren != -1) {
+    if (this.name != null) {
+      writeName()
+    }
+
+    if (this.numChildren != 0) {
       writeNumChildren()
     }
 
@@ -125,7 +150,7 @@ class SchemaElement extends Fauxquetable {
   }
 
   override def validate(): Unit = {
-    if (className == null) throw new Error("SchemaElement className was not found in file.")
+    if (name == null) throw new Error("SchemaElement className was not found in file.")
   }
 
   override def className: String = "SchemaElement"

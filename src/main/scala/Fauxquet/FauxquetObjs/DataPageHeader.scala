@@ -1,18 +1,19 @@
 package main.scala.Fauxquet.FauxquetObjs
 
+import main.scala.Fauxquet.FauxquetObjs.statistics.Statistics
 import main.scala.Fauxquet._
 
 /**
   * Created by james on 8/30/16.
   */
-class DataPageHeader extends Fauxquetable {
-  var numValues = -1
+class DataPageHeader(var numValues: Int = -1, var encoding: Encoding = null, var definitionLevelEncoding: Encoding = null, var repetitionLevelEncoding: Encoding = null, var statistics: Statistics = null) extends Fauxquetable {
+  //var numValues = -1
 
-  var encoding: Encoding = _
-  var definitionLevelEncoding: Encoding = _
-  var repetitionLevelEncoding: Encoding = _
+  //var encoding: Encoding = _
+  //var definitionLevelEncoding: Encoding = _
+  //var repetitionLevelEncoding: Encoding = _
 
-  var statistics: Statistics = _
+  //var statistics: Statistics = _
 
   private val NUM_VALUES_FIELD_DESC = TField("num_values", 8, 1)
   private val ENCODING_FIELD_DESC = TField("encoding", 8, 2)
@@ -39,13 +40,13 @@ class DataPageHeader extends Fauxquetable {
     }
     case TField(_, 12, 5) =>
       statistics = new Statistics()
-      statistics read arr
+      statistics.read(arr)
     case _ => FauxquetDecoder skip(arr, field Type)
   }
 
   override def doWrite(): Unit = {
     def writeNumValues(): Unit = {
-      FauxquetEncoder writeFieldBegin ENCODING_FIELD_DESC
+      FauxquetEncoder writeFieldBegin NUM_VALUES_FIELD_DESC
       FauxquetEncoder writeI32 numValues
       FauxquetEncoder writeFieldEnd()
     }
@@ -70,7 +71,7 @@ class DataPageHeader extends Fauxquetable {
 
     def writeStatistics(): Unit = {
       FauxquetEncoder writeFieldBegin STATISTICS_FIELD_DESC
-      this.statistics.write()
+      statistics write FauxquetEncoder.encoder
       FauxquetEncoder writeFieldEnd()
     }
 
@@ -88,8 +89,8 @@ class DataPageHeader extends Fauxquetable {
       writeRepetitionLevelEncoding()
     }
 
-    if (this.statistics != null) {
-      writeStatistics()
-    }
+//    if (this.statistics != null) {
+//      writeStatistics()
+//    }
   }
 }

@@ -1,17 +1,17 @@
 package main.scala.Fauxquet.FauxquetObjs
 
 import main.scala.Fauxquet._
+import main.scala.Fauxquet.schema.MessageType
 
 /**
   * Created by james on 8/5/16.
   */
-class FileMetadata extends Fauxquetable {
+class FileMetadata(var schem: MessageType = null, val extraMetaData: Map[String, String] = null, var createdBy: String = "Flare Team") extends Fauxquetable {
   var numRows: Long = _
-  var version: Int = _
-  var createdBy: String = _
+  var version: Int = 1
   var rowGroups: List[RowGroup] = Nil
 
-  var schema: Vector[SchemaElement] = Vector[SchemaElement]()
+  var schema: Vector[SchemaElement] = Vector[SchemaElement]() //TODO: Fix this
 
   private val VERSION_FIELD_DESC = TField("version", 8, 1)
   private val SCHEMA_FIELD_DESC = TField("schema", 15, 2)
@@ -63,7 +63,7 @@ class FileMetadata extends Fauxquetable {
       FauxquetEncoder writeListBegin TList(12, schema size)
 
       for (se <- schema) {
-        se.write()
+        se.write(FauxquetEncoder.encoder)
       }
 
       FauxquetEncoder writeListEnd()
@@ -81,7 +81,7 @@ class FileMetadata extends Fauxquetable {
       FauxquetEncoder writeListBegin TList(12, rowGroups size)
 
       for (rg <- rowGroups) {
-        rg.write()
+        rg.write(FauxquetEncoder.encoder)
       }
 
       FauxquetEncoder writeListEnd()
@@ -93,7 +93,7 @@ class FileMetadata extends Fauxquetable {
       FauxquetEncoder writeListBegin TList(12, keyValueMetadata size)
 
       for (kv <- keyValueMetadata) {
-        kv.write()
+        kv.write(FauxquetEncoder.encoder)
       }
 
       FauxquetEncoder writeListEnd()
@@ -114,11 +114,11 @@ class FileMetadata extends Fauxquetable {
 
     writeNumRows()
 
-    if (this.rowGroups != null) {
+    if (this.rowGroups != null && this.rowGroups != Nil) {
       writeRowGroups()
     }
 
-    if (this.keyValueMetadata != null) {
+    if (this.keyValueMetadata != null && this.keyValueMetadata != Nil) {
       writeKeyValueMetadata()
     }
 

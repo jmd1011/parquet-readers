@@ -1,5 +1,6 @@
 package main.scala.Fauxquet
 
+import main.scala.Fauxquet.flare.FauxquetFile
 import org.scalatest.FunSuite
 
 /**
@@ -7,15 +8,16 @@ import org.scalatest.FunSuite
   */
 class FauxquetFileTest extends FunSuite {
   test("timingTest") {
-    val numRuns = 30
+    val numRuns = 1
 
     var sum = 0L
 
     for (i <- 0 until numRuns) {
       val t0 = System.nanoTime()
 
-      val fauxquetFile = new FauxquetFile("resources/customer.parquet")
-      fauxquetFile init()
+      val fauxquetFile = new FauxquetFile()
+      fauxquetFile.read("resources/customer_out.parquet")
+      fauxquetFile.write("resources/customer_out_2.parquet", fauxquetFile.mtSchema)
 
       val t1 = System.nanoTime()
 

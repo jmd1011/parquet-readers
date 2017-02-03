@@ -39,7 +39,7 @@ class ColumnChunk extends Fauxquetable {
 
     if (this.metadata != null) {
       FauxquetEncoder writeFieldBegin META_DATA_FIELD_DESC
-      this.metadata.write()
+      this.metadata.write(FauxquetEncoder.encoder)
       FauxquetEncoder writeFieldEnd()
     }
   }
