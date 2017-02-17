@@ -32,6 +32,12 @@ class InternalFauxquetRecordWriter(val fauxquetFileWriter: FauxquetFileWriter, v
     writeSupport.prepareForWrite(recordConsumer)
   }
 
+  def write(values: List[String]): Unit = {
+    writeSupport.write(values)
+    recordCount += 1
+    checkBlockSizeReached()
+  }
+
   def write(values: Map[Long, Map[String, String]]): Unit = {
     for (i <- 0 until values.size) {
       val v = values(i)
@@ -87,7 +93,7 @@ class InternalFauxquetRecordWriter(val fauxquetFileWriter: FauxquetFileWriter, v
     if (!closed) {
       flushRowGroupToStore()
       val finalMetadata = extraMetadata + ("writer.model.name" -> writeSupport.name)
-      fauxquetFileWriter.end(extraMetadata)
+      fauxquetFileWriter.end(finalMetadata)
       closed = true
     }
   }

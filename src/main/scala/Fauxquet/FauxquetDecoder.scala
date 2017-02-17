@@ -10,7 +10,7 @@ import main.scala.Fauxquet.FauxquetObjs._
 
 object FauxquetDecoder {
   var id: Int = 0
-  var boolValue: java.lang.Boolean = _ //wtf is this?
+  var boolValue: java.lang.Boolean = _
 
   def readStructBegin(): Unit = id = 0
   def readStructEnd(id: Int) = this.id = id

@@ -2,14 +2,15 @@ package main.scala.Fauxquet
 
 import java.io.{BufferedReader, File, FileReader}
 
-import main.scala.Fauxquet.flare.FauxquetFile
+import main.scala.Fauxquet.flare.api.WriteSupport
+import main.scala.Fauxquet.flare.{FauxquetFile, FauxquetWriter}
 import org.scalatest.FunSuite
 
 /**
   * Created by james on 10/22/16.
   */
 class FauxquetFileTest extends FunSuite {
-  val CSV_DELIMITER = "|"
+  val CSV_DELIMITER: Char = '|'
 
   test("timingTest") {
     val numRuns = 1
@@ -20,8 +21,8 @@ class FauxquetFileTest extends FunSuite {
       val t0 = System.nanoTime()
 
       val fauxquetFile = new FauxquetFile()
-      fauxquetFile.read("resources/nation.parquet")
-      fauxquetFile.write("resources/nation_out.parquet", fauxquetFile.mtSchema)
+      fauxquetFile.read("resources/customer.parquet")
+      //fauxquetFile.write("resources/lineitem_out.parquet", fauxquetFile.mtSchema)
 
       val t1 = System.nanoTime()
 
@@ -31,30 +32,34 @@ class FauxquetFileTest extends FunSuite {
     println(s"$numRuns took ${sum / 1000000000.0} seconds.")
   }
 
-  test("From CSV to Parquet") {
-    val csvFile = new File("resources/customer.csv")
-    val parquetFile = new File("resources/customer_out_from_csv.parquet")
-
-    val custSchema = "message m {\n  optional int64 cust_key;\n  optional binary name;\n  optional binary address;\n  optional int32 nation_key;\n  optional binary phone;\n  optional double acctbal;\n  optional binary mktsegment;\n  repeated binary comment_col;\n}"
-
-    val schema = MessageTypeParser.parse(custSchema)
-
-    val br = new BufferedReader(new FileReader(csvFile))
-
-    var lineNumber = 0
-    var line = br.readLine()
-
-    val f = new FauxquetFile
-    f.mtSchema = schema
-    f.write()
-
-    while (line != null) {
-      val fields = line.split(CSV_DELIMITER)
-
-
-
-
-      line = br.readLine()
-    }
-  }
+//  test("From CSV to Parquet") {
+//    val csvFile = new File("resources/customer.csv")
+//    val parquetFile = new File("resources/customer_out_from_csv.parquet")
+//
+//    val custSchema = "message m {\n  optional int64 cust_key;\n  optional binary name;\n  optional binary address;\n  optional int32 nation_key;\n  optional binary phone;\n  optional double acctbal;\n  optional binary mktsegment;\n  repeated binary comment_col;\n}"
+//
+//    val schema = MessageTypeParser.parse(custSchema)
+//
+//    val br = new BufferedReader(new FileReader(csvFile))
+//
+//    //var lineNumber = 0
+//    var line = br.readLine()
+//
+//    //val f = new FauxquetFile
+//    //f.mtSchema = schema
+//    //f.write("resources/customer.csv", schema)
+//
+//    val writer = new FauxquetWriter("resources/customer_out_from_csv.parquet", new WriteSupport(schema))
+//    writer.writer.writeSupport.recordConsumer.startMessage()
+//
+//    while (line != null) {
+//      writer.write(line.split(CSV_DELIMITER).toList)
+//
+//      line = br.readLine()
+//    }
+//
+//    writer.writer.writeSupport.recordConsumer.endMessage()
+//
+//    writer.close()
+//  }
 }

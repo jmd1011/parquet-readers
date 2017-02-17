@@ -14,13 +14,16 @@ import scala.collection.mutable
   * Created by james on 1/10/17.
   */
 class FauxquetReader(val path: String) {
-  val fileMetaData = new FileMetadata()
+  val fileMetaData: main.scala.Fauxquet.FauxquetObjs.FileMetadata = new FileMetadata()
   lazy val array = new SeekableArray[Byte](Files.readAllBytes(Paths.get(path)))
   val MAGIC = "PAR1".getBytes(Charset.forName("ASCII"))
 
   def init() = {
-    if (!isParquetFile) throw new Error(s"$path is not a valid Parquet file.")
+//    val metadataReader = new MetadataReader(path)
+//    val test = metadataReader.read()
+//    println(test.toString)
 
+    if (!isParquetFile) throw new Error(s"$path is not a valid Parquet file.")
     fileMetaData read array
 
     array pos = 4
@@ -52,7 +55,7 @@ class FauxquetReader(val path: String) {
         }
 
         while (valuesRead < rg.numRows) {
-          val pageHeader = new PageHeader
+          val pageHeader = new main.scala.Fauxquet.FauxquetObjs.PageHeader
           pageHeader read array
 
           valuesRead += pageHeader.dataPageHeader.numValues
@@ -68,16 +71,15 @@ class FauxquetReader(val path: String) {
           array.pos = array.pos + numToSkip
           //maxSkip = math.max(maxSkip, numToSkip)
 
-          var j = 0
-          while (j < pageHeader.dataPageHeader.numValues) {
+          for (j <- 0 until pageHeader.dataPageHeader.numValues) {
             //test += 1
 
             val r = repetitionReader.readInt()
             val d = definitionReader.readInt()
 
-            if (d > fileMetaData.schema(ci + 1).definition)
-              println("<NULL>")
-            else
+//            if (d > fileMetaData.schema(ci + 1).definition)
+//              println("<NULL>")
+//            else
               cc.metadata.Type match {
                 case BOOLEAN => data(col) :+= LittleEndianDecoder readBool array
                 case INT32 => data(col) :+= LittleEndianDecoder readInt array
@@ -89,7 +91,7 @@ class FauxquetReader(val path: String) {
                 case FIXED_LEN_BYTE_ARRAY => data(col) :+= LittleEndianDecoder readFixedLengthString(array, 8) //figure out length
               }
 
-            j = j + 1
+            //j = j + 1
           }
 
           //inds(i) = inds(i) + j

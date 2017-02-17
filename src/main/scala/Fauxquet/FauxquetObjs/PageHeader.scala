@@ -6,16 +6,12 @@ import main.scala.Fauxquet._
   * Created by james on 8/30/16.
   */
 class PageHeader(var Type: PageType = null, var uncompressedPageSize: Int = 0, var compressedPageSize: Int = 0) extends Fauxquetable {
-//  var uncompressedPageSize = -1
-//  var compressedPageSize = -1
-  var crc = -1 //wtf is this?
+  var crc = -1
 
   var dataPageHeader: DataPageHeader = _
   var indexPageHeader: IndexPageHeader = _
   var dictionaryPageHeader: DictionaryPageHeader = _
   var dataPageHeaderV2: DataPageHeaderV2 = _
-
-  //var Type: PageType = _
 
   private val TYPE_FIELD_DESC = TField("type", 8, 1)
   private val UNCOMPRESSED_PAGE_SIZE_FIELD_DESC = TField("uncompressed_page_size", 8, 2)
@@ -49,15 +45,15 @@ class PageHeader(var Type: PageType = null, var uncompressedPageSize: Int = 0, v
       case 5 =>
         dataPageHeader = new DataPageHeader()
         dataPageHeader read arr
-      case 6 =>
-        indexPageHeader = new IndexPageHeader()
-        indexPageHeader read arr
-      case 7 =>
-        dictionaryPageHeader = new DictionaryPageHeader()
-        dictionaryPageHeader read arr
-      case 8 =>
-        dataPageHeaderV2 = new DataPageHeaderV2()
-        dataPageHeaderV2 read arr
+//      case 6 =>
+//        indexPageHeader = new IndexPageHeader()
+//        indexPageHeader read arr
+//      case 7 =>
+//        dictionaryPageHeader = new DictionaryPageHeader()
+//        dictionaryPageHeader read arr
+//      case 8 =>
+//        dataPageHeaderV2 = new DataPageHeaderV2()
+//        dataPageHeaderV2 read arr
       case _ => FauxquetDecoder skip(arr, 12)
     }
     case _ => FauxquetDecoder skip(arr, field.Type)

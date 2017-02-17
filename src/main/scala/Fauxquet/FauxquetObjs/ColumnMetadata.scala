@@ -55,14 +55,14 @@ class ColumnMetadata(var Type: TType = null, var encodings: List[Encoding] = Nil
           kv read arr
           kv
         }
-      case 13 =>
-        val list = FauxquetDecoder readListBegin arr
-
-        for (i <- 0 until list.size) encodingStats :+= {
-          val pes = new PageEncodingStats
-          pes read arr
-          pes
-        }
+//      case 13 =>
+//        val list = FauxquetDecoder readListBegin arr
+//
+//        for (i <- 0 until list.size) encodingStats :+= {
+//          val pes = new PageEncodingStats
+//          pes read arr
+//          pes
+//        }
       case _ => FauxquetDecoder skip(arr, 15)
     }
     case TField(_, 10, x) => x match {
@@ -74,7 +74,7 @@ class ColumnMetadata(var Type: TType = null, var encodings: List[Encoding] = Nil
       case 11 => dictionaryPageOffset = FauxquetDecoder readI64 arr
       case _ => FauxquetDecoder skip(arr, 10)
     }
-    case TField(_, 12, 12) => statistics = {val s = new Statistics; s read arr; s}
+    //case TField(_, 12, 12) => statistics = {val s = new Statistics; s read arr; s}
     case _ => FauxquetDecoder skip(arr, field Type)
   }
 

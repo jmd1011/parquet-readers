@@ -38,9 +38,9 @@ class DataPageHeader(var numValues: Int = -1, var encoding: Encoding = null, var
       case 4 => repetitionLevelEncoding = EncodingManager getEncodingById(FauxquetDecoder readI32 arr)
       case _ => FauxquetDecoder skip(arr, 8)
     }
-    case TField(_, 12, 5) =>
-      statistics = new Statistics()
-      statistics.read(arr)
+//    case TField(_, 12, 5) =>
+//      statistics = new Statistics()
+//      statistics.read(arr)
     case _ => FauxquetDecoder skip(arr, field Type)
   }
 

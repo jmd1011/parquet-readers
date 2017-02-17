@@ -20,7 +20,7 @@ class FauxquetFile() {
   def Schema(schema: List[String]) = schema.toVector
 
   var data: Map[String, Vector[Any]] = Map[String, Vector[Any]]() //need to change this when dealing with Record
-  var schema = Vector[SchemaElement]()
+  var schema = Vector[main.scala.Fauxquet.FauxquetObjs.SchemaElement]()
   var mtSchema: MessageType =_
   var fields: Fields = _
   var fauxquetMetadata: FauxquetMetadata = _
@@ -33,9 +33,14 @@ class FauxquetFile() {
     mtSchema = FauxquetMetadataConverter.fromFauxquetSchema(schema.toList)
   }
 
-  def write(file: String, schema: MessageType)(value: Map[Long, Map[String, String]]): Unit = {
+  def write(file: String, schema: MessageType, values: List[List[String]]) = {
     val fauxquetWriter = new FauxquetWriter(file, new WriteSupport(schema))
 
+    for (v <- values) {
+      fauxquetWriter.write(v)
+    }
+
+    fauxquetWriter.close()
   }
 
   def write(file: String, schema: MessageType) = {
@@ -43,7 +48,7 @@ class FauxquetFile() {
 
     var test = Map[Long, Map[String, String]]()
 
-    for (i <- data("nation_key").indices) {
+    for (i <- data("n_nationkey").indices) {
       var m = Map[String, String]()
 
       for (key <- data.keySet) {

@@ -19,6 +19,39 @@ class WriteSupport(val schema: MessageType) {
   def init(): WriteContext = new WriteContext(schema, Map[String, String]())
 
   def prepareForWrite(recordConsumer: RecordConsumer): Unit = this.recordConsumer = recordConsumer
+
+  def write(values: List[String]): Unit = {
+    //recordConsumer.startMessage()
+
+    if (values.size != columns.size) {
+      throw new Error("Incompatible schema")
+    }
+
+    for (i <- columns.indices) {
+      val col = columns(i)
+      val field = col.path.head
+      val v = values(i)
+
+      recordConsumer.startField(field, i)
+
+      if (v.length > 0) {
+        col.primitive match {
+          case BOOLEAN => recordConsumer.addBool(v.toBoolean)
+          case INT32 => recordConsumer.addInteger(v.toInt)
+          case INT64 => recordConsumer.addLong(v.toLong)
+          case BINARY => recordConsumer.addBinary(BinaryManager.fromString(v))
+          case FLOAT => recordConsumer.addFloat(v.toFloat)
+          case DOUBLE => recordConsumer.addDouble(v.toDouble)
+          case _ => throw new Error("Unsupported column type")
+        }
+
+        recordConsumer.endField(field, i)
+      }
+    }
+
+    //recordConsumer.endMessage()
+  }
+
   def write(values: Map[String, String]): Unit = {
 //    if (values.size != columns.size) {
 //      throw new Error("Schema mismatch")

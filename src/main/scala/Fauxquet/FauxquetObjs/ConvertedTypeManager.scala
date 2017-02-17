@@ -13,9 +13,7 @@ object ConvertedTypeManager {
     case 5 => DECIMAL
     case 6 => DATE
     case 7 => TIME_MILLIS
-    //uhhhhhhhh they missed one
     case 9 => TIMESTAMP_MILLIS
-    //man these guys sucked at counting
     case 11 => UINT_8
     case 12 => UINT_16
     case 13 => UINT_32

@@ -18,7 +18,8 @@ object LittleEndianDecoder {
     val ch2 = arr.next & 255
     val ch1 = arr.next & 255
 
-    (ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0)
+    val ret = (ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0)
+    ret
   }
 
   def readLong(arr: SeekableArray[Byte]) = {

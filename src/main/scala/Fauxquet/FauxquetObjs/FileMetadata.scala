@@ -1,6 +1,7 @@
 package main.scala.Fauxquet.FauxquetObjs
 
 import main.scala.Fauxquet._
+import main.scala.Fauxquet.FauxquetObjs.SchemaElement
 import main.scala.Fauxquet.schema.MessageType
 
 /**

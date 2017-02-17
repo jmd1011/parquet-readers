@@ -78,8 +78,7 @@ object MessageTypeParser {
     var buffer: StringBuffer = new StringBuffer()
 
     def nextToken: String = {
-      while (true) {
-        if (this.st.hasMoreTokens) {
+        while (this.st.hasMoreTokens) {
           val t = st.nextToken()
 
           if (t.equals("\n")) {
@@ -95,7 +94,6 @@ object MessageTypeParser {
         }
 
         throw new Error("Unexpected end of schema")
-      }
     }
 
     def isWhitespace(str: String) = str == " " || str == "\n" || str == "\t"

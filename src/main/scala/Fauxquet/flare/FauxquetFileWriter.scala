@@ -84,7 +84,7 @@ class FauxquetFileWriter(path: String, schema: MessageType, alignmentStrategy: A
     val uncompressedSize: Int = dictionaryPage.uncompressedSize
     val compressedPageSize: Int = dictionaryPage.bytes.size.asInstanceOf[Int]
 
-    val pageHeader = new PageHeader(DICTIONARY_PAGE, uncompressedLength.asInstanceOf[Int], compressedLength.asInstanceOf[Int])
+    val pageHeader = new main.scala.Fauxquet.FauxquetObjs.PageHeader(DICTIONARY_PAGE, uncompressedLength.asInstanceOf[Int], compressedLength.asInstanceOf[Int])
     pageHeader.dictionaryPageHeader = new DictionaryPageHeader()
     pageHeader.write(new PlainEncoder(out))
 
@@ -103,8 +103,8 @@ class FauxquetFileWriter(path: String, schema: MessageType, alignmentStrategy: A
     val beforeHeader = out.pos
     val compressedPageSize = bytes.size
 
-    val pageHeader = new PageHeader(DATA_PAGE, uncompressedPageSize, compressedPageSize.asInstanceOf[Int])
-    pageHeader.dataPageHeader = new DataPageHeader(valueCount, valuesEncoding, dlEncoding, rlEncoding, statistics)
+    val pageHeader = new main.scala.Fauxquet.FauxquetObjs.PageHeader(DATA_PAGE, uncompressedPageSize, compressedPageSize.asInstanceOf[Int])
+    pageHeader.dataPageHeader = new main.scala.Fauxquet.FauxquetObjs.DataPageHeader(valueCount, valuesEncoding, dlEncoding, rlEncoding, statistics)
     pageHeader.write(new PlainEncoder(out), reset = true)
 
     val headerSize = out.pos - beforeHeader

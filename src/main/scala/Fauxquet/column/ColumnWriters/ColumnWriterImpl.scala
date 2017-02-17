@@ -17,7 +17,7 @@ import main.scala.Fauxquet.io.api.Binary
 class ColumnWriterImpl(val path: ColumnDescriptor, pageWriter: PageWriter) extends ColumnWriter {
   val MIN_SLAB_SIZE = 64
   val PAGE_SIZE = 1024 * 1024 //need to change this (maybe not -- this is what it is in parquet-compat)
-  val initSize = 256 * 256 //no idea why
+  val initSize = 256 * 256
 
   val repetitionLevelColumn: ValuesWriter = DevNullValuesWriter //for TPCH, will change later
   val definitionLevelColumn: ValuesWriter = new RunLengthBitPackingValuesWriter(
